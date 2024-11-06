@@ -3,6 +3,7 @@
 
 1. /etc/nginx/sites-available/default 에서 root 페이지가 변경 가능합니다.
 2. 변경 후 sudo systemctl restart nginx 로 nginx 재실행 필요
+3. phpinfo에서 php.ini "short_open_tag = On" 처리해야만 <??>해당 사용가능 그리고 nginx와 php8.2-fpm 재시작 처리 필요
 
 //////////////////////////////////////////////
 

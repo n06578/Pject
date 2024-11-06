@@ -73,7 +73,6 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
                         <h6 class="collapse-header">Custom Components:</h6>
                     <?
                         $que = "select * from projectList where doneDate <= '".date('Y-m-d')."' order by seq desc";
-                        echo $que;
                         $res = mysql_query($que);
                         while($row = mysql_fetch_array($res)){
                     ?>
