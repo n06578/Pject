@@ -52,7 +52,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
             </li>
 
 
-<!---->
+<!-- 개인 프로젝트 정리 중 -->
 
         <hr class="sidebar-divider">
 
@@ -71,15 +71,15 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
                 <div id="collapsePro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <?
+                    <?
                         $que = "select * from projectList where doneDate <= '".date('Y-m-d')."' order by seq desc";
                         $res = mysql_query($que);
                         while($row = mysql_fetch_array($res)){
-                        ?>
+                    ?>
                             <a class="collapse-item" href="buttons.html"><?if($row['projectIcon'] !=""){?><i class="<?=$row['projectIcon']?>"></i> <?}?><?=$row['projectName']?></i></a>
-                        <?
+                    <?
                         }
-                        ?>
+                    ?>
                     </div>
                 </div>
             </li>
