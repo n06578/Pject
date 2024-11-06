@@ -1,0 +1,2 @@
+1. /etc/nginx/sites-available/default 에서 root 페이지가 변경 가능합니다.
+2. 변경 후 sudo systemctl restart nginx 로 nginx 재실행 필요
