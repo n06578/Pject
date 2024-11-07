@@ -3267,7 +3267,7 @@
 			}
 	
 			if ( column.sTitle != cell[0].innerHTML ) {
-				cell.html( column.sTitle );
+				cell.php( column.sTitle );
 			}
 	
 			_fnRenderer( oSettings, 'header' )(
@@ -3525,7 +3525,7 @@
 					'valign':  'top',
 					'colSpan': _fnVisbleColumns( oSettings ),
 					'class':   oSettings.oClasses.sRowEmpty
-				} ).html( sZero ) )[0];
+				} ).php( sZero ) )[0];
 		}
 	
 		/* Header and footer callbacks */
@@ -4701,7 +4701,7 @@
 			);
 		}
 	
-		$(nodes).html( out );
+		$(nodes).php( out );
 	}
 	
 	
@@ -5055,7 +5055,7 @@
 				'id': ! settings.aanFeatures.r ? settings.sTableId+'_processing' : null,
 				'class': settings.oClasses.sProcessing
 			} )
-			.html( settings.oLanguage.sProcessing )
+			.php( settings.oLanguage.sProcessing )
 			.insertBefore( settings.nTable )[0];
 	}
 	
@@ -5832,7 +5832,7 @@
 	
 		var data = settings.aoData[ idx ];
 		return ! data.nTr ? // Might not have been created when deferred rendering
-			$('<td/>').html( _fnGetCellData( settings, idx, colIdx, 'display' ) )[0] :
+			$('<td/>').php( _fnGetCellData( settings, idx, colIdx, 'display' ) )[0] :
 			data.anCells[ colIdx ];
 	}
 	
@@ -8269,7 +8269,7 @@
 				var created = $('<tr><td></td></tr>').addClass( k );
 				$('td', created)
 					.addClass( k )
-					.html( r )
+					.php( r )
 					[0].colSpan = _fnVisbleColumns( ctx );
 	
 				rows.push( created[0] );
@@ -10731,7 +10731,7 @@
 		 *          // Bold the grade for all 'A' grade browsers
 		 *          if ( data[4] == "A" )
 		 *          {
-		 *            $('td:eq(4)', row).html( '<b>A</b>' );
+		 *            $('td:eq(4)', row).php( '<b>A</b>' );
 		 *          }
 		 *        }
 		 *      } );
@@ -10954,7 +10954,7 @@
 		 *        "rowCallback": function( row, data, displayIndex, displayIndexFull ) {
 		 *          // Bold the grade for all 'A' grade browsers
 		 *          if ( data[4] == "A" ) {
-		 *            $('td:eq(4)', row).html( '<b>A</b>' );
+		 *            $('td:eq(4)', row).php( '<b>A</b>' );
 		 *          }
 		 *        }
 		 *      } );
@@ -14678,7 +14678,7 @@
 											settings.sTableId +'_'+ button :
 											null
 									} )
-									.html( btnDisplay )
+									.php( btnDisplay )
 									.appendTo( container );
 	
 								_fnBindAction(
@@ -14859,7 +14859,7 @@
 	
 				// For HTML types add a search formatter that will strip the HTML
 				if ( key.match(/^html\-/) ) {
-					_ext.type.search[ key+decimalPlace ] = _ext.type.search.html;
+					_ext.type.search[ key+decimalPlace ] = _ext.type.search.php;
 				}
 			}
 		);
@@ -15332,7 +15332,7 @@
 	 *  @example
 	 *     // Use a custom property returned from the server in another DOM element
 	 *     $('#table').dataTable().on('xhr.dt', function (e, settings, json) {
-	 *       $('#status').html( json.status );
+	 *       $('#status').php( json.status );
 	 *     } );
 	 *
 	 *  @example
