@@ -16,6 +16,7 @@ include "includes/main_header.php";
                 $res = mysql_query($que);
                 while($row = mysql_fetch_array($res)){
                     if($row['filename'] != "" && strpos($row['filename'],"pdf")===false){?>
+                    <a href='/file/<?=$row['filename']?>' target='_blank'><?=$row['realName']?></a>&nbsp;<a href='javascript:delImg1()'>삭제</a>";
                         <img src='/file/<?=$row['filename']?>' width='260'>&nbsp;<a href='javascript:delImg1()'>삭제</a>
                     <?}else{
                         
