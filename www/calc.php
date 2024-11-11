@@ -11,9 +11,10 @@ include "includes/main_header.php";
             <div class="card border-left-primary shadow h-100 py-">
                 <div class="card-body pb-0 mb-0">
                     <div class="row no-gutters align-items-center">
-                        <div class="text-sm font-weight-bold text-primary text-uppercase mt-0 mb-2">total</div>
+                        <div class="col-1 text-sm font-weight-bold text-primary text-uppercase mt-0 mb-2">total</div>
+                        <div class="col-11 text-sm font-weight-bold text-secondery text-right text-uppercase mt-0 mb-2 calc"></div>
                         <div class="col-12 mr-2">
-                            <div class="h3 text-right mb-3 font-weight-bold text-gray-800">$40,000</div>
+                            <div class="h3 text-right mb-3 font-weight-bold text-gray-800 textView"></div>
                         </div>
                     </div>  
                 </div>
@@ -28,6 +29,46 @@ include "includes/main_header.php";
         </div>
     </div>
     
+
+    <div class="row">
+
+        <!-- Content Column -->
+        <div class="col-lg-12 mt-2 mb-4">
+
+            <!-- Project Card Example -->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">7</button>
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">8</button>
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">9</button>
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">X</button>                   
+                    </div>
+                    <div class="row">
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">4</button>
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">5</button>
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">6</button>
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">-</button>
+                    </div>
+                    <div class="row">
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">1</button>
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">2</button>
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">3</button>
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">+</button>
+                    </div>
+                    <div class="row">
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">+/-</button>
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">0</button>
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">.</button>
+                        <button type="button" class="btn eb btn-xl border border-light-subtle border-bottom-info m-1">=</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 
     <!-- Content Row -->
@@ -130,3 +171,10 @@ include "includes/main_header.php";
 </div>
 <!-- /.container-fluid -->
 <? include "includes/main_bottom.php"?>
+<script>
+    $(".eb").click(function(){
+        $(".calc").append($(this).text());
+        var textNum = $(".calc").text();
+        $(".calc").text(Format_comma(textNum.replace(',','')))
+    })
+</script>
