@@ -7,7 +7,9 @@
         var formatValue="";
 
         // 콤마제거
+        newValue = newValue.replace(/[^0-9]/g, "");
         newValue = newValue.replace(/\,/gi, ' ');
+        newValue = newValue.replace(/^0+/, "");
 
         // comma제거된 문자열 길이
         len = newValue.length;
