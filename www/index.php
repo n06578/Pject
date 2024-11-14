@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
-include "includes/main_header.php";
+include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
 ?>
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -329,4 +329,4 @@ include "includes/main_header.php";
 
 </div>
 <!-- /.container-fluid -->
-<? include "includes/main_bottom.php"?>
+<? include $_SERVER['DOCUMENT_ROOT']."/includes/main_bottom.php"?>

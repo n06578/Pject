@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
-include "includes/main_header.php";
+include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
 ?>
 <div class="container-fluid">
 
@@ -183,4 +183,4 @@ include "includes/main_header.php";
     </div>
 
 </div>
-<? include "includes/main_bottom.php"?>
+<? include $_SERVER['DOCUMENT_ROOT']."/includes/main_bottom.php"?>
