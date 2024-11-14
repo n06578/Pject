@@ -20,7 +20,7 @@ $rootPath =  str_repeat($rootPath,count($documentPath)-1);
     <!-- Page level plugins -->
     <script src="<?=$rootPath?>vendor/chart.js/Chart.min.js"></script>
     <script src="<?=$rootPath?>vendor/jquery/jquery.min.js"></script>
-    <title>SB Admin 2 - Dashboard</title>
+    <title>PjectY</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=$rootPath?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -29,6 +29,8 @@ $rootPath =  str_repeat($rootPath,count($documentPath)-1);
     <link href="<?=$rootPath?>css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link href="<?=$rootPath?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="<?=$rootPath?>css/mobiscroll.jquery.min.css" rel="stylesheet" />
+    <script src="<?=$rootPath?>js/mobiscroll.jquery.min.js"></script>
 </head>
 
 <body id="page-top">
