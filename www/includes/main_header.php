@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('Asia/Seoul');
 $baseName = explode(".php",basename($_SERVER["PHP_SELF"]));
 $_SESSION['left_menu_active'] = $baseName[0];
 
@@ -20,6 +21,8 @@ $rootPath =  str_repeat($rootPath,count($documentPath)-1);
     <!-- Page level plugins -->
     <script src="<?=$rootPath?>vendor/chart.js/Chart.min.js"></script>
     <script src="<?=$rootPath?>vendor/jquery/jquery.min.js"></script>
+    <script src="<?=$rootPath?>js/jquery-1.11.1.min.js"></script>
+    <script src="<?=$rootPath?>js/jquery.form.js"></script>
     <title>PjectY</title>
 
     <!-- Custom fonts for this template-->
