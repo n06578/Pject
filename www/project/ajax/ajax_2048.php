@@ -12,4 +12,5 @@ if($cnt > 0){
 }else{
     $que = "insert into miniGame set ip ='".$_SERVER["REMOTE_ADDR"]."',score = '".$score."'";
 }
+echo $que ;
 mysql_query($que);
