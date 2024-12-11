@@ -53,7 +53,7 @@ $activeShow = $cnt_active > 0 ? "show" : "";
             $res = mysql_query($que);
             while($row = mysql_fetch_array($res)){
         ?>
-                <a class="collapse-item <?=$_SESSION['left_menu_active'] == $row['projectSite'] ? "active":""?>" href="<?=$rootPath?>/<?=$row['projectPath']?>/<?=$row['projectSite']?>.php"><?if($row['projectIcon'] !=""){?><i class="<?=$row['projectIcon']?>"></i> <?}?><?=$row['projectName']?></i></a>
+                <a class="collapse-item <?=$_SESSION['left_menu_active'] == $row['projectSite'] ? "active":""?>" href="<?=$rootPath?><?=$row['projectPath']?>/<?=$row['projectSite']?>.php"><?if($row['projectIcon'] !=""){?><i class="<?=$row['projectIcon']?>"></i> <?}?><?=$row['projectName']?></i></a>
         <?
             }
         ?>
