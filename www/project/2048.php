@@ -57,30 +57,14 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                         </div>
                     </div>
                     <table class="table table-bordered" id="myTable" width="100%" cellspacing="0" height="80">
+                        <? for($i = 0; $i<4; $i++){ ?>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        <? } ?>
                     </table>
                 </div>
             </div>
@@ -90,6 +74,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/main_bottom.php"?>
 <script>
     let tableHtml = "";
+    let resetDone = false; // 플래그 변수 초기화
     $(document).ready(function(){
         newNum();
         saveTableState();
@@ -234,6 +219,13 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
             restoreTableState();
         })
 
+        $(".btn-restart").click(function(){
+            if(confirm("다시 시작하시겠습니까?")){
+                $("table td").text('');
+                newNum();
+            }
+        })
+
         function newNum(type) {
             const emptyCells = [];
             $("#myTable").find("tr").each(function() {
@@ -301,15 +293,21 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                 // If no mergeable cells are found, alert game over
                 if (isGameOver) {
                     var nowScore = parseInt($(".scoreText").html().replace(/\,/gi, ''));
-                    $.ajax({
-                        type: "POST",
-                        url: "ajax/ajax_2048.php", // 데이터를 가져올 서버 URL
-                        data: "scrore="+nowScore,
-                        success: function(data) {
-                            console.log(data);
-                            alert("game over");
-                        }
-                    });
+                    if (!resetDone) { // 아직 초기화가 안 되었을 때만 실행
+                        resetDone = true; // 플래그를 true로 설정하여 재실행 방지
+                        $.ajax({
+                            type: "POST",
+                            url: "ajax/ajax_2048.php", // 데이터를 가져올 서버 URL
+                            data: "scrore="+nowScore,
+                            success: function(data) {
+                                if(confirm("다시 시작하시겠습니까?")){
+                                    $("table td").text('');
+                                    newNum();
+                                }
+                                resetDone = false; // 플래그를 true로 설정하여 재실행 방지
+                            }
+                        });
+                    }
                 }
             }
         }
