@@ -30,25 +30,31 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2 my-2">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">startDate</div>
-								<input type="text" name="startDate" class="form-control" id="startDate">
+                                <div class="row no-gutters align-items-center">
+                                    <input type="date" name="startDay" class="form-control px-3 col mr-3" id="startDay">
+                                    <input type="time" name="startTime" class="form-control px-3 col" id="startTime">
+                                </div>
 							</div>
 						</div>
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2 my-2">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">endDate</div>
-								<input type="text" name="endDate" class="form-control" id="endDate">
+                                <div class="row no-gutters align-items-center">
+                                    <input type="date" name="endDay" class="form-control px-3 col mr-3" id="endDay">
+                                    <input type="time" name="endTime" class="form-control px-3 col" id="endTime">
+                                </div>
 							</div>
 						</div>
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2 my-2">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">color</div>
-								<input type="text" name="color" class="form-control" id="color">
+								<input type="color" name="color" class="form-control" id="color">
 							</div>
 						</div>
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2 my-2">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">memo</div>
-								<input type="text" name="memo" class="form-control" id="memo">
+								<textarea type="text" name="memo" class="form-control" id="memo"></textarea>
 							</div>
 						</div>
 						<div class="row no-gutters align-items-center">
@@ -137,8 +143,15 @@ $(document).ready(function() {
                                 success: function (data) {
 									$(".info-card").removeClass("d-none")
                                     $("#title").val(data['title']);
-									$("#startDate").val(data['startDate']);
-									$("#endDate").val(data['endDate']);
+                                    var startDate = data['startDate'];
+                                    startDay = startDate.split(" ");
+									$("#startDay").val(startDay[0]);
+                                    $("#startTime").val(startDay[1]);
+
+                                    var endDate = data['endDate'];
+                                    endDay = endDate.split(" ");
+                                    $("#endDay").val(endDay[0]);
+                                    $("#endTime").val(endDay[1]);
 									$("#color").val(data['color']);
 									$("#memo").val(data['memo']);
 									$("#id").val(args.event.id);

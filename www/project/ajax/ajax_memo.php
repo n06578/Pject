@@ -5,7 +5,6 @@ date_default_timezone_set('Asia/Seoul');
 
 $dataMode = $_REQUEST['dataMode'] != "" ? $_REQUEST['dataMode'] : "insertChk";
 
-
 if($dataMode == "insertChk"){
     $que = "select * from MonthMemo where memoId='".$_REQUEST['id']."'";
     $res = mysql_query($que) or die(mysql_error());
@@ -33,8 +32,6 @@ if($dataMode == "insertChk"){
     }else{
         $que = "update MonthMemo set
                     allDay = '".$_REQUEST['allDay']."',
-                    endDate = '".$endDate."',
-                    startDate = '".$startDate."',
                     color = '".$_REQUEST['color']."',
                     title = '".$_REQUEST['title']."'
                 where memoId='".$_REQUEST['id']."'
@@ -55,6 +52,9 @@ if($dataMode == "insertChk"){
     echo json_encode($data);
     
 }else if($dataMode == "updateData"){
+    
+    $_REQUEST['startDate'] = $_REQUEST['startDay']. " " . $_REQUEST['startTime'];
+    $_REQUEST['endDate'] = $_REQUEST['endDay']. " " . $_REQUEST['endTime'];
     $que = "update MonthMemo set
                 allDay = '".$_REQUEST['allDay']."',
                 endDate = '".$_REQUEST['endDate']."',
