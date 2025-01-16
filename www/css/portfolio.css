@@ -1,0 +1,20 @@
+.txt-black{ color: #000 !important; }
+.txt-secondary{ color: #858796 !important; }
+.txt-darkgray{ color: #404044 !important; }
+.lh-1{ line-height: 10px !important; }
+.lh-2{ line-height: 30px !important; }
+.lh-4{ line-height: 40px !important; }
+.itemAction{ background-color: #4e73df; color: #fff;}
+.itemAction:hover{ background-color: #2e59d9; color: #fff;}
+
+
+.hoverNone:hover{ text-decoration: none !important; }
+
+.p-body{
+    min-height:350px;
+}
+.linkBtn{
+    bottom: 13px !important;
+    position: absolute;
+    width: 90%;
+}

@@ -4,7 +4,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>포트폴리오 사이트 참고 &copy; startbootstrap.com</span>
                     </div>
                 </div>
             </footer>
