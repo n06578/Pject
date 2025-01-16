@@ -29,7 +29,7 @@
 
 <!-- Nav Item - Pages Collapse Menu -->
 <?
-collapsed active
+// collapsed active
 $que_active = "select * from projectList where doneDate <= '".date('Y-m-d')."' and projectSite = '".$_SESSION['left_menu_active']."' and projectSite !=''";
 $res_active = mysql_query($que_active);
 $cnt_active = mysql_num_rows($res_active);
