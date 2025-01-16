@@ -1,5 +1,5 @@
 <?php
-// require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 ?>
 <div class="main-box h-90 d-none">
