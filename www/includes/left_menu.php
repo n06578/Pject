@@ -29,14 +29,14 @@
 
 <!-- Nav Item - Pages Collapse Menu -->
 <?
-//collapsed active
-// $que_active = "select * from projectList where doneDate <= '".date('Y-m-d')."' and projectSite = '".$_SESSION['left_menu_active']."' and projectSite !=''";
-// $res_active = mysql_query($que_active);
-// $cnt_active = mysql_num_rows($res_active);
+collapsed active
+$que_active = "select * from projectList where doneDate <= '".date('Y-m-d')."' and projectSite = '".$_SESSION['left_menu_active']."' and projectSite !=''";
+$res_active = mysql_query($que_active);
+$cnt_active = mysql_num_rows($res_active);
 
-// $activeMainYn = $cnt_active > 0 ? "active" : "";
-// $activeSubYn = $cnt_active > 0 ? "active" : "collapsed";
-// $activeShow = $cnt_active > 0 ? "show" : "";
+$activeMainYn = $cnt_active > 0 ? "active" : "";
+$activeSubYn = $cnt_active > 0 ? "active" : "collapsed";
+$activeShow = $cnt_active > 0 ? "show" : "";
 ?>
 
 <li class="nav-item <?=$activeMainYn?>">
@@ -49,15 +49,15 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
         <?
-            // $que = "select * from projectList where doneDate <= '".date('Y-m-d')."' order by seq desc";
-            // $res = mysql_query($que);
-            // while($row = mysql_fetch_array($res)){
-            //     $target = "";
-            //     if($row['projectRole'] == "웹프로젝트"){$target = "target='_blank'";}
+            $que = "select * from projectList where doneDate <= '".date('Y-m-d')."' order by seq desc";
+            $res = mysql_query($que);
+            while($row = mysql_fetch_array($res)){
+                $target = "";
+                if($row['projectRole'] == "웹프로젝트"){$target = "target='_blank'";}
         ?>
-                <!-- <a class="collapse-item <?=$_SESSION['left_menu_active'] == $row['projectSite'] ? "active":""?>" <?=$target?> href="<?=$rootPath?><?=$row['projectPath']?>/<?=$row['projectSite']?>.php"><?if($row['projectIcon'] !=""){?><i class="<?=$row['projectIcon']?>"></i> <?}?><?=$row['projectName'].$row['projectRole']?></i></a> -->
+                <a class="collapse-item <?=$_SESSION['left_menu_active'] == $row['projectSite'] ? "active":""?>" <?=$target?> href="<?=$rootPath?><?=$row['projectPath']?>/<?=$row['projectSite']?>.php"><?if($row['projectIcon'] !=""){?><i class="<?=$row['projectIcon']?>"></i> <?}?><?=$row['projectName'].$row['projectRole']?></i></a>
         <?
-            // }
+            }
         ?>
         </div>
     </div>
