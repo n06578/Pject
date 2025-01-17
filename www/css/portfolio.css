@@ -12,9 +12,37 @@
 
 .p-body{
     min-height:350px;
+    padding-bottom: 50px;
 }
 .linkBtn{
     bottom: 13px !important;
     position: absolute;
-    width: 90%;
+    right :1.25rem;
+    left : 1.25rem;
+}
+
+.subdown:hover .subdown-menu {
+    display: flex;
+    z-index: 6;    
+    top: 87%;
+    left: 25px;
+    font-size: 12px;
+    
+    /* width: 80%; */
+}
+.subdown-div { cursor: pointer; }
+
+.subdown-menu {
+    display: none;
+    position: absolute;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.18);
+    background-color: #0000006b !important;
+}
+
+.subdown-menu p{
+    text-decoration: none;
+    color: #fff;
+    text-align : left;
+    margin-bottom: 0 !important;
 }

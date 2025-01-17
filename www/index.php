@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
+// require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
 ?>
 <div class="container-fluid">
@@ -34,12 +34,12 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
+                    <div class="pt-4 pb-2">
                         <div class="row h-100">
                             <div class="col-3 h-100">
-                                <img src="img/pt/my.jpg" alt="" style="height: 100%;">
+                                <img src="img/pt/my.jpg" alt="" style="width: 100%;">
                             </div>
-                            <div class="col-7">
+                            <div class="col-9">
                                 <p class="txt-black lh-2 context1" >
                                     안녕하십니까.
                                     <br>저는 웹 개발자 <strong>나윤아</strong>입니다. <br>
@@ -87,13 +87,14 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
             </div>
             <!-- 개인 활동 상단 -->    
             <div class="row">
-                <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="col-xl-4 col-md-6 mb-4 subdown">
+                    <div class="card border-left-secondary shadow h-100 py-2 subdown-div">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold txt-secondary text-uppercase mb-1">
-                                        총 경력 (아르바이트+개발자)</div>
+                                        총 경력<br>(아르바이트+개발자)
+                                    </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">4년</div>
                                 </div>
                                 <div class="col-auto">
@@ -102,14 +103,23 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                             </div>
                         </div>
                     </div>
+                    <div class="subdown-menu">
+                        <p class="subdown-item pl-2 pr-1 py-2" href="#">
+                            ●   2017.06 ~ 2018.02 9개월   교촌치킨 <br>
+                            ●   2018.08 ~ 2018.12 5개월   치킨대학교 <br>
+                            ●   2019.05 ~ 2019.10 6개월   곱창이야기 <br>
+                            ●   2022.04 ~ 2024.08 2.5년   제트핑거소프트( 개발팀 )
+                        </p>
+                    </div>
                 </div>
-                <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="col-xl-4 col-md-6 mb-4 subdown">
+                    <div class="card border-left-secondary shadow h-100 py-2 subdown-div">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold txt-secondary text-uppercase mb-1">
-                                        개발자</div>
+                                        개발자
+                                    </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">2.5년</div>
                                 </div>
                                 <div class="col-auto">
@@ -118,14 +128,20 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                             </div>
                         </div>
                     </div>
+                    <div class="subdown-menu">
+                        <p class="subdown-item px-2" href="#">
+                            Profile
+                        </p>
+                    </div>
                 </div>
-                <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="col-xl-4 col-md-6 mb-4 subdown">
+                    <div class="card border-left-secondary shadow h-100 py-2 subdown-div">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold txt-secondary text-uppercase mb-1">
-                                        포트폴리오</div>
+                                        포트폴리오
+                                    </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">5개</div>
                                 </div>
                                 <div class="col-auto">
@@ -134,17 +150,23 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                             </div>
                         </div>
                     </div>
+                    <div class="subdown-menu">
+                        <p class="subdown-item px-2" href="#">
+                            Profile
+                        </p>
+                    </div>
                 </div>
             </div>
             <!-- 개인 활동 하단 -->
             <div class="row">
-                <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="col-xl-4 col-md-6 mb-4 subdown">
+                    <div class="card border-left-secondary shadow h-100 py-2 subdown-div">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold txt-secondary text-uppercase mb-1">
-                                        팀 프로젝트</div>
+                                        팀 프로젝트
+                                    </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">1개</div>
                                 </div>
                                 <div class="col-auto">
@@ -153,14 +175,20 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                             </div>
                         </div>
                     </div>
+                    <div class="subdown-menu">
+                        <p class="subdown-item px-2" href="#">
+                            Profile
+                        </p>
+                    </div>
                 </div>
-                <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="col-xl-4 col-md-6 mb-4 subdown">
+                    <div class="card border-left-secondary shadow h-100 py-2 subdown-div">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold txt-secondary text-uppercase mb-1">
-                                        개인 포트폴리오</div>
+                                        개인 포트폴리오
+                                    </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">4개</div>
                                 </div>
                                 <div class="col-auto">
@@ -169,14 +197,20 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                             </div>
                         </div>
                     </div>
+                    <div class="subdown-menu">
+                        <p class="subdown-item px-2">
+                            Profile
+                        </p>
+                    </div>
                 </div>
-                <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="col-xl-4 col-md-6 mb-4 subdown">
+                    <div class="card border-left-secondary shadow h-100 py-2 ">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold txt-secondary text-uppercase mb-1">
-                                        총 포트폴리오 제작일수(5개)</div>
+                                        총 포트폴리오 제작일수<br>(5개)
+                                    </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">11개월</div>
                                 </div>
                                 <div class="col-auto">
@@ -184,6 +218,11 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="subdown-menu">
+                        <p class="subdown-item px-2">
+                            Profile
+                        </p>
                     </div>
                 </div>
             </div>
@@ -388,6 +427,16 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
 <!-- /.container-fluid -->
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/main_bottom.php"?>
 <script>
+$(document).ready(function(){
+    // 제일 높이가 큰 card를 기준으로 나머지 card의 높이를 맞춤
+    var max = 0;
+    $(".p-body").each(function(){
+        if(max < $(this).height()){
+            max = $(this).height();
+        }
+    });
+    $(".p-body").height(max);
+});
 $(".portItem").click(function(){
     $(".portItem").removeClass("itemAction");
     $(this).addClass("itemAction");
