@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
+// require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 ?>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
@@ -25,8 +25,8 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
             <div class="contents-col col ml-2 p-5 pt-2 text-lg" id="mainCardDiv">
                 <table class="table noTable">
                     <tr>
-                        <td class="w-10 text-blg text-right t-navy txt-18" id="tripArea">여행지</td>
-                        <td class="w-75">
+                        <td class="w-15 text-blg text-right t-navy txt-18" id="tripArea">여행지</td>
+                        <td class="w-70">
                             <div class="search-div d-none">
                                 <? include "test.php";?>
                             </div>
@@ -68,7 +68,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                                     <div class="listItemWrt text-right txt-6">
                                         작성자
                                     </div>
-                                    <div class="showDetail text-right txt-6">
+                                    <div class="showDetail text-right txt-6" onclick="location.href='trvView.php'">
                                         자세히보기
                                     </div>
                                 </div>

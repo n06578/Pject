@@ -6,7 +6,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
     <div class="contents-col col pt-2 text-lg h-100" id="mainCardDiv">
         <table class="table noTable mr-5">
             <tr>
-                <td class="w-15 text-blg text-right t-navy txt-17 pt-3" id="tripArea">문의제목</td>
+                <td class="w-15 text-blg text-right t-navy txt-17 pt-3" id="tripArea">소통창고</td>
                 <td class="w-85"><input type="text" class="form-control w-95 noBorder mr-5"></td>
             </tr>
         </table>
@@ -19,7 +19,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
         </div>
     </div>
 </div>
-<div class="text-center" id="writeBtn" ><i class="far fa-save"></i> 등록하기</div> <!--onclick="location.href='monEWrite.php'"-->
+<div class="text-center" id="writeBtn" onclick="location.href='commuWrite.php'"><i class="far fa-save"></i> 등록하기</div>
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <!-- Place the first <script> tag in your HTML's <head> -->
 
@@ -32,12 +32,8 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
     height:"77vh",
     setup: (editor) => {
         editor.on('init', () => {
-            editor.setContent('');
+
         });
     }
-});
-$("#writeBtn").click(function(){
-    var content = tinyMCE.activeEditor.getContent();
-    console.log(content);
 });
 </script>

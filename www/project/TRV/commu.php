@@ -6,7 +6,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
     <div class="contents-col col pt-2 text-lg h-100" id="mainCardDiv">
         <table class="table noTable">
             <tr>
-                <td class="w-15 text-blg text-right t-navy txt-17 pt-3" id="tripArea">공지사항</td>
+                <td class="w-15 text-blg text-right t-navy txt-17 pt-3" id="tripArea">소통창고</td>
                 <td><input type="text" class="form-control noBorder mr-4"></td>
                 <td class="w-10"><input type="button" class="btn btn-navy w-100 mr-4 text-blg t-white" id="search" value="검색"></td>
             </tr>
@@ -17,7 +17,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                 <thead>
                     <tr class="text-center">
                         <td class="w-10">No.</td>
-                        <td>공지사항 제목</td>
+                        <td>소통창고 제목</td>
                         <td class="w-15">등록일시</td>
                         <td class="w-15">작성자</td>
                     </tr>
@@ -34,7 +34,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
         </div>
     </div>
 </div>
-<div class="text-center" id="writeBtn" onclick="location.href='gongJiWrite.php'"><i class="fas fa-pen"></i> 작성하기</div>
+<div class="text-center" id="writeBtn" onclick="location.href='commuWrite.php'"><i class="fas fa-pen"></i> 작성하기</div>
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <script>
 </script>

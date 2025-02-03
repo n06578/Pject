@@ -12,13 +12,13 @@
                                 <span class="text">홈</span>
                             </a>
 
-                            <a href="myCal.php" class="btn">
+                            <a href="javascript:void(0)" class="btn" onclick="chkLogin('myCal.php')">
                                 <i class="far fa-calendar-alt"></i>
                                 <br>
                                 <span class="text">일정</span>
                             </a>
                         <br>
-                        <a href="myHome.php" class="btn">
+                        <a href="javascript:void(0)" class="btn" onclick="chkLogin('myHome.php')">
                             <i class="fas fa-plane"></i>
                             <br>
                             <span class="text">프로필</span>
@@ -41,10 +41,10 @@
                     <ul class="big_menu">
                         <li>내 게시물 <i class="arrow fas fas2 fa-angle-right"></i></li>
                         <ul class="small_menu">
-                            <li><a href="myHome.php">게시물</a></li>
-                            <li><a href="myHome.php">최근 본 게시물</a></li>
-                            <li><a href="myHome.php">찜한 게시물</a></li>
-                            <li><a href="myHome.php">일정에 추가된 게시물</a></li>
+                            <li><a href="javascript:void(0)" onclick="chkLogin('myHome.php')">게시물</a></li>
+                            <li><a href="javascript:void(0)" onclick="chkLogin('myHome.php')">최근 본 게시물</a></li>
+                            <li><a href="javascript:void(0)" onclick="chkLogin('myHome.php')">찜한 게시물</a></li>
+                            <li><a href="javascript:void(0)" onclick="chkLogin('myHome.php')">일정에 추가된 게시물</a></li>
                         </ul>
                     </ul>
                     <!-- <ul class="big_menu">
@@ -54,11 +54,14 @@
                             <li><a href="#"></a>소메뉴2-2</a></li>
                         </ul>
                     </ul> -->
-                    <ul class="big_menu">
-                        <li><a href="monE.php">문의사항</a></li>
+                    <ul class="big_menu" onclick="location.href='monE.php'">
+                        <li><a href="#">문의사항</a></li>
                     </ul>
-                    <ul class="big_menu">
-                        <li><a href="gongJi.php">공지사항</a></li>
+                    <ul class="big_menu" onclick="location.href='gongJi.php'">
+                        <li><a href="#">공지사항</a></li>
+                    </ul>
+                    <ul class="big_menu" onclick="location.href='commu.php'">
+                        <li><a href="#">소통창고</a></li>
                     </ul>
                 </div>
             </div>
@@ -95,3 +98,14 @@
         });
     });
 </script>
+<script>
+    function chkLogin(paging){
+        console.log(paging);
+
+        <? if($_SESSION['loginYn'] != "Y" ){ ?>
+            loginChkClos();
+        <?}else{?>
+            location.href=paging;
+        <?}?>
+    }
+    </script>

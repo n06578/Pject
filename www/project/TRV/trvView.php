@@ -3,18 +3,14 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 ?>
 <div class="main-box container-fluid h-90">
-    <div class="contents-col col pt-2 text-lg h-100" id="mainCardDiv">
-        <table class="table noTable mr-5">
-            <tr>
-                <td class="w-15 text-blg text-right t-navy txt-17 pt-3" id="tripArea">공지제목</td>
-                <td class="w-85"><input type="text" class="form-control w-95 noBorder mr-5"></td>
-            </tr>
-        </table>
-        <hr class="hr-navy">
-        <div class="card mx-5 h-80">
-        
-            <textarea id="editor" class="w-100 h-100">
-            </textarea>
+    <div class="contents-col col pt-5 text-lg h-100" id="mainCardDiv">
+        <!-- <hr class="hr-navy"> -->
+        <div class="card mx-5 h-80 p-5">
+        <p>안녕하세요, TinyMCE 에디터입니다!</p>
+            <p>&nbsp;</p>
+            <p><em>ㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇ</em></p>
+            <p>&nbsp;</p>
+            <p><strong>ㄴㅇㅎㄹㄴㅇㄴㅇㅎ</strong></p>
 
         </div>
     </div>
@@ -29,10 +25,9 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
   tinymce.init({
     selector: '#editor',
     language: 'ko',
-    height:"77vh",
     setup: (editor) => {
         editor.on('init', () => {
-
+            editor.setContent('<p>안녕하세요, TinyMCE 에디터입니다!</p>');
         });
     }
 });

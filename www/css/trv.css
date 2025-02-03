@@ -1,3 +1,15 @@
+@media (min-width: 1200px) {
+  .main-box{
+    padding : 0px 300px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .main-box{
+    padding : 0px 10px;
+  }
+}
+
 body {
 	font-family: 'S-CoreDream-3Light';
   color: #2e266d !important;
@@ -10,7 +22,6 @@ body {
 }
 .main-box{
   margin-top: 90px;
-  padding : 0px 300px;
 }
 #content-wrapper::-webkit-scrollbar {
     display: none;
@@ -158,8 +169,9 @@ body {
 
 
 /*메인페이지 디자인*/
-.noTable{border-collapse: unset !important;}
+.noTable{border-collapse: unset !important;background-color: #ffffff00 !important;}
 .noTable td, .noBorder{border:none !important;}
+.noTable td{background-color: #ffffff00 !important;}
 
 
 #moneBtn{
@@ -207,13 +219,14 @@ body {
 }
 
 .listItemCon{
-  height : 68px !important;
-  margin:3px 10px !important;
+  height : 67px !important;
+  margin:1px 5px !important;
+  padding-bottom: 2px;
   color: #231d52da;
   font-weight: 600;
   font-size: 0.6rem !important;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* 표시할 줄 수 */
+  -webkit-line-clamp: 4; /* 표시할 줄 수 */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -302,7 +315,7 @@ body {
   cursor: pointer;
 }
 
-/* 로그인 및 회원가입 css */
+/* 로그인 css */
 #trvNavyLogo{
   margin-top : 2vh;
   margin-bottom : 2vh;
@@ -330,40 +343,22 @@ body {
   margin-bottom : 2vh;
   width: 10vw;
   height: 25vh;
-  background-image: url("../img/trv/loginBack.PNG");
+  background-image: url("../img/trv/loginBackdev.PNG");
   background-size: contain; /* 이미지를 화면에 맞게 조절 */
   background-position: center; /* 이미지를 중앙에 위치 */
   background-repeat: no-repeat; 
 }
-
-#joinLogo{
-  margin-top : 2vh;
-  margin-bottom : 2vh;
-  width: 10vw;
-  height: 5vh;
-  background-image: url("../img/trv/joinImg.PNG");
-  background-size: contain; /* 이미지를 화면에 맞게 조절 */
-  background-position: center; /* 이미지를 중앙에 위치 */
-  background-repeat: no-repeat; 
-}
-
-#joinBack{
-  margin-top : 2vh;
-  margin-bottom : 2vh;
-  width: 100%;
-  height: 52vh;
-  background-image: url("../img/trv/joinBack.PNG");
-  background-size: contain; /* 이미지를 화면에 맞게 조절 */
-  background-position: center; /* 이미지를 중앙에 위치 */
-  background-repeat: no-repeat; 
-}
-
 .loginBox {
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center !important;
 }
+
+.joinBox {
+  padding-top: 100px !important;
+}
+
 
 .loginInput{
   width: 85%; 
@@ -383,13 +378,78 @@ body {
   color: #2e266d;
 }
 
+
 #loginBtn{
   width: 60%;
   padding : 10px 0px;
   border-radius: 15px;
-  background-color: #2e266db2;
+  background-color: #7770a6b2;
 }
 
+/* 회원가입 부분 */
+.joinTbl{
+  /* height: 420px; */
+  /* background-color: bisque; */
+  width: 550px;
+  border-top: 1px solid #2e266d17 !important;
+  border-bottom: 1px solid #2e266d17 !important;
+  border-radius : 25px;
+}
+.joinBtm{
+  width: 550px;
+  text-align: center;
+}
+#joinLogo{
+  margin-bottom: 4.5vh !important;
+  width: 10vw;
+  height: 5vh;
+  background-image: url("../img/trv/joinImg.PNG");
+  background-size: contain; /* 이미지를 화면에 맞게 조절 */
+  background-position: center; /* 이미지를 중앙에 위치 */
+  background-repeat: no-repeat; 
+}
+
+#joinBack{
+  margin-top : 2vh;
+  margin-bottom : 2vh;
+  width: 100%;
+  height: 52vh;
+  /* background-image: url("../img/trv/joinBackdev2.PNG"); */
+  background-size: contain; /* 이미지를 화면에 맞게 조절 */
+  background-position: center; /* 이미지를 중앙에 위치 */
+  background-repeat: no-repeat; 
+  padding: 80px 110px 50px 120px ;
+} 
+
+.joinDiv > i { position: absolute; margin: 18px 0px 0px 22px; }
+.joinMailDiv > i { position: absolute; margin: 18px 0px 0px 22px; }
+
+.joinMailDiv{
+  display: table;
+  width: 100%;
+}
+.joinInput{
+  width: 100%; 
+  height: 50px;
+  border: none;
+  color:#2e266d;
+  background-color: #ffffffa9;
+  font-weight: 500 !important;
+  padding : 0px 50px !important;
+  border-bottom: 1px solid #2e266d17 !important;
+}
+
+.joinInput:focus{ outline: none; }
+.joinInput::placeholder { color: #2e266d; }
+/* .joinDiv{border-left : 1px solid #2e266d17 !important; border-right:1px solid #2e266d17 !important} */
+/* .joinDiv:nth-child(1){border-top-left-radius: 25px; border-top-right-radius: 25px;border-top: 1px solid #2e266d17 !important;padding-top:10px}
+.joinDiv:nth-child(6){border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;border-bottom: 1px solid #2e266d17 !important} */
+.radioDiv{width: 85%; display:inline-flex; padding: 0px !important;height:50px; text-align: center !important; padding: 3px 20px 0px 20px  !important; border:none !important;}/*border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;*/
+.ullist{    list-style: none;display: ruby; }
+.form-ul{position:fixed;text-align: center; padding-top:10px; right:0px; left:0px;}
+#nickChkBtn{position: absolute; margin: 10px 0px 0px -90px; border: none;background-color: #160c5dc2;}
+.eyeI{position: absolute; margin: 18px 0px 0px -41px !important; cursor: pointer;}
+#passI{border-bottom: 1px solid #2d2d2d; padding-bottom: 2px; cursor: pointer;}
 #homeBtn{
   z-index: 4;
   position: fixed;
@@ -409,6 +469,7 @@ body {
 .w-20{width: 20%;}
 .w-30{width: 30%;}
 .w-40{width: 40%;}
+.w-45{width: 45%;}
 .w-50{width: 50%;}
 .w-70{width: 70%;}
 .w-75{width: 75%;}
@@ -420,7 +481,10 @@ body {
 .h-80{min-height:80% !important;}
 .h-85{min-height:85% !important;}
 .h-90{min-height:90% !important;}
+.h-95{min-height:95% !important;}
 .h-100{min-height:100% !important;}
+
+.j-c{justify-content: center !important;}
 
 .btn-secondary{background-color: #615e7a9a;}
 .text-blg{font-weight: bold;}
@@ -428,6 +492,7 @@ body {
 .t-navy{color:#2e266d !important;}
 
 .d-ruby{display: ruby-text !important;}
+.btn:focus{box-shadow: none !important; border-color: #2e266d26;}
 .btn-white{background-color: #ffffff;}
 .btn-white:hover{border-color: #2e266d26;    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
 .btn-navy{background-color: #2e266d;}
@@ -506,3 +571,58 @@ body {
 gmp-map {
   height: 100%;
 }
+
+
+/* PNotify 안내창 css */
+[data-pnotify] .brighttheme-container {
+  padding: 1.1rem !important;
+  background-color: #f7f9ff !important;
+  border: 0 solid var(--brighttheme-border-color);
+  color: #2b2363 !important;
+  border-radius: 3px !important;
+}
+.brighttheme-title > .pnotify-pre-line{
+  font-weight: 900 !important;
+  padding-left:2px !important;
+}
+.pnotify-pre-line{
+  font-weight: 500 !important;
+  font-size: smaller !important;
+  padding-left:20px !important;
+}
+.pnotify-action-button{
+  color: #2b2363 !important;
+  font-weight: 700 !important;
+}
+[data-pnotify] .brighttheme-confirm, [data-pnotify] .brighttheme-title+.brighttheme-text {
+  margin-top: 10px !important;
+}
+[data-pnotify] .brighttheme-btn {
+  border: 1px solid #fcfcfc00 !important;
+  padding : 3px 4px !important;
+  border-radius: 3px !important;
+  font-size: smaller !important; 
+  font-weight: 400 !important;
+}
+[data-pnotify] .brighttheme-btn:hover {
+  border: 1px solid #2b23633d !important;
+}
+
+/* [data-pnotify] .brighttheme-btn:hover:nth-child(2) {
+  border: 1px solid #ff000033 !important;
+} */
+[data-pnotify] .brighttheme-btn:nth-child(2){
+  margin-left:5px;
+  color:rgb(146, 0, 0) !important; 
+}
+[data-pnotify].pnotify-with-icon .brighttheme-content {
+  margin-left: 1px !important;
+}
+
+.ui-state-active{
+  background-color: #453c7c !important;
+  border-color : #453c7c !important;
+}
+
+.txt-dis{ background-color: #0000000f !important;}
+.tooltip-inner { max-width: 100% !important;background-color: #000000cc !important;}
