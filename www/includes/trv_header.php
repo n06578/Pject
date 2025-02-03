@@ -1,4 +1,5 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 session_start();
 date_default_timezone_set('Asia/Seoul');
 $baseName = explode(".php",basename($_SERVER["PHP_SELF"]));
@@ -35,7 +36,14 @@ include $rootPath."lib/PNotify.php"; // PNotiry관련 함수
 //footer box 기본값 x
 $showFooter = false;
 if(!isset($_SESSION['loginYn'])){
+    $_SESSION['loginNum'] = '-';
     $_SESSION['loginYn'] = "N";
+}else{
+    if($_SESSION['loginNum'] != 0){
+        $que_info = "select * from TjoinTbl where seq = '".$_SESSION['loginNum']."'";
+        $res_info = mysql_query($que_info);
+        $row_info = mysql_fetch_array($res_info);
+    }
 }
 if( ($baseName[0] == "myCal" || $baseName[0] == "myHome") && $_SESSION['loginYn'] != "Y" ){ 
     ?>

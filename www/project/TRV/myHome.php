@@ -1,5 +1,4 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 ?>
 <div class="main-box h-90 d-none">
@@ -21,7 +20,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                                 </div>
                             </div>
                         </td>
-                        <td class="fw-800 txt-12 w-40">darong</td>
+                        <td class="fw-800 txt-12 w-40"><?=$row_info['nickName']?></td>
                         <td class="w-15 text-right">
                             <span class="fw-800 txt-12">국내여행횟수</span>
                             <span>0</span>

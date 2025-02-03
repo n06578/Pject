@@ -9,6 +9,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
             <div class="row j-c w-100 pt-5 mb-4">
                 <div class="joinTbl py-3 px-5">
                     <div class="joinDiv"><i class="fas fa-user"></i><input type="text" class="joinInput t-navy noBorder" id="nickName" name="nickName" placeholder="닉네임"><input type="button" class="btn btn-sm btn-secondary" id="nickChkBtn" value="중복확인"></div>
+                    <div class="joinDiv"><i class="fas fa-user"></i><input type="text" class="joinInput t-navy noBorder" id="userName" name="userName" placeholder="성명"></div>
                     <div class="joinDiv">
                         <div class="joinMailDiv">
                             <i class="fas fa-envelope"></i>
@@ -177,13 +178,13 @@ $(function() {
 			url: 'ajax/ajax_join.php',
 			type: 'post',
 			success : function(val){
-				mobiscroll.toast({
-					message: "저장되었습니다.",
-					display: "center",
-					color: "gray",
-					closeButton: false
-				});
-                console.log(val);
+                if(val == "joinDone"){
+                    joinLogin();
+                }else{
+                    pAlert("error","가입실패","이미 가입된 이메일입니다.",true);
+                    $("#eMail").val("");
+                    $("#eMail").focus();
+                }
 			}
 		});
     }

@@ -177,4 +177,43 @@ function pAlert(type, titleTXT,conTxt,modal) {
         }
         PNotify.alert(opts);
 }
+
+
+function joinLogin(){
+        const notice = PNotify.info({
+            title: '가입이 완료되었습니다',
+            text: '로그인 화면으로 이동하시겠습니까?',
+            icon: 'fa fa-exclamation-triangle',
+            hide: false, // 자동으로 닫히지 않도록 설정
+            closer: false, // 닫기 버튼 비활성화
+            sticker: false, // 스티커 버튼 비활성화
+            destroy: true, // 알림을 클릭으로 제거 가능하도록 설정
+            stack: new PNotify.Stack({
+                dir1: 'down',
+                modal: true,
+                firstpos1: 25,
+                overlayClose: false
+            }),
+            modules: new Map([
+                ...PNotify.defaultModules,
+                [PNotifyConfirm, {
+                    confirm: true,
+                    buttons: [
+                        {
+                            text: '확인',
+                            click: (notice) => {
+                                location.href = 'login.php';
+                            }
+                        },
+                        {
+                            text: '취소',
+                            click: (notice) => {
+                                // location.reload();
+                            }
+                        }
+                    ]
+                }]
+            ])
+        });
+    }
 </script>

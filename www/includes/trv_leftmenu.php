@@ -38,15 +38,17 @@
                     <?}?>
                     </div>
                     <h2></h2>
+                <?if($_SESSION['loginNum'] != 0){?>
                     <ul class="big_menu">
                         <li>내 게시물 <i class="arrow fas fas2 fa-angle-right"></i></li>
                         <ul class="small_menu">
-                            <li><a href="javascript:void(0)" onclick="chkLogin('myHome.php')">게시물</a></li>
-                            <li><a href="javascript:void(0)" onclick="chkLogin('myHome.php')">최근 본 게시물</a></li>
-                            <li><a href="javascript:void(0)" onclick="chkLogin('myHome.php')">찜한 게시물</a></li>
-                            <li><a href="javascript:void(0)" onclick="chkLogin('myHome.php')">일정에 추가된 게시물</a></li>
+                            <li onclick="chkLogin('myHome.php')"><a href="javascript:void(0)">게시물</a></li>
+                            <li onclick="chkLogin('myHome.php')"><a href="javascript:void(0)">최근 본 게시물</a></li>
+                            <li onclick="chkLogin('myHome.php')"><a href="javascript:void(0)">찜한 게시물</a></li>
+                            <li onclick="chkLogin('myHome.php')"><a href="javascript:void(0)">일정에 추가된 게시물</a></li>
                         </ul>
                     </ul>
+                <?}?>
                     <!-- <ul class="big_menu">
                         <li>MENU 2 <i class="arrow fas fas2 fa-angle-right"></i></li>
                         <ul class="small_menu">
@@ -100,6 +102,7 @@
 </script>
 <script>
     function chkLogin(paging){
+        console.log("paging");
         console.log(paging);
 
         <? if($_SESSION['loginYn'] != "Y" ){ ?>

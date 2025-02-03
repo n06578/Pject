@@ -2,9 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
 ?>
-<meta name="google-signin-client_id" content="AIzaSyBpj9mhqC5Vd2Wn6FXPqEr5crupY0FRKXg">
-
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="611069435508-9qc4jsebjvbqg1s0v23lvinfj4ae97dr.apps.googleusercontent.com">
+
 
 <div class="loginBox h-90">
     <table class="noBorder text-center w-40">
@@ -66,7 +66,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
                     pw: pw
                 },
                 success: function(data){
-                    if(data == "success"){
+                    if(data == "success" || data == "manager"){
                         location.href = "trvmain2.php";
                     }else{
                         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
@@ -77,12 +77,11 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
             });
         }
     }
-
     function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    }
+        }
 </script>
