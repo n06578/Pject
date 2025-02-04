@@ -4,94 +4,69 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/function.php';
 
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
-?>
-
-<script src="/rams/_assets/js/mail_page.js?v=<?=time();?>"></script>
-
-<?
-/** switch($mode)
- *  mainUser : 사업장 관리자 회원등록 페이지
- *  subUser : 사업장의 사원 회원등록 페이지
- *  passchgUser : 비밀번호 변경 페이지
- *  filePartner : 업체등록 정보 확인 및 자료 등록 요청 페이지
- *  workderPartner : 업체의 작업자 등록 페이지
- */
-
-$action = "yes";
-$mode= $_GET['sendMode'];
-$mailChk = getCnt("select * from mail_hash where hash_key = '".$_GET['hash']."'");
 
 
-// 최초 열람인 경우 mh_dt_read 에 현재시간을 기록
-if($mailChk > 0){
-    setResult("update mail_hash set mh_dt_read = now() where hash_key = '".$_GET['hash']."' AND mh_dt_read = '0000-00-00 00:00:00'");
+$que = "select * from TjoinTbl where seq = '".$_REQUEST['seq']."' and joinAgreeChk = 0";
+$res = mysql_query($que);
+$row = mysql_fetch_array($res);
+$cnt = mysql_num_rows($res);
+
+$action = $cnt>0? "yes" : "no";
+if($action == "yes"){
+    $que_ok = " update TjoinTbl set joinAgreeChk=1 where seq = '".$_REQUEST['seq']."'";
+    mysql_query($que_ok);
 }
-if($mailChk > 0){
-    $url ="";
-    switch($mode){
-
-    /* 사업장 관리자 회원등록 페이지 */
-        case "mainUser" :
-            $sql = "SELECT * FROM `user` WHERE `user_ref_seq` = 0  and user_use ='N' and hash_key='".$_GET['hash']."'";
-            $userCnt = getCnt($sql);
-            if($userCnt <= 0){
-                $action = "no";
-            }else{
-                $user = getRow($sql);
-                setResult("update user set user_use = 'Y', hash_key ='', user_level = '100' where user_email = '".$user['user_email']."' and hash_key='".$_GET['hash']."'");
-            }
-        break;
-
-    /*사업장의 사원 회원등록 페이지 */
-        case "subUser":
-           //
-           $signCnt = getCnt("select * from user where user_pass = '".$_GET['hash']."' and user_use = 'N' and user_del = '0' ");
-           if($signCnt == 0){
-                $action ="no";
-            }else{
-                $signData = getRow("select * from user where user_pass = '".$_GET['hash']."' and user_use = 'N' and user_del = '0' ");
-                $mailCnt = getCnt("select * from user where user_del = '0' and user_use = 'Y' and user_email = '".$signData['user_email']."' ");
-                if($mailCnt > 0){
-                    // 이미 등록된 이메일 주소로 회원등록을 시도한 경우
-                    $action = "copy";
-                    $url ='/rams/auth/agree.php?'.$_SERVER['QUERY_STRING']."&action=copy";
-                }else{
-                    // 관리자와 사원에 계정정보가 없는경우
-                    $url ='/rams/auth/agree.php?'.$_SERVER['QUERY_STRING'];
-                }
-            }
-        break;
-    /* 그 외는 모두 잘못된 접근 */
-        default:
-            $action ="no";
-        break;
-
+?>
+<style>
+    #content{
+        background-image: url('../../../img/trv/trvBackgroundNoWord.PNG') !important;
+        width: 100vw;
+        height: 100vh;
+        background-size: cover; /* 이미지를 화면에 맞게 조절 */
+        background-position: center; /* 이미지를 중앙에 위치 */
+        background-repeat: no-repeat; 
+        position: fixed;
+        opacity: 0.6;
     }
-}else{
-    $action ="no";
-}
-
-?>
-
-
-<div class="main-container container-fluid mt-5 pt-5 p-5">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card custom-card ">
-                    <div class="card-body p-0">
+    .main-container{
+        width: 100vw;
+        height: 100vh;
+    }
+    #btn-login{
+        background-color: #7770a6;
+    }
+    hr{
+        color:#7770a6b2;
+        margin : 0px 20px;
+    }
+    #contents{
+        color:rgb(11 4 53 / 74%);
+    }
+    .card{
+        border: 1px solid #b2b2b2
+    }
+    
+</style>
+</div>
+<div class="main-container container-fluid mt-5 pt-5 p-5" >
+    <div class="row justify-content-center">
+        <div class="col-md-12 w-50">
+            <div class="card custom-card " >
+                <div class="card-body p-0">
+                        <img src='http://34.231.136.110/img/trv/TRV.PNG' style='width:125px; margin:15px;'>
+                        <hr>
                         <div class="tab-content text-center m-5 p-5">
-                            <h1 class="fw-bolder" id="contentsTitle">
-                            </h1>
-                            <h3 class="mt-3" id="contents">
-                            </h3>
+                            <h2 class="fw-bolder" id="contentsTitle">
+                            </h2>
+                            <h4 class="mt-4" id="contents">
+                            </h4>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="float-end">
-                    <? if($mode == "mainUser" && $action =="yes"){ ?>
-                            <button class="btn btn-green m-1" id="btn-login" onclick="location.href='/rams/auth/login.php'"><i class="fa fa-check"></i> 로그인하기</button>
-                    <? }?>
-                            <button class="btn btn-primary m-1" id="btn-close" onclick="self.close();"><i class="fa fa-close"></i> 닫기</button>
+                        <div class="float-end mr-3 mb-2">
+                            <?if($action == "yes"){?>
+                                <button class="btn btn-navy t-white" id="btn-login" onclick="location.href='/project/TRV/login.php'"><i class="fa fa-check"></i> 로그인</button>
+                            <?}else{?>
+                                문의센터 : 1999-0903
+                            <?}?>
                         </div>
                     </div>
                 </form>
@@ -107,7 +82,7 @@ if($action == "no"){
     $sub_title = "관리자에게 문의해주세요.";
 }else{
     $title = "이메일 인증이 완료되었습니다.";
-    $sub_title = "이제부터 안전보건관리 솔루션 이용이 가능합니다.";
+    $sub_title = $row['userName']."님 환영합니다.";
     $url = "/project/TRV/login.php";
 }
 
@@ -119,6 +94,4 @@ if($title !="" || $sub_title != ""){
     </script>
 <?
 }
-
-require_once $_SERVER['DOCUMENT_ROOT'].'/rams/_common/rms_footer.php'; 
 ?>

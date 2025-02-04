@@ -182,7 +182,7 @@ function pAlert(type, titleTXT,conTxt,modal) {
 function joinLogin(){
         const notice = PNotify.info({
             title: '가입이 완료되었습니다',
-            text: '로그인 화면으로 이동하시겠습니까?',
+            text: '이메일 인증이 후 로그인이 활성화됩니다.',
             icon: 'fa fa-exclamation-triangle',
             hide: false, // 자동으로 닫히지 않도록 설정
             closer: false, // 닫기 버튼 비활성화
@@ -208,7 +208,7 @@ function joinLogin(){
                         {
                             text: '취소',
                             click: (notice) => {
-                                // location.reload();
+                                location.reload();
                             }
                         }
                     ]

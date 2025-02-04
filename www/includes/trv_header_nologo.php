@@ -24,6 +24,8 @@ $showFooter = false;
 
     <!-- Page level plugins -->
     <?include "linkScript.php";?>
+    <title>PjectY</title>
+
 </head>
 <?include $rootPath."lib/PNotify.php"; // PNotiry관련 함수 ?>
 <body id="page-top">

@@ -1,7 +1,5 @@
 <?php
 $document_root = $_SERVER['DOCUMENT_ROOT'];
-
-require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 // require_once $_SERVER['DOCUMENT_ROOT'].'/lib/function.php';
 
 include $document_root . '/project/TRV/plugin/PHPMailer/src/Exception.php';
@@ -13,6 +11,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
+require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 
 /**
  * 메일 전송 함수
@@ -40,7 +39,7 @@ function mailSend($title, $receiveMan, $mailText, $user_email, $sendMode, $addUr
     $mail->Port = 465;
     $mail->SMTPSecure = "ssl";
     $mail->Username   = "yoyajo";
-    $mail->Password   = "Nyoun003310..4";
+    $mail->Password   = "EQH4V7216URC";
     $mail->CharSet = "utf-8";
     $mail->SetFrom('yoyajo@naver.com', 'Pject TRV 인증 서비스');
 
@@ -52,25 +51,33 @@ function mailSend($title, $receiveMan, $mailText, $user_email, $sendMode, $addUr
 
     $mail->Subject = $title;
     $mail->isHTML(true);
-    $mail->Body  = "<h4 style='text-align: center;padding: 25px 15px;background-color: #0c6c9e;color: #FFFFFF;font-size:16px;width:90%;border-radius: 10px;'>
-                        ".$title."
-                    </h4><br>";
-    $mail->Body .= "<br>
-                    <div style='background-color: #EDEFF2;padding:30px 15px;border-radius:10px;min-height:50px;width:90%;'>
-                        " . nl2br($mailText) . "
-                    </div><br>
-                    <br>
-                    <a href=\"$org_url\">
-                        <button style='text-align: center;padding: 10px 15px;background-color: #8BC34A;color: #FFFFFF;font-size:16px;border-radius: 10px;'>
-                            <b>접속하기</b>
-                        </button>
-                    </a>
-                    <br>
-                    ";
+    $mail->Body .= " <div>
+    <img src='http://34.231.136.110/img/trv/TRV.PNG' style='width:125px; margin:15px;'>
+        <div style='padding: 30px 0px;border-radius: 10px;min-height: 50px;border: 1px solid rgba(36, 50, 128, 0.75);width: 500px;text-align:center;color: #1a1a1ac4 ;'>
+            " . nl2br("$mailText") . "
+        </div>
+        <br>
+        <a href=\"$org_url\">
+            <button style='text-align: center;padding: 10px 15px;background-color: #3042a7bf;color: #FFFFFF;font-size:16px;width: 500px;border-radius: 10px; border:0px;'>
+                <b>접속하기</b>
+            </button>
+        </a>
+    </div>
+        <br>
+        ";
     $mail->Body .= "";
 
     $mail->AddAddress($user_email, $receiveMan);
-    $mail->send();
+    $rand_num = sprintf("%06d",rand(000000,999999));
+
+    try {
+        $mail->send();
+    } catch (Exception $e) {
+        $rand_num = -1;
+        echo "action";
+    }
+    return $rand_num;
+    echo "<Br>".$mail->Body."<Br>".$user_email."<Br>". $receiveMan;
 
 
     // sendHistory($hash,$user_email,"mail",$mail->Body);
@@ -87,7 +94,7 @@ function ATagNoSend($title, $receiveMan, $mailText, $user_email, $sendMode, $add
     $mail->Port = 465;
     $mail->SMTPSecure = "ssl";
     $mail->Username   = "yoyajo";
-    $mail->Password   = "Nyoun003310..";
+    $mail->Password   = "EQH4V7216URC";
     $mail->CharSet = "utf-8";
     $mail->SetFrom('yoyajo@naver.com', 'Pject TRV 인증 서비스');
 
