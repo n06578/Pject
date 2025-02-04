@@ -2,11 +2,11 @@
 $document_root = $_SERVER['DOCUMENT_ROOT'];
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/lib/function.php';
+// require_once $_SERVER['DOCUMENT_ROOT'].'/lib/function.php';
 
-include($document_root . '/project/TRV/plugin/PHPMailer/src/Exception.php');
-include($document_root . '/project/TRV/plugin/PHPMailer/src/PHPMailer.php');
-include($document_root . '/project/TRV/plugin/PHPMailer/src/SMTP.php');
+include $document_root . '/project/TRV/plugin/PHPMailer/src/Exception.php';
+include $document_root . '/project/TRV/plugin/PHPMailer/src/PHPMailer.php';
+include $document_root . '/project/TRV/plugin/PHPMailer/src/SMTP.php';
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -40,7 +40,7 @@ function mailSend($title, $receiveMan, $mailText, $user_email, $sendMode, $addUr
     $mail->Port = 465;
     $mail->SMTPSecure = "ssl";
     $mail->Username   = "yoyajo";
-    $mail->Password   = "Nyoun003310";
+    $mail->Password   = "Nyoun003310..4";
     $mail->CharSet = "utf-8";
     $mail->SetFrom('yoyajo@naver.com', 'Pject TRV 인증 서비스');
 
@@ -86,10 +86,10 @@ function ATagNoSend($title, $receiveMan, $mailText, $user_email, $sendMode, $add
     $mail->SMTPAuth = true;
     $mail->Port = 465;
     $mail->SMTPSecure = "ssl";
-    $mail->Username   = "scainet";
-    $mail->Password   = "tmzkdlspt20241!";
+    $mail->Username   = "yoyajo";
+    $mail->Password   = "Nyoun003310..";
     $mail->CharSet = "utf-8";
-    $mail->SetFrom('scainet@naver.com', '안전관리시스템 SC·AI net');
+    $mail->SetFrom('yoyajo@naver.com', 'Pject TRV 인증 서비스');
 
 
     $mail->Subject = $title;
