@@ -68,6 +68,8 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
                 success: function(data){
                     if(data == "success" || data == "manager"){
                         location.href = "trvmain2.php";
+                    }else if(data == "fail_1"){
+                        alert("이메일 인증후 사용가능합니다.");
                     }else{
                         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
                         $("#loginId").val("")
