@@ -23,6 +23,17 @@
     </div>
 </div>
 
+<div class="modal" id="searchModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-fit">
+        <div class="modal-content">
+            <div class="modal-body _modalBody" ng-switch="invitationStep" style="height: 90vh;">
+                <? include "test.php";?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     $(".modal-open").on("click", function() {
         var imgSrc = $(this).find("img").attr("src");

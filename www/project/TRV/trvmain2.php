@@ -2,8 +2,6 @@
 // require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 ?>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
 
 <div class="main-box h-90 d-none">
     <div class="p-0 m-0 h-100">
@@ -28,7 +26,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                         <td class="w-15 text-blg text-right t-navy txt-18" id="tripArea">여행지</td>
                         <td class="w-70">
                             <div class="search-div d-none">
-                                <? include "test.php";?>
+                                
                             </div>
                             <input type="text" class="form-control noBorder searchInput mr-4">
                         </td>
@@ -99,14 +97,17 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
         });
         
         $(".searchInput").on("click", function() {
-            var offset = $(".searchInput").offset();
-            console.table(offset);
             $(".search-div").removeClass("d-none")
+            $("#searchModal").modal("show");
         });
 
-            $(document).not(".search-div").click(function() {
-                $(".search-div").addClass("d-none");
-            });
+        $(document).not(".search-div").click(function() {
+            $(".search-div").addClass("d-none");
+        });
+        
+		$("#searchClose").on("click",function(){
+			$("#searchModal").modal("hide")
+		})
     });
 
     $(".listItemBox").on({
@@ -129,5 +130,5 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
             $(this).find(".showDetail").removeClass("d-flex").addClass("d-none");
         }
     });
-    
+
 </script>

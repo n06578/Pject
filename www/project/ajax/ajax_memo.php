@@ -6,6 +6,7 @@ date_default_timezone_set('Asia/Seoul');
 $dataMode = $_REQUEST['dataMode'] != "" ? $_REQUEST['dataMode'] : "insertChk";
 
 if($dataMode == "insertChk"){
+    $_REQUEST['color'] = @$_REQUEST['color'] =="" ? "blue":$_REQUEST['color'];
     $que = "select * from MonthMemo where memoId='".$_REQUEST['id']."'";
     $res = mysql_query($que) or die(mysql_error());
     $row = mysql_fetch_array($res);
@@ -26,7 +27,8 @@ if($dataMode == "insertChk"){
                     endDate = '".$endDate."',
                     startDate = '".$startDate."',
                     color = '".$_REQUEST['color']."',
-                    title = '".$_REQUEST['title']."'
+                    title = '".$_REQUEST['title']."',
+                    memo = ''
                     ";
         mysql_query($que);
     }else{

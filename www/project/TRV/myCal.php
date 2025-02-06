@@ -16,7 +16,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                 <div class="card-body pb-0 m-3 clicktitle">
 					<form id="infoData">
 						<div class="row no-gutters align-items-center">
-							<div class="col mr-2">
+							<div class="col mr-2 my-2">
 								<input type="hidden" name="dataMode" value="updateData">
 								<input type="hidden" name="id" id="id">
 								<input type="hidden" name="allDay" id="allDay">
@@ -24,22 +24,25 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 								<input type="text" name="title" class="form-control" id="title">
 							</div>
 						</div>
+                        <div class="row no-gutters align-items-center">
+							<div class="col mr-2 my-2">
+								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">일정소명</div>
+								<input type="text" name="subTitle" class="form-control" id="subTitle">
+							</div>
+						</div>
+                        
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2 my-2">
-								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">여행시작</div>
-                                <div class="row no-gutters align-items-center">
-                                    <input type="date" name="startDay" class="form-control px-3 col mr-3" id="startDay">
-                                    <input type="time" name="startTime" class="form-control px-3 col" id="startTime">
-                                </div>
-							</div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">여행시작</div>
+                                <input type="date" name="startDay" class="form-control px-3 col mr-3" id="startDay">
+                                <input type="time" name="startTime" class="form-control px-3 col d-none" id="startTime">
+                            </div>
 						</div>
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2 my-2">
-								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">여행종료</div>
-                                <div class="row no-gutters align-items-center">
-                                    <input type="date" name="endDay" class="form-control px-3 col mr-3" id="endDay">
-                                    <input type="time" name="endTime" class="form-control px-3 col" id="endTime">
-                                </div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">여행종료</div>
+                                <input type="date" name="endDay" class="form-control px-3 col mr-3" id="endDay">
+                                <input type="time" name="endTime" class="form-control px-3 col d-none" id="endTime">
 							</div>
 						</div>
 						<div class="row no-gutters align-items-center">
@@ -81,16 +84,14 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 						</div>
 						<div class="row no-gutters align-items-center float-bottom bottom-div text-right">
 							<div class="col mr-2 my-2 text-right">
-								<a href="#" class="btn btn-sm btn-danger btn-icon-split btn-del">
+								<a href="#" class="btn btn-sm btn-danger btn-icon-split" id="btn-del">
 									<span class="icon text-white-50">
 										<i class="fas fa-trash"></i>
 									</span>
 									<span class="text">삭제</span>
 								</a>
 								<a class="btn btn-sm btn-success btn-icon-split" id="btn-save">
-									<span class="icon text-white-50">
 										<i class="fas fa-check"></i>
-									</span>
 									<span class="text">저장</span>
 								</a>
 							</div>
@@ -140,60 +141,169 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
         }
     });
     
-    mobiscroll.setOptions({
-  locale: mobiscroll.localeKo,
-  theme: 'windows',
-  themeVariant: 'dark'
-});
 
 $(function () {
     mobiscroll.setOptions({
-  locale: mobiscroll.localeKo,
-  theme: 'windows',
-  themeVariant: 'light'
-});
-
-//https://mobiscroll.com/docs/jquery/eventcalendar/api 참고,Eventcalendar API 
-$(function () {
-  var inst = $('#demo-desktop-month-view')
-    .mobiscroll()
-    .eventcalendar({
-      clickToCreate: true,
-      dragToCreate: true,
-      dragToMove: true,
-      dragToResize: true,
-      eventDelete: true,
-      view: {
-        calendar: { labels: true },
-      },
-      onEventClick: function (args) {
-        $(".clicktitle").text(args.event.title);
-        mobiscroll.toast({
-          message: args.event.title,
-        });
-      },
-      data: [
-        {
-            start: new Date(2024, 10, 18),
-            end: new Date(2024, 10, 18),
-            title: 'Conference',
-            allDay: true,
-            color: 'red'
-        }
-        ]
-    })
-    .mobiscroll('getInst');
-});
-  
-});
-  
-
-$(function () {
-    mobiscroll.setOptions({
-        locale: mobiscroll.localeKo,
-        theme: 'windows',
-        themeVariant: 'light' // or dark
+    locale: mobiscroll.localeKo,
+    theme: 'windows',
+    themeVariant: 'light'
     });
+    $.ajax({
+        type: "GET",
+        url: "ajax/ajax_get_memo.php", // 데이터를 가져올 서버 URL
+        dataType: "json", // 응답 형식은 JSON
+        success: function(data) {
+            if (Array.isArray(data)) {
+                // 서버에서 받은 데이터를 Mobiscroll 캘린더 형식에 맞게 변환
+                const eventsData = data.map(event => ({
+                    start: new Date(event.start),  // start는 Date 객체로 변환
+                    end: new Date(event.end),      // end도 마찬가지
+                    title: event.title,
+                    subTitle:event.subTitle,
+                    momo:event.momo,
+                    allDay: event.allDay === 'true', // "true"를 boolean으로 변환
+                    color: event.color || '#0078D7'  // color가 없으면 빈 문자열로 처리
+                }));
+
+                console.log(eventsData);
+
+                // Mobiscroll 캘린더 설정 및 데이터 추가
+                var inst = $('#demo-desktop-month-view')
+                    .mobiscroll()
+                    .eventcalendar({
+                        clickToCreate: true,
+                        dragToCreate: true,
+                        dragToMove: true,
+                        dragToResize: true,
+                        eventDelete: true,
+                        view: {
+                            calendar: { labels: true },
+                        },
+                        onEventClick: function (args) {
+                            args.event.dataMode = "insertChk";
+                            args.event.subTitle = '';
+                            // UI 차단: 로딩 표시
+                            mobiscroll.toast({
+                                message: "Loading...",
+                                display: "center",
+                                color: "gray",
+                                closeButton: false
+                            });
+
+                            // AJAX 요청 최적화
+                            $.ajax({
+                                type: "POST",
+                                url: "ajax/ajax_memo.php",
+                                data: args.event,
+								dataType : "json",
+                                success: function (data) {
+									$(".info-card").removeClass("d-none")
+                                    $("#title").val(data['title']);
+                                    var startDate = data['startDate'];
+                                    startDay = startDate.split(" ");
+									$("#startDay").val(startDay[0]);
+                                    $("#startTime").val(startDay[1]);
+
+                                    var endDate = data['endDate'];
+                                    endDay = endDate.split(" ");
+                                    if(data['color'] == "" ){
+                                        data['color'] = "#0078D7";
+                                    }
+                                    $("#endDay").val(endDay[0]);
+                                    $("#endTime").val(endDay[1]);
+									$("#color").val(data['color']);
+                                    $("#subTitle").val(data['subTitle']);
+									$("#memo").val(data['memo']);
+									$("#id").val(args.event.id);
+									$("#allDay").val(args.event.allDay);
+
+                                    // 로딩 표시 제거 후 결과 토스트
+                                    mobiscroll.toast({
+                                        message: args.event.title,
+                                    });
+                                },
+                                error: function(xhr, status, error) {
+                                    // 오류 처리
+                                    mobiscroll.toast({
+                                        message: "Error occurred!",
+                                        color: "red",
+                                    });
+                                }
+                            });
+                        },
+                        data: eventsData
+                    })
+                    .mobiscroll('getInst');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("이벤트 데이터를 가져오는 중 오류 발생:", error);
+        }
+    });
+
+	$("#btn-save").click(function(){
+		$("#infoData").ajaxSubmit({
+			url: 'ajax/ajax_memo.php',
+			type: 'post',
+			success : function(val){
+				mobiscroll.toast({
+					message: "저장되었습니다.",
+					display: "center",
+					color: "gray",
+					closeButton: false
+				});
+				location.reload();
+			}
+		});
+	})
+	
+    $('#btn-del').click(function(){
+        calDataDel();
+    })
+
+    function calDataDel(){
+        const notice = PNotify.info({
+            title: '삭제 후 복구가 불가능합니다.',
+            text: '삭제하시겠습니까?',
+            icon: 'fa fa-exclamation-triangle',
+            hide: false, // 자동으로 닫히지 않도록 설정
+            closer: false, // 닫기 버튼 비활성화
+            sticker: false, // 스티커 버튼 비활성화
+            destroy: true, // 알림을 클릭으로 제거 가능하도록 설정
+            stack: new PNotify.Stack({
+                dir1: 'down',
+                modal: true,
+                firstpos1: 25,
+                overlayClose: false
+            }),
+            modules: new Map([
+                ...PNotify.defaultModules,
+                [PNotifyConfirm, {
+                    confirm: true,
+                    buttons: [
+                        {
+                            text: '확인',
+                            click: (notice) => {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ajax/ajax_memo.php",
+                                    data: "id="+$("#id").val()+"&dataMode=delData",
+                                    success: function (data) {
+                                        console.log("action");
+                                        location.reload();
+                                    }
+                                })  
+                            }
+                        },
+                        {
+                            text: '취소',
+                            click: notice => notice.close()
+                        }
+                    ]
+                }]
+            ])
+        });
+    }
 });
 
   

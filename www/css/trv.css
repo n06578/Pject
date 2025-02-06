@@ -525,6 +525,14 @@ body {
   background-color: #ffffff00 !important;
   border: none;
 }
+.modal-fit{
+  width: 100% !important;
+  min-width: 100% !important;
+}
+.modal-fit > .modal-content{
+  background-color: #ffffff00 !important;
+  border: none;
+}
 
 /* 캘린더 관련 css */
 .mbsc-calendar-cell-inner{
@@ -626,3 +634,6 @@ gmp-map {
 
 .txt-dis{ background-color: #0000000f !important;}
 .tooltip-inner { max-width: 100% !important;background-color: #000000cc !important;}
+
+.chkAck{background-color: #2d2d2d29;}
+.searchInput{font-weight: 600; color: #4b4b4b;}
