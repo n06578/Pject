@@ -8,16 +8,16 @@ $dataMode = $_REQUEST['dataMode'] != "" ? $_REQUEST['dataMode'] : "insertChk";
 
 if($dataMode == "insertChk"){
     $_REQUEST['color'] = @$_REQUEST['color'] =="" ? "":$_REQUEST['color'];
-    $que = "select * from TcalanderTbl where memoId='".$_REQUEST['id']."'";
+    $que = "select * from TcalanderTbl where memoId='".$_REQUEST['id']."' and joinSeq = '".$_SESSION['loginNum']."'";
     $res = mysql_query($que) or die(mysql_error());
     $row = mysql_fetch_array($res);
     $cnt = mysql_num_rows($res);
     
     // 날짜 데이터 변환 처리
-    $start = preg_replace('/\s*\(.*\)$/', '', $_REQUEST['start']);;
+    $start = preg_replace('/\s*\(.*\)$/', '', $_REQUEST['start']);
     $startDate = date("Y-m-d H:i:s", strtotime($start));
     
-    $end = preg_replace('/\s*\(.*\)$/', '', $_REQUEST['end']);;
+    $end = preg_replace('/\s*\(.*\)$/', '', $_REQUEST['end']);
     $endDate = date("Y-m-d H:i:s", strtotime($end));
     
     
