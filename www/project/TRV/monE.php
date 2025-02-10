@@ -23,12 +23,27 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="c-pointer" onclick="location.href='noticeView.php'">
-                        <td class="text-center">1</td>
-                        <td>2</td>
-                        <td class="text-center">3</td>
-                        <td class="text-center">4</td>
+                    <?
+                    $que_mone = "select a.*,b.nickName from TmoneTbl a left join TjoinTbl b on a.joinSeq = b.seq order by writeDateTime desc";
+                    $res_mone = mysql_query($que_mone);
+                    $cnt_mone = mysql_num_rows($res_mone);
+                    $i = 1;
+                    while($row_mone = mysql_fetch_array($res_mone)){
+                    ?>
+                    <tr class="c-pointer" onclick="location.href='moneView.php?seq=<?=$row_mone['seq']?>'">
+                        <td class="text-center"><?=$i?></td>
+                        <td><?=$row_mone['writeTitle']?></td>
+                        <td class="text-center noWrap"><?=$row_mone['writeDateTime']?></td>
+                        <td class="text-center"><?=$row_mone['nickName']?></td>
                     </tr>
+                    <?
+                    $i++;
+                    }
+                    if($cnt_mone == 0){ ?>
+                        <tr>
+                            <td class="text-center" colspan="4">등록된 문의가 없습니다.</td>
+                        </tr>
+                    <? } ?>
                 </tbody>
             </table>
         </div>

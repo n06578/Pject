@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/lib_mysql.php';
-
+date_default_timezone_set('Asia/Seoul');
 
 // db 정보
 $host='34.231.136.110';		   # 호스트명 또는 IP

@@ -302,6 +302,19 @@ body {
   cursor: pointer;
 }
 
+#listBtn{
+  z-index: 4;
+  position: fixed;
+  width: 100px;
+  bottom: 10px;
+  padding: 8px 0px;
+  border-radius: 50px;
+  background-color: #352e63b2;
+  color: #fff;
+  left: 10px;
+  cursor: pointer;
+  
+}
 #saveBtn{
   z-index: 4;
   position: fixed;
@@ -637,3 +650,8 @@ gmp-map {
 
 .chkAck{background-color: #2d2d2d29;}
 .searchInput{font-weight: 600; color: #4b4b4b;}
+
+.noWrap{
+  word-wrap: break-word;
+  text-wrap-mode: nowrap;
+}

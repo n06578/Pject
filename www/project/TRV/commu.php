@@ -20,15 +20,36 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                         <td>소통창고 제목</td>
                         <td class="w-15">등록일시</td>
                         <td class="w-15">작성자</td>
+                        <td class="w-10">조회수</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="c-pointer">
-                        <td class="text-center">1</td>
-                        <td>2</td>
-                        <td class="text-center">3</td>
-                        <td class="text-center">4</td>
+                <tbody>
+                    <?
+                    // $que_gongji = "select * from TcommuniTbl order by writeDateTime desc";
+                    $que_gongji = "select a.*,b.nickName from TcommuniTbl a left join TjoinTbl b on a.joinSeq = b.seq order by writeDateTime desc";
+
+                    $res_gongji = mysql_query($que_gongji);
+                    $cnt_gongji = mysql_num_rows($res_gongji);
+                    $i = 1;
+                    while($row_gongji = mysql_fetch_array($res_gongji)){
+                    ?>
+                    <tr class="c-pointer" onclick="location.href='commuView.php?seq=<?=$row_gongji['seq']?>'">
+                        <td class="text-center"><?=$i?></td>
+                        <td><?=$row_gongji['writeTitle']?></td>
+                        <td class="text-center noWrap"><?=$row_gongji['writeDateTime']?></td>
+                        <td class="text-center"><?=$row_gongji['nickName']?></td>
+                        <td class="text-center"><?=$row_gongji['viewCnt']?></td>
                     </tr>
+                    <?
+                    $i++;
+                    }
+                    if($cnt_gongji == 0){ ?>
+                        <tr>
+                            <td class="text-center" colspan="4">등록된 내용이 없습니다.</td>
+                        </tr>
+                    <? } ?>
+                </tbody>
                 </tbody>
             </table>
         </div>

@@ -45,6 +45,7 @@ if(!isset($_SESSION['loginYn'])){
         $row_info = mysql_fetch_array($res_info);
     }
 }
+if(!isset($_REQUEST['seq'])){$_REQUEST['seq'] = "";}
 if( ($baseName[0] == "myCal" || $baseName[0] == "myHome") && $_SESSION['loginYn'] != "Y" ){ 
     ?>
     <script>
