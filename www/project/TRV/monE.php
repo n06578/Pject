@@ -34,7 +34,10 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
         </div>
     </div>
 </div>
-<div class="text-center" id="writeBtn" onclick="location.href='monEWrite.php'"><i class="fas fa-pen"></i> 작성하기</div>
+<?
+if($_SESSION['loginNum'] != '-' && $_SESSION['loginYn'] == "Y"){?>
+    <div class="text-center" id="writeBtn" onclick="location.href='monEWrite.php'"><i class="fas fa-pen"></i> 작성하기</div>
+<?}?>
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <script>
 </script>
