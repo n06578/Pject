@@ -1,5 +1,6 @@
 <?
 session_start();
+$_SESSION['loginNum'] = '-';
 $_SESSION['loginYn'] = "N";
 ?>
 <script>

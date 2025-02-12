@@ -7,7 +7,6 @@ $que_con = "select a.*,ifnull(b.seq,0) as ansSeq from TcommuniTbl a left join (s
 $res_con = mysql_query($que_con);
 $row_con = mysql_fetch_array($res_con);
 
-
 if($_SESSION['loginNum'] != $row_con['joinSeq']){
     $que_view = "update TcommuniTbl set viewCnt = viewCnt+1 where seq = '".$_REQUEST['seq']."'";
     mysql_query($que_view);
@@ -37,8 +36,8 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
         while($row_ans = mysql_fetch_array($res_ans)){
         ?>
             <div class="ansCard px-2 py-1 txt-9">
-                <label><?=getName($row_ans['joinSeq'])?></label>
-                <label class="f-right"><?=$row_ans['answerDateTime']?></label>
+                <label class="txt-10"><?=getName($row_ans['joinSeq'])?></label>
+                <label class="f-right txt-8"><?=$row_ans['answerDateTime']?></label>
                 <div> <label><?=$row_ans['answerContents']?></label> </div>
                 <div class="likeHateDiv text-right" id="likeHate_<?=$row_ans['seq']?>">
                     <?
@@ -89,19 +88,23 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
 });
 
 $("#ansAdd").on("click",function(){
-    $.ajax({
-        url: "ajax/trv_commu_add_ok.php",
-        type: "POST",
-        data: {
-            answerContents: $("#ansText").val(),
-            conSeq : "<?=$_REQUEST['seq']?>",
-            conType : "commu",
-            ansType : "ansAdd",
-        },
-        success: function(data){
-            location.reload();
-        }
-    });
+    if("<?=$_SESSION['loginNum']?>" !="-" && "<?=$_SESSION['loginNum']?>" !="") {
+        $.ajax({
+            url: "ajax/trv_commu_add_ok.php",
+            type: "POST",
+            data: {
+                answerContents: $("#ansText").val(),
+                conSeq : "<?=$_REQUEST['seq']?>",
+                conType : "commu",
+                ansType : "ansAdd",
+            },
+            success: function(data){
+                location.reload();
+            }
+        });
+    }else{
+        loginChkClos()
+    }
 })
 
 $(document).on('click', '.ansLikeCnt',function(){
