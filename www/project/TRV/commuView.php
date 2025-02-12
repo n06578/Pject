@@ -40,7 +40,7 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
                 <label><?=getName($row_ans['joinSeq'])?></label>
                 <label class="f-right"><?=$row_ans['answerDateTime']?></label>
                 <div> <label><?=$row_ans['answerContents']?></label> </div>
-                <div class="text-right" id="likeHate_<?=$row_ans['seq']?>" data-writer="<?=$row_ans['joinSeq']?>">
+                <div class="likeHateDiv text-right" id="likeHate_<?=$row_ans['seq']?>">
                     <?
                     $que_lh = "select * from TlikeHateTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$row_ans['seq']."' and conType = 'commu'";
                     $res_lh = mysql_query($que_lh);
@@ -51,8 +51,8 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
                         $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
                     }
                     ?>
-                    <label class="c-pointer ansLikeCnt mr-1"><i class="<?=$likeChk?> fa-thumbs-up"></i> <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?></label>
-                    <label class="c-pointer ansHateCnt mr-1"><i class="<?=$hateChk?> fa-thumbs-down"></i> <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?></label>
+                    <label class="c-pointer ansLikeCnt mr-1"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label><!--<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>-->
+                    <label class="c-pointer ansHateCnt mr-1"><i class="<?=$hateChk?> fa-thumbs-down"></i></label><!-- <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>-->
                 <? if($row_ans['joinSeq'] == $_SESSION['loginNum']){ ?>
                     <label class="c-pointer deleteCnt"><i class="fas fa-trash-alt"></i></label>
                 <? } ?>
@@ -105,9 +105,15 @@ $("#ansAdd").on("click",function(){
 })
 
 $(document).on('click', '.ansLikeCnt',function(){
+    $(this).find("i").toggleClass("fas far");
+    $(this).next().find("i").removeClass("fas")
+    $(this).next().find("i").addClass("far")
     ansLikeHateCnt(this,"ansLike");
 })
 $(document).on('click', '.ansHateCnt',function(){
+    $(this).find("i").toggleClass("fas far");
+    $(this).prev().find("i").removeClass("fas")
+    $(this).prev().find("i").addClass("far")
     ansLikeHateCnt(this,"ansHate");
 })
 $(document).on('click', '.deleteCnt',function(){
@@ -116,7 +122,6 @@ $(document).on('click', '.deleteCnt',function(){
 function ansLikeHateCnt(thisVal,ansType){
     var thisId = $(thisVal).parents().attr("id");
     var ansSeq = thisId.replace("likeHate_","");
-    console.log("in");
     $.ajax({
         url: "ajax/trv_commu_add_ok.php",
         type: "POST",
@@ -127,29 +132,10 @@ function ansLikeHateCnt(thisVal,ansType){
             ansType : ansType,
         },
         success: function(data){
-            console.log(thisId);
             if(ansType == "ansDel"){
                 $("#"+thisId).parent().remove();
-            }else{
-                ansLikeHateReloat(ansSeq,thisId)
             }
         }
     });
-}
-
-function ansLikeHateReloat(ansSeq,thisId){
-    $.ajax({
-        url: "ajax/trv_likehate_reload.php",
-        type: "POST",
-        data: {
-            conSeq : ansSeq,
-            conType : "commu",
-            joinSeq : $("#"+thisId).data("writer")
-        },
-        success: function(data){
-            $("#"+thisId).html(data);
-        }
-    });
-    
 }
 </script>
