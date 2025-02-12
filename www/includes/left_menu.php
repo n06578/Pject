@@ -55,7 +55,7 @@ $activeShow = $cnt_active > 0 ? "show" : "";
                 $target = "";
                 if($row['projectRole'] == "웹프로젝트"){$target = "target='_blank'";}
         ?>
-                <a class="collapse-item <?=$_SESSION['left_menu_active'] == $row['projectSite'] ? "active":""?>" <?=$target?> href="<?=$rootPath?><?=$row['projectPath']?>/<?=$row['projectSite']?>.php"><?if($row['projectIcon'] !=""){?><i class="<?=$row['projectIcon']?>"></i> <?}?><?=$row['projectName'].$row['projectRole']?></i></a>
+                <a class="collapse-item <?=$_SESSION['left_menu_active'] == $row['projectSite'] ? "active":""?>" <?=$target?> href="<?=$rootPath?><?=$row['projectPath']?>/<?=$row['projectSite']?>.php"><?if($row['projectIcon'] !=""){?><i class="<?=$row['projectIcon']?>"></i> <?}?><?=$row['projectName']?></i></a><!--$row['projectRole']-->
         <?
             }
         ?>

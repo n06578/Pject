@@ -13,24 +13,62 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
     mysql_query($que_view);
 }
 ?>
-<div class="main-box container-fluid h-90">
-    <div class="contents-col col pt-2 text-lg h-100" id="mainCardDiv">
-        <table class="table noTable mx-5">
-            <tr>
-                <td class="text-left text-blg t-navy txt-14 pt-3 pl-5">Title<text class="ml-4 txt-12"><?=$row_con['writeTitle']?></text></td>
-            </tr>
-        </table>
-        <hr class="hr-navy">
-        <div class="mx-5 text-right txt-10">
-            작성일자 : <?=$row_con['writeDateTime']?>
+<div class="main-box row container-fluid h-90">
+    <div class="h-100">
+        <div class="contents-col col pt-2 text-lg h-100" id="subCardDiv">
+            <table class="table noTable my-0">
+                <tr>
+                    <td class="text-left text-blg t-navy txt-11 pt-3 pl-5">Title<text class="ml-3 txt-10"><?=$row_con['writeTitle']?></text></td>
+                </tr>
+            </table>
+            <hr class="hr-navy mx-4 mt-0 mb-3">
+            <div class="row">
+                <div class="mx-5 col text-left mb-1 txt-8"> <?=getName($row_con['joinSeq'])?> </div>
+                <div class="mx-5 col text-right mb-1 txt-8"> <?=$row_con['writeDateTime']?> </div>
+            </div>
+            <div class="card mx-5 h-80 p-3 txt-9"> <?=$row_con['writeContents']?> </div>
         </div>
-        <div class="card mx-5 h-80 p-5">
-            <?=$row_con['writeContents']?>
+    </div>
+    <!-- <div class="mt-4 mb-2 txt-8"></div> -->
+    <div id="scrollAnsDiv">
+        <?
+        $que_ans = "select * from TcommuniAnswerTbl where conSeq='".$_REQUEST['seq']."' and conType='commu'";
+        $res_ans = mysql_query($que_ans);
+        while($row_ans = mysql_fetch_array($res_ans)){
+        ?>
+            <div class="ansCard px-2 py-1 txt-9">
+                <label><?=getName($row_ans['joinSeq'])?></label>
+                <label class="f-right"><?=$row_ans['answerDateTime']?></label>
+                <div> <label><?=$row_ans['answerContents']?></label> </div>
+                <div class="text-right" id="likeHate_<?=$row_ans['seq']?>" data-writer="<?=$row_ans['joinSeq']?>">
+                    <?
+                    $que_lh = "select * from TlikeHateTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$row_ans['seq']."' and conType = 'commu'";
+                    $res_lh = mysql_query($que_lh);
+                    $cnt_lh = mysql_num_rows($res_lh);
+                    $likeChk = $hateChk = "far";
+                    if($cnt_lh>0){
+                        $row_lh  = mysql_fetch_array($res_lh);
+                        $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
+                    }
+                    ?>
+                    <label class="c-pointer ansLikeCnt mr-1"><i class="<?=$likeChk?> fa-thumbs-up"></i> <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?></label>
+                    <label class="c-pointer ansHateCnt mr-1"><i class="<?=$hateChk?> fa-thumbs-down"></i> <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?></label>
+                <? if($row_ans['joinSeq'] == $_SESSION['loginNum']){ ?>
+                    <label class="c-pointer deleteCnt"><i class="fas fa-trash-alt"></i></label>
+                <? } ?>
+                </div>
+            </div>
+        <?}?>
+    </div>
+    <div class="col ansWrite">
+        <div class="row p-3 pb-0">
+            <textarea class="form-control col-9 w-100 mb-2" id="ansText"></textarea>
+            <input type="button" class="btn btn-white col-1 f-right txt-8" id="ansAdd" value="등록">
         </div>
     </div>
 </div>
 
-<div class="text-center" id="listBtn" onclick="location.href='commu.php'"><i class="far fa-list"></i> 목록</div>
+<div class="text-center" id="listBtn" onclick="location.href='commu.php'"><i class="fas fa-list"></i> 목록</div>
 <?if($_SESSION['loginNum'] == $row_con['joinSeq']){?>
 <div class="text-center" id="writeBtn" onclick="location.href='commuWrite.php?seq=<?=$_REQUEST['seq']?>'"><i class="far fa-save"></i> 수정하기</div>
 <?}?>
@@ -49,4 +87,69 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
         });
     }
 });
+
+$("#ansAdd").on("click",function(){
+    $.ajax({
+        url: "ajax/trv_commu_add_ok.php",
+        type: "POST",
+        data: {
+            answerContents: $("#ansText").val(),
+            conSeq : "<?=$_REQUEST['seq']?>",
+            conType : "commu",
+            ansType : "ansAdd",
+        },
+        success: function(data){
+            location.reload();
+        }
+    });
+})
+
+$(document).on('click', '.ansLikeCnt',function(){
+    ansLikeHateCnt(this,"ansLike");
+})
+$(document).on('click', '.ansHateCnt',function(){
+    ansLikeHateCnt(this,"ansHate");
+})
+$(document).on('click', '.deleteCnt',function(){
+    ansLikeHateCnt(this,"ansDel");
+})
+function ansLikeHateCnt(thisVal,ansType){
+    var thisId = $(thisVal).parents().attr("id");
+    var ansSeq = thisId.replace("likeHate_","");
+    console.log("in");
+    $.ajax({
+        url: "ajax/trv_commu_add_ok.php",
+        type: "POST",
+        data: {
+            answerContents: $("#ansText").val(),
+            conSeq : ansSeq,
+            conType : "commu",
+            ansType : ansType,
+        },
+        success: function(data){
+            console.log(thisId);
+            if(ansType == "ansDel"){
+                $("#"+thisId).parent().remove();
+            }else{
+                ansLikeHateReloat(ansSeq,thisId)
+            }
+        }
+    });
+}
+
+function ansLikeHateReloat(ansSeq,thisId){
+    $.ajax({
+        url: "ajax/trv_likehate_reload.php",
+        type: "POST",
+        data: {
+            conSeq : ansSeq,
+            conType : "commu",
+            joinSeq : $("#"+thisId).data("writer")
+        },
+        success: function(data){
+            $("#"+thisId).html(data);
+        }
+    });
+    
+}
 </script>

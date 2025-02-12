@@ -12,6 +12,7 @@ $conn = mysqli_connect($host, $user, $dbpass, $dbname);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+require_once $_SERVER['DOCUMENT_ROOT'].'/lib/lib_function.php';
 
 // $que = "select * from test";
 // $res = mysql_query($que);

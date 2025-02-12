@@ -18,6 +18,7 @@ if($_REQUEST['id'] == "n06578" && $_REQUEST['pw'] == "1234"){
             $row = mysql_fetch_array($res);
             $_SESSION['loginYn'] = "Y";
             $_SESSION['loginNum'] = $row['seq'];
+            $_SESSION['loginName'] = $row['nickName'];
             echo "success";
         }else{
             echo "fail_1";
