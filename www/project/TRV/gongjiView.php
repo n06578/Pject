@@ -12,21 +12,58 @@ if($_SESSION['loginNum'] != "0"){
 }
 ?>
 <div class="main-box container-fluid h-90">
-    <div class="contents-col col pt-2 text-lg h-100" id="mainCardDiv">
-        <table class="table noTable mx-5">
-            <tr>
-                <td class="text-left text-blg t-navy txt-14 pt-3 pl-5">Title<text class="ml-4 txt-12"><?=$row_con['writeTitle']?></text></td>
-            </tr>
-        </table>
-        <hr class="hr-navy">
-        <div class="mx-5 text-right txt-10">
-            작성일자 : <?=$row_con['writeDateTime']?>
+    <div class="h-100">
+        <div class="contents-col col pt-2 text-lg h-100" id="subCardDiv">
+            <table class="table noTable my-0">
+                <tr>
+                    <td class="text-left text-blg t-navy txt-11 pt-3 pl-5">Title<text class="ml-3 txt-10"><?=$row_con['writeTitle']?></text></td>
+                </tr>
+            </table>
+            <hr class="hr-navy mx-4 mt-0 mb-3">
+            <div class="row">
+                <div class="mx-5 col text-right mb-1 txt-8"> <?=$row_con['writeDateTime']?> </div>
+            </div>
+            <div class="card mx-5 h-80 p-3 txt-9"> <?=$row_con['writeContents']?> </div>
         </div>
-        <div class="card mx-5 h-80 p-5">
-            <?=$row_con['writeContents']?>
+    </div>
+    <div id="scrollAnsDiv">
+        <?
+        $que_ans = "select * from TcommuniAnswerTbl where conSeq='".$_REQUEST['seq']."' and conType='gongji'";
+        $res_ans = mysql_query($que_ans);
+        while($row_ans = mysql_fetch_array($res_ans)){
+        ?>
+            <div class="ansCard px-2 py-1 txt-9">
+                <label class="txt-10"><?=getName($row_ans['joinSeq'])?></label>
+                <label class="f-right txt-8"><?=$row_ans['answerDateTime']?></label>
+                <div> <label><?=$row_ans['answerContents']?></label> </div>
+                <div class="likeHateDiv text-right" id="likeHate_<?=$row_ans['seq']?>">
+                    <?
+                    $que_lh = "select * from TlikeHateTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$row_ans['seq']."' and conType = 'gongji'";
+                    $res_lh = mysql_query($que_lh);
+                    $cnt_lh = mysql_num_rows($res_lh);
+                    $likeChk = $hateChk = "far";
+                    if($cnt_lh>0){
+                        $row_lh  = mysql_fetch_array($res_lh);
+                        $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
+                    }
+                    ?>
+                    <label class="c-pointer ansLikeCnt mr-1"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label><!--<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>-->
+                    <label class="c-pointer ansHateCnt mr-1"><i class="<?=$hateChk?> fa-thumbs-down"></i></label><!-- <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>-->
+                <? if($row_ans['joinSeq'] == $_SESSION['loginNum']){ ?>
+                    <label class="c-pointer deleteCnt"><i class="fas fa-trash-alt"></i></label>
+                <? } ?>
+                </div>
+            </div>
+        <?}?>
+    </div>
+    <div class="col ansWrite">
+        <div class="row p-3 pb-0">
+            <textarea class="form-control col-9 w-100 mb-2" id="ansText"></textarea>
+            <input type="button" class="btn btn-white col-1 f-right txt-8" id="ansAdd" value="등록">
         </div>
     </div>
 </div>
+<div class="text-center" id="listBtn" onclick="location.href='gongji.php'"><i class="fas fa-list"></i> 목록</div>
 <?if($_SESSION['loginYn'] == "Y" && $_SESSION['loginNum'] == "0"){?>
 <div class="text-center" id="writeBtn" onclick="location.href='gongjiWrite.php?seq=<?=$_REQUEST['seq']?>'"><i class="far fa-save"></i> 수정하기</div>
 <?}?>
@@ -45,4 +82,60 @@ if($_SESSION['loginNum'] != "0"){
         });
     }
 });
+
+
+$("#ansAdd").on("click",function(){
+    if("<?=$_SESSION['loginNum']?>" !="-" && "<?=$_SESSION['loginNum']?>" !="") {
+        $.ajax({
+            url: "ajax/trv_commu_add_ok.php",
+            type: "POST",
+            data: {
+                answerContents: $("#ansText").val(),
+                conSeq : "<?=$_REQUEST['seq']?>",
+                conType : "gongji",
+                ansType : "ansAdd",
+            },
+            success: function(data){
+                location.reload();
+            }
+        });
+    }else{
+        loginChkClos()
+    }
+})
+
+$(document).on('click', '.ansLikeCnt',function(){
+    $(this).find("i").toggleClass("fas far");
+    $(this).next().find("i").removeClass("fas")
+    $(this).next().find("i").addClass("far")
+    ansLikeHateCnt(this,"ansLike");
+})
+$(document).on('click', '.ansHateCnt',function(){
+    $(this).find("i").toggleClass("fas far");
+    $(this).prev().find("i").removeClass("fas")
+    $(this).prev().find("i").addClass("far")
+    ansLikeHateCnt(this,"ansHate");
+})
+$(document).on('click', '.deleteCnt',function(){
+    ansLikeHateCnt(this,"ansDel");
+})
+function ansLikeHateCnt(thisVal,ansType){
+    var thisId = $(thisVal).parents().attr("id");
+    var ansSeq = thisId.replace("likeHate_","");
+    $.ajax({
+        url: "ajax/trv_commu_add_ok.php",
+        type: "POST",
+        data: {
+            answerContents: $("#ansText").val(),
+            conSeq : ansSeq,
+            conType : "gongji",
+            ansType : ansType,
+        },
+        success: function(data){
+            if(ansType == "ansDel"){
+                $("#"+thisId).parent().remove();
+            }
+        }
+    });
+}
 </script>
