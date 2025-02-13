@@ -5,6 +5,12 @@ error_reporting(E_ALL);
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 
+if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    $ip = strtok($_SERVER['HTTP_X_FORWARDED_FOR'], ',');
+} else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
 
 switch($_REQUEST['writeMode']){
 	case "mone" :
@@ -15,7 +21,7 @@ switch($_REQUEST['writeMode']){
 					writeContents = '".$_REQUEST['moneContents']."',
 					writePassWord = '".$_REQUEST['monePW']."',
 					writeTitle = '".$_REQUEST['moneTitle']."',
-					writeIp = '".$_SERVER['REMOTE_ADDR']."',
+					writeIp = '".$ip."',
 					declareCnt = '0'";
 			
 			mysql_query($que);
@@ -31,7 +37,7 @@ switch($_REQUEST['writeMode']){
 					writeContents = '".$_REQUEST['moneContents']."',
 					writePassWord = '".$_REQUEST['monePW']."',
 					writeTitle = '".$_REQUEST['moneTitle']."',
-					writeIp = '".$_SERVER['REMOTE_ADDR']."' where seq = '".$_REQUEST['seq']."'";
+					writeIp = '".$ip."' where seq = '".$_REQUEST['seq']."'";
 			
 			mysql_query($que);
 			
@@ -44,7 +50,7 @@ switch($_REQUEST['writeMode']){
 					writeDateTime = '".date("Y-m-d H:i:s")."',
 					writeContents = '".$_REQUEST['gongjiContents']."',
 					writeTitle = '".$_REQUEST['gongjiTitle']."',
-					writeIp = '".$_SERVER['REMOTE_ADDR']."',
+					writeIp = '".$ip."',
 					likeCnt = '0',
 					hateCnt = '0',
 					viewCnt = '0'";
@@ -60,7 +66,7 @@ switch($_REQUEST['writeMode']){
 					writeDateTime = '".date("Y-m-d H:i:s")."',
 					writeContents = '".$_REQUEST['gongjiContents']."',
 					writeTitle = '".$_REQUEST['gongjiTitle']."',
-					writeIp = '".$_SERVER['REMOTE_ADDR']."' where seq = '".$_REQUEST['seq']."'";
+					writeIp = '".$ip."' where seq = '".$_REQUEST['seq']."'";
 			
 			mysql_query($que);
 			
@@ -74,7 +80,7 @@ switch($_REQUEST['writeMode']){
 					writeDateTime = '".date("Y-m-d H:i:s")."',
 					writeTitle = '".$_REQUEST['commuTitle']."',
 					writeContents = '".$_REQUEST['commuContents']."',
-					writeIp = '".$_SERVER['REMOTE_ADDR']."',
+					writeIp = '".$ip."',
 					country='',
 					city='',
 					likeCnt = '0',
@@ -94,7 +100,7 @@ switch($_REQUEST['writeMode']){
 						writeDateTime = '".date("Y-m-d H:i:s")."',
 						writeTitle = '".$_REQUEST['commuTitle']."',
 						writeContents = '".$_REQUEST['commuContents']."',
-						writeIp = '".$_SERVER['REMOTE_ADDR']."',
+						writeIp = '".$ip."',
 						country='',
 						city=''
 					where seq = '".$_REQUEST['seq']."'";

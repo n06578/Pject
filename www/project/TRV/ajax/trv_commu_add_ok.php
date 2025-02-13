@@ -4,6 +4,14 @@ error_reporting(E_ALL);
 
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
+
+if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    $ip = strtok($_SERVER['HTTP_X_FORWARDED_FOR'], ',');
+} else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+
 if($_REQUEST['ansType'] == "ansAdd"){
     $que = "insert into TcommuniAnswerTbl set
             joinSeq = '".$_SESSION['loginNum']."',
@@ -11,7 +19,7 @@ if($_REQUEST['ansType'] == "ansAdd"){
             conType = '".$_REQUEST['conType']."',
             answerDateTime = '".date('Y-m-d H:i:s')."',
             answerContents = '".$_REQUEST['answerContents']."',
-            answerIp = '".$_SERVER['REMOTE_ADDR']."',
+            answerIp = '".$ip."',
             likeCnt='0',
             hateCnt='0',
             declareCnt='0'
