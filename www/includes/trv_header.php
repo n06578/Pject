@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 date_default_timezone_set('Asia/Seoul');
 $baseName = explode(".php",basename($_SERVER["PHP_SELF"]));
 $_SESSION['left_menu_active'] = $baseName[0];

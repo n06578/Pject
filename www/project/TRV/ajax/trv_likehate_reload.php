@@ -1,6 +1,6 @@
-<?
-require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
+<?php
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 
 $que_lh = "select * from TlikeHateTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$_REQUEST['conSeq']."' and conType = '".$_REQUEST['conType']."'";
 $res_lh = mysql_query($que_lh);

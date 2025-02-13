@@ -1,6 +1,6 @@
-<?
-require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
+<?php
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 if($_REQUEST['conType']=="gongji"){
     $que_main = "select seq from TgongjiTbl where seq = '".$_REQUEST['seq']."'";
 }else if($_REQUEST['conType']=="commu"){

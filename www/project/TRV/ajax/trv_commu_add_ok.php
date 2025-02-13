@@ -1,6 +1,6 @@
-<?
-require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
+<?php
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 if($_REQUEST['ansType'] == "ansAdd"){
     $que = "insert into TcommuniAnswerTbl set
             joinSeq = '".$_SESSION['loginNum']."',

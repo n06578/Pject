@@ -1,6 +1,6 @@
-<?
-require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
+<?php
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 
 if($_REQUEST['id'] == "n06578" && $_REQUEST['pw'] == "1234"){
     $_SESSION['loginYn'] = "Y";
