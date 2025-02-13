@@ -28,17 +28,3 @@ $row_con = mysql_fetch_array($res_con);
 <?}?>
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <!-- Place the first <script> tag in your HTML's <head> -->
-
-
-<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
-<script>
-  tinymce.init({
-    selector: '#editor',
-    language: 'ko',
-    setup: (editor) => {
-        editor.on('init', () => {
-            editor.setContent('<p>안녕하세요, TinyMCE 에디터입니다!</p>');
-        });
-    }
-});
-</script>

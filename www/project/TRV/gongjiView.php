@@ -79,17 +79,6 @@ if($_SESSION['loginNum'] != "0"){
 
 <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
 <script>
-  tinymce.init({
-    selector: '#editor',
-    language: 'ko',
-    setup: (editor) => {
-        editor.on('init', () => {
-            editor.setContent('<p>안녕하세요, TinyMCE 에디터입니다!</p>');
-        });
-    }
-});
-
-
 $("#ansAdd").on("click",function(){
     if("<?=$_SESSION['loginNum']?>" !="-" && "<?=$_SESSION['loginNum']?>" !="") {
         $.ajax({
