@@ -88,7 +88,7 @@ $("#ansAdd").on("click",function(){
                 answerContents: $("#ansText").val(),
                 conSeq : "<?=$_REQUEST['seq']?>",
                 conType : "gongji",
-                ansType : "ansAdd",
+                ansType : "ansAdd"
             },
             success: function(data){
                 location.reload();
@@ -124,7 +124,7 @@ function ansLikeHateCnt(thisVal,ansType){
             answerContents: $("#ansText").val(),
             conSeq : ansSeq,
             conType : "gongji",
-            ansType : ansType,
+            ansType : ansType
         },
         success: function(data){
             if(ansType == "ansDel"){

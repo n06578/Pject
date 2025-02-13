@@ -89,7 +89,7 @@ $("#ansAdd").on("click",function(){
                 answerContents: $("#ansText").val(),
                 conSeq : "<?=$_REQUEST['seq']?>",
                 conType : "commu",
-                ansType : "ansAdd",
+                ansType : "ansAdd"
             },
             success: function(data){
                 location.reload();
@@ -125,7 +125,7 @@ function ansLikeHateCnt(thisVal,ansType){
             answerContents: $("#ansText").val(),
             conSeq : ansSeq,
             conType : "commu",
-            ansType : ansType,
+            ansType : ansType
         },
         success: function(data){
             if(ansType == "ansDel"){
@@ -164,7 +164,7 @@ $(document).on('click','.postDelete',function(){
                                     type: "POST",
                                     data: {
                                         conType : "commu",
-                                        seq : "<?=$_REQUEST['seq']?>",
+                                        seq : "<?=$_REQUEST['seq']?>"
                                     },
                                     success: function(data){
                                         pAlert("info","삭제완료","성공적으로 삭제되었습니다.",true);
