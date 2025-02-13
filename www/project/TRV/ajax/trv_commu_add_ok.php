@@ -5,13 +5,14 @@ error_reporting(E_ALL);
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 
-if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    $ip = strtok($_SERVER['HTTP_X_FORWARDED_FOR'], ',');
-} else {
-    $ip = $_SERVER['REMOTE_ADDR'];
-}
+// if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+//     $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+//     $ip = strtok($_SERVER['HTTP_X_FORWARDED_FOR'], ',');
+// } else {
+//     $ip = $_SERVER['REMOTE_ADDR'];
+// }
 
+$ip = '수정필요';
 if($_REQUEST['ansType'] == "ansAdd"){
     $que = "insert into TcommuniAnswerTbl set
             joinSeq = '".$_SESSION['loginNum']."',
