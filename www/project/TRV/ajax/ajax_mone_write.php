@@ -23,6 +23,7 @@ switch($_REQUEST['writeMode']){
 		}
 		else{
 			$que = "update TmoneTbl set
+					joinSeq = '".$_SESSION['loginNum']."',
 					writeDateTime = '".date("Y-m-d H:i:s")."',
 					writeContents = '".$_REQUEST['moneContents']."',
 					writePassWord = '".$_REQUEST['monePW']."',

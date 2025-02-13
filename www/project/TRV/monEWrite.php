@@ -8,7 +8,7 @@ $moneWrite = "";
 if($_REQUEST['seq'] != ""){
     $que_mone = "select * from TmoneTbl where seq='".$_REQUEST['seq']."'";
     $res_mone = mysql_query($que_mone);
-    $row_mone = mysql_fetch_array($res);
+    $row_mone = mysql_fetch_array($res_mone);
     
     $seq = $_REQUEST['seq'];
     $moneTitle = $row_mone['writeTitle'];
@@ -51,7 +51,6 @@ if($_REQUEST['seq'] != ""){
     height:"77vh",
     setup: (editor) => {
         editor.on('init', () => {
-            editor.setContent('');
         });
     }
 });
