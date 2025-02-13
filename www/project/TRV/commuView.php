@@ -23,7 +23,10 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
             <hr class="hr-navy mx-4 mt-0 mb-3">
             <div class="row">
                 <div class="mx-5 col text-left mb-1 txt-8"> <?=getName($row_con['joinSeq'])?> </div>
-                <div class="mx-5 col text-right mb-1 txt-8"> <?=$row_con['writeDateTime']?> </div>
+                <div class="mx-5 col text-right mb-1 txt-8"> 
+                    <?=$row_con['writeDateTime']?> 
+                    <label class="c-pointer ml-3 postDelete"><i class="fas fa-trash-alt"></i></label>
+                </div>
             </div>
             <div class="card mx-5 h-80 p-3 txt-9"> <?=$row_con['writeContents']?> </div>
         </div>
@@ -141,4 +144,52 @@ function ansLikeHateCnt(thisVal,ansType){
         }
     });
 }
+
+$(document).on('click','.postDelete',function(){
+    const notice = PNotify.info({
+            title: '해당 모든 내역이 삭제됩니다.',
+            text: '삭제하시겠습니까?',
+            icon: 'fa fa-exclamation-triangle',
+            hide: false, // 자동으로 닫히지 않도록 설정
+            closer: false, // 닫기 버튼 비활성화
+            sticker: false, // 스티커 버튼 비활성화
+            destroy: true, // 알림을 클릭으로 제거 가능하도록 설정
+            stack: new PNotify.Stack({
+                dir1: 'down',
+                modal: true,
+                firstpos1: 25,
+                overlayClose: false
+            }),
+            modules: new Map([
+                ...PNotify.defaultModules,
+                [PNotifyConfirm, {
+                    confirm: true,
+                    buttons: [
+                        {
+                            text: '확인',
+                            click: (notice) => {
+                                notice.close()
+                                $.ajax({
+                                    url: "ajax/trv_post_del.php",
+                                    type: "POST",
+                                    data: {
+                                        conType : "commu",
+                                        seq : "<?=$_REQUEST['seq']?>",
+                                    },
+                                    success: function(data){
+                                        pAlert("info","삭제완료","성공적으로 삭제되었습니다.",true);
+                                        location.href="commu.php";
+                                    }
+                                });
+                            }
+                        },
+                        {
+                            text: '취소',
+                            click: notice => notice.close()
+                        }
+                    ]
+                }]
+            ])
+        });
+})
 </script>
