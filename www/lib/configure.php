@@ -1,6 +1,4 @@
 <?php
-header("HTTP/1.1 200 OK");
-header("Content-Type: application/json; charset=UTF-8");
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/lib_mysql.php';
 date_default_timezone_set('Asia/Seoul');
 
