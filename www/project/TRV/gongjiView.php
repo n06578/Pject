@@ -91,7 +91,7 @@ $("#ansAdd").on("click",function(){
                 ansType : "ansAdd"
             },
             success: function(data){
-                // location.reload();
+                location.reload();
             }
         });
     }else{
