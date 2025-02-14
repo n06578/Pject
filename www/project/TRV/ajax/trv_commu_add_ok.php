@@ -33,8 +33,9 @@ else if($_REQUEST['ansType'] == "ansDel"){
     mysql_query($que);
 
 }else{
-    if($_REQUEST['ansType'] == "ansLike"){ $likeHate='like'; }
-    else { $likeHate='hate'; }
+    // if($_REQUEST['ansType'] == "Like"){ $likeHate='like'; }
+    // else { $likeHate='hate'; }
+    $likeHate = $_REQUEST['ansType'];
 
     $que = "select * from TlikeHateTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$_REQUEST['conSeq']."' and conType = '".$_REQUEST['conType']."' and likeHate='".$likeHate."'";
     $res = mysql_query($que);

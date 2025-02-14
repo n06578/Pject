@@ -9,6 +9,9 @@ $row_con = mysql_fetch_array($res_con);
 if($_SESSION['loginNum'] != "0"){
     $que_view = "update TgongjiTbl set viewCnt = viewCnt+1 where seq = '".$_REQUEST['seq']."'";
     mysql_query($que_view);
+    $commu_writer = "";
+}else{
+    $commu_writer = "yes";
 }
 ?>
 <div class="main-box container-fluid h-90">
@@ -21,12 +24,26 @@ if($_SESSION['loginNum'] != "0"){
             </table>
             <hr class="hr-navy mx-4 mt-0 mb-3">
             <div class="row">
-            <?if($_SESSION['loginYn'] == "Y" && $_SESSION['loginNum'] == "0"){?>
-                <?}?>
-                
+                <div class="mx-5 col text-left mb-1 txt-8"> [ 작성일시 <?=$row_con['writeDateTime']?> ] </div>
+
                 <div class="mx-5 col text-right mb-1 txt-8"> 
-                    <?=$row_con['writeDateTime']?> 
-                    <label class="c-pointer ml-3 postDelete"><i class="fas fa-trash-alt"></i></label>
+                    <?
+                        $que_lh = "select * from TlikeHateTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$_REQUEST['seq']."' and conType = 'postGongji'";
+                        $res_lh = mysql_query($que_lh);
+                        $cnt_lh = mysql_num_rows($res_lh);
+                        $likeChk = $hateChk = "far";
+                        if($cnt_lh>0){
+                            $row_lh  = mysql_fetch_array($res_lh);
+                            $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
+                        }
+                    ?>
+                    <label class="c-pointer ml-3 LikeCnt mr-1 tooltip"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","like")?>">
+                        <i class="<?=$likeChk?> fa-thumbs-up"></i> 
+                    </label>
+                    <label class="c-pointer HateCnt mr-1 tooltip" data-toggle="tooltip" data-placement="bottom" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","hate")?>">
+                        <i class="<?=$hateChk?> fa-thumbs-down"></i>
+                    </label>
+                    <label class="c-pointer postDelete"><i class="fas fa-trash-alt"></i></label>
                 </div>
             </div>
             <div class="card mx-5 h-80 p-3 txt-9"> <?=$row_con['writeContents']?> </div>
@@ -70,7 +87,7 @@ if($_SESSION['loginNum'] != "0"){
     </div>
 </div>
 <div class="text-center" id="listBtn" onclick="location.href='gongji.php'"><i class="fas fa-list"></i> 목록</div>
-<?if($_SESSION['loginYn'] == "Y" && $_SESSION['loginNum'] == "0"){?>
+<?if($commu_writer == "yes"){?>
 <div class="text-center" id="writeBtn" onclick="location.href='gongjiWrite.php?seq=<?=$_REQUEST['seq']?>'"><i class="far fa-save"></i> 수정하기</div>
 <?}?>
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
@@ -78,7 +95,7 @@ if($_SESSION['loginNum'] != "0"){
 
 
 <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
-<script>
+<script>    
 $("#ansAdd").on("click",function(){
     if("<?=$_SESSION['loginNum']?>" !="-" && "<?=$_SESSION['loginNum']?>" !="") {
         $.ajax({
@@ -99,31 +116,50 @@ $("#ansAdd").on("click",function(){
     }
 })
 
+$(document).on('click', '.LikeCnt',function(){
+    console.log("action");
+    $(this).find("i").toggleClass("fas far");
+    $(this).next().find("i").removeClass("fas")
+    $(this).next().find("i").addClass("far")
+    ansLikeHateCnt(this,"like","postGongji");
+})
+$(document).on('click', '.HateCnt',function(){
+    $(this).find("i").toggleClass("fas far");
+    $(this).prev().find("i").removeClass("fas")
+    $(this).prev().find("i").addClass("far")
+    ansLikeHateCnt(this,"hate","postGongji");
+})
+
 $(document).on('click', '.ansLikeCnt',function(){
     $(this).find("i").toggleClass("fas far");
     $(this).next().find("i").removeClass("fas")
     $(this).next().find("i").addClass("far")
-    ansLikeHateCnt(this,"ansLike");
+    ansLikeHateCnt(this,"like","gongji");
 })
 $(document).on('click', '.ansHateCnt',function(){
     $(this).find("i").toggleClass("fas far");
     $(this).prev().find("i").removeClass("fas")
     $(this).prev().find("i").addClass("far")
-    ansLikeHateCnt(this,"ansHate");
+    ansLikeHateCnt(this,"hate","gongji");
 })
 $(document).on('click', '.deleteCnt',function(){
-    ansLikeHateCnt(this,"ansDel");
+    ansLikeHateCnt(this,"ansDel","gongji");
 })
-function ansLikeHateCnt(thisVal,ansType){
-    var thisId = $(thisVal).parents().attr("id");
-    var ansSeq = thisId.replace("likeHate_","");
+
+function ansLikeHateCnt(thisVal,ansType,conType){
+    if(conType=="gongji"){
+        var thisId = $(thisVal).parents().attr("id");
+        var ansSeq = thisId.replace("likeHate_","");
+    }else{
+        var ansSeq = "<?=$_REQUEST['seq']?>";
+    }
     $.ajax({
         url: "ajax/trv_commu_add_ok.php",
         type: "POST",
         data: {
             answerContents: $("#ansText").val(),
             conSeq : ansSeq,
-            conType : "gongji",
+            conType : conType,
             ansType : ansType
         },
         success: function(data){
@@ -136,49 +172,49 @@ function ansLikeHateCnt(thisVal,ansType){
 
 $(document).on('click','.postDelete',function(){
     const notice = PNotify.info({
-            title: '해당 모든 내역이 삭제됩니다.',
-            text: '삭제하시겠습니까?',
-            icon: 'fa fa-exclamation-triangle',
-            hide: false, // 자동으로 닫히지 않도록 설정
-            closer: false, // 닫기 버튼 비활성화
-            sticker: false, // 스티커 버튼 비활성화
-            destroy: true, // 알림을 클릭으로 제거 가능하도록 설정
-            stack: new PNotify.Stack({
-                dir1: 'down',
-                modal: true,
-                firstpos1: 25,
-                overlayClose: false
-            }),
-            modules: new Map([
-                ...PNotify.defaultModules,
-                [PNotifyConfirm, {
-                    confirm: true,
-                    buttons: [
-                        {
-                            text: '확인',
-                            click: (notice) => {
-                                notice.close()
-                                $.ajax({
-                                    url: "ajax/trv_post_del.php",
-                                    type: "POST",
-                                    data: {
-                                        conType : "gongji",
-                                        seq : "<?=$_REQUEST['seq']?>",
-                                    },
-                                    success: function(data){
-                                        pAlert("info","삭제완료","성공적으로 삭제되었습니다.",true);
-                                        location.href="gongji.php";
-                                    }
-                                });
-                            }
-                        },
-                        {
-                            text: '취소',
-                            click: notice => notice.close()
+        title: '해당 모든 내역이 삭제됩니다.',
+        text: '삭제하시겠습니까?',
+        icon: 'fa fa-exclamation-triangle',
+        hide: false, // 자동으로 닫히지 않도록 설정
+        closer: false, // 닫기 버튼 비활성화
+        sticker: false, // 스티커 버튼 비활성화
+        destroy: true, // 알림을 클릭으로 제거 가능하도록 설정
+        stack: new PNotify.Stack({
+            dir1: 'down',
+            modal: true,
+            firstpos1: 25,
+            overlayClose: false
+        }),
+        modules: new Map([
+            ...PNotify.defaultModules,
+            [PNotifyConfirm, {
+                confirm: true,
+                buttons: [
+                    {
+                        text: '확인',
+                        click: (notice) => {
+                            notice.close()
+                            $.ajax({
+                                url: "ajax/trv_post_del.php",
+                                type: "POST",
+                                data: {
+                                    conType : "gongji",
+                                    seq : "<?=$_REQUEST['seq']?>",
+                                },
+                                success: function(data){
+                                    pAlert("info","삭제완료","성공적으로 삭제되었습니다.",true);
+                                    location.href="gongji.php";
+                                }
+                            });
                         }
-                    ]
-                }]
-            ])
-        });
+                    },
+                    {
+                        text: '취소',
+                        click: notice => notice.close()
+                    }
+                ]
+            }]
+        ])
+    });
 })
 </script>

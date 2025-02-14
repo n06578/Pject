@@ -10,6 +10,9 @@ $row_con = mysql_fetch_array($res_con);
 if($_SESSION['loginNum'] != $row_con['joinSeq']){
     $que_view = "update TcommuniTbl set viewCnt = viewCnt+1 where seq = '".$_REQUEST['seq']."'";
     mysql_query($que_view);
+    $commu_writer = "";
+}else{
+    $commu_writer = "yes";
 }
 ?>
 <div class="main-box row container-fluid h-90">
@@ -22,10 +25,22 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
             </table>
             <hr class="hr-navy mx-4 mt-0 mb-3">
             <div class="row">
-                <div class="mx-5 col text-left mb-1 txt-8"> <?=getName($row_con['joinSeq'])?> </div>
+                <div class="mx-5 col text-left mb-1 txt-8"> <?=getName($row_con['joinSeq'])?> [ 작성일시 <?=$row_con['writeDateTime']?> ]</div>
                 <div class="mx-5 col text-right mb-1 txt-8"> 
-                    <?=$row_con['writeDateTime']?> 
-                    <label class="c-pointer ml-3 postDelete"><i class="fas fa-trash-alt"></i></label>
+                    
+                    <?
+                        $que_lh = "select * from TlikeHateTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$_REQUEST['seq']."' and conType = 'postCommu'";
+                        $res_lh = mysql_query($que_lh);
+                        $cnt_lh = mysql_num_rows($res_lh);
+                        $likeChk = $hateChk = "far";
+                        if($cnt_lh>0){
+                            $row_lh  = mysql_fetch_array($res_lh);
+                            $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
+                        }
+                    ?>
+                    <label class="c-pointer ml-3 LikeCnt mr-1"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label><!--<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>-->
+                    <label class="c-pointer HateCnt mr-1"><i class="<?=$hateChk?> fa-thumbs-down"></i></label><!-- <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>-->
+                    <label class="c-pointer postDelete"><i class="fas fa-trash-alt"></i></label>
                 </div>
             </div>
             <div class="card mx-5 h-80 p-3 txt-9"> <?=$row_con['writeContents']?> </div>
@@ -55,7 +70,7 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
                     ?>
                     <label class="c-pointer ansLikeCnt mr-1"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label><!--<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>-->
                     <label class="c-pointer ansHateCnt mr-1"><i class="<?=$hateChk?> fa-thumbs-down"></i></label><!-- <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>-->
-                <? if($row_ans['joinSeq'] == $_SESSION['loginNum']){ ?>
+                <?if($commu_writer == "yes"){?>
                     <label class="c-pointer deleteCnt"><i class="fas fa-trash-alt"></i></label>
                 <? } ?>
                 </div>
@@ -71,7 +86,7 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
 </div>
 
 <div class="text-center" id="listBtn" onclick="location.href='commu.php'"><i class="fas fa-list"></i> 목록</div>
-<?if($_SESSION['loginNum'] == $row_con['joinSeq']){?>
+<?if($commu_writer == "yes"){?>
 <div class="text-center" id="writeBtn" onclick="location.href='commuWrite.php?seq=<?=$_REQUEST['seq']?>'"><i class="far fa-save"></i> 수정하기</div>
 <?}?>
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
@@ -92,7 +107,7 @@ $("#ansAdd").on("click",function(){
                 ansType : "ansAdd"
             },
             success: function(data){
-                location.reload();
+                // location.reload();
             }
         });
     }else{
@@ -100,31 +115,49 @@ $("#ansAdd").on("click",function(){
     }
 })
 
+$(document).on('click', '.LikeCnt',function(){
+    console.log("action");
+    $(this).find("i").toggleClass("fas far");
+    $(this).next().find("i").removeClass("fas")
+    $(this).next().find("i").addClass("far")
+    ansLikeHateCnt(this,"like","postCommu");
+})
+$(document).on('click', '.HateCnt',function(){
+    $(this).find("i").toggleClass("fas far");
+    $(this).prev().find("i").removeClass("fas")
+    $(this).prev().find("i").addClass("far")
+    ansLikeHateCnt(this,"hate","postCommu");
+})
+
 $(document).on('click', '.ansLikeCnt',function(){
     $(this).find("i").toggleClass("fas far");
     $(this).next().find("i").removeClass("fas")
     $(this).next().find("i").addClass("far")
-    ansLikeHateCnt(this,"ansLike");
+    ansLikeHateCnt(this,"like","commu");
 })
 $(document).on('click', '.ansHateCnt',function(){
     $(this).find("i").toggleClass("fas far");
     $(this).prev().find("i").removeClass("fas")
     $(this).prev().find("i").addClass("far")
-    ansLikeHateCnt(this,"ansHate");
+    ansLikeHateCnt(this,"hate","commu");
 })
 $(document).on('click', '.deleteCnt',function(){
-    ansLikeHateCnt(this,"ansDel");
+    ansLikeHateCnt(this,"ansDel","commu");
 })
-function ansLikeHateCnt(thisVal,ansType){
-    var thisId = $(thisVal).parents().attr("id");
-    var ansSeq = thisId.replace("likeHate_","");
+function ansLikeHateCnt(thisVal,ansType,conType){
+    if(conType=="commu"){
+        var thisId = $(thisVal).parents().attr("id");
+        var ansSeq = thisId.replace("likeHate_","");
+    }else{
+        var ansSeq = "<?=$_REQUEST['seq']?>";
+    }
     $.ajax({
         url: "ajax/trv_commu_add_ok.php",
         type: "POST",
         data: {
             answerContents: $("#ansText").val(),
             conSeq : ansSeq,
-            conType : "commu",
+            conType : conType,
             ansType : ansType
         },
         success: function(data){
