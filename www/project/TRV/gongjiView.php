@@ -6,6 +6,7 @@ $que_con = "select a.*,ifnull(b.seq,0) as ansSeq from TgongjiTbl a left join (se
 $res_con = mysql_query($que_con);
 $row_con = mysql_fetch_array($res_con);
 
+// 작성자 확인
 if($_SESSION['loginNum'] != "0"){
     $que_view = "update TgongjiTbl set viewCnt = viewCnt+1 where seq = '".$_REQUEST['seq']."'";
     mysql_query($que_view);
@@ -13,6 +14,11 @@ if($_SESSION['loginNum'] != "0"){
 }else{
     $commu_writer = "yes";
 }
+
+//로그인 확인
+if($_SESSION['loginNum'] !="-" && $_SESSION['loginNum'] !="") {$login="yes";}
+else{$login="no";}
+
 ?>
 <div class="main-box container-fluid h-90">
     <div class="h-100">
@@ -43,7 +49,11 @@ if($_SESSION['loginNum'] != "0"){
                     <label class="c-pointer HateCnt mr-1 tooltip" data-toggle="tooltip" data-placement="bottom" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","hate")?>">
                         <i class="<?=$hateChk?> fa-thumbs-down"></i>
                     </label>
+                    <label class="c-pointer LikeCnt mr-1"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label><!--<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>-->
+                    <label class="c-pointer HateCnt mr-1"><i class="<?=$hateChk?> fa-thumbs-down"></i></label><!-- <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>-->
+                    <?if($commu_writer == "yes"){?>
                     <label class="c-pointer postDelete"><i class="fas fa-trash-alt"></i></label>
+                    <?}?>
                 </div>
             </div>
             <div class="card mx-5 h-80 p-3 txt-9"> <?=$row_con['writeContents']?> </div>
@@ -97,7 +107,7 @@ if($_SESSION['loginNum'] != "0"){
 <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
 <script>    
 $("#ansAdd").on("click",function(){
-    if("<?=$_SESSION['loginNum']?>" !="-" && "<?=$_SESSION['loginNum']?>" !="") {
+    if("<?=$login?>" =="yes") {
         $.ajax({
             url: "ajax/trv_commu_add_ok.php",
             type: "POST",
@@ -116,31 +126,51 @@ $("#ansAdd").on("click",function(){
     }
 })
 
+function loginChk(){
+    if("<?=$login?>" =="yes") {return true;}
+    else{return false;}
+}
+
 $(document).on('click', '.LikeCnt',function(){
-    console.log("action");
-    $(this).find("i").toggleClass("fas far");
-    $(this).next().find("i").removeClass("fas")
-    $(this).next().find("i").addClass("far")
-    ansLikeHateCnt(this,"like","postGongji");
+    if(loginChk()){
+        $(this).find("i").toggleClass("fas far");
+        $(this).next().find("i").removeClass("fas")
+        $(this).next().find("i").addClass("far")
+        ansLikeHateCnt(this,"like","postGongji");
+    }else{
+        loginChkClos()
+    }
 })
 $(document).on('click', '.HateCnt',function(){
-    $(this).find("i").toggleClass("fas far");
-    $(this).prev().find("i").removeClass("fas")
-    $(this).prev().find("i").addClass("far")
-    ansLikeHateCnt(this,"hate","postGongji");
+    if(loginChk()){
+        $(this).find("i").toggleClass("fas far");
+        $(this).prev().find("i").removeClass("fas")
+        $(this).prev().find("i").addClass("far")
+        ansLikeHateCnt(this,"hate","postGongji");
+    }else{
+        loginChkClos()
+    }
 })
 
 $(document).on('click', '.ansLikeCnt',function(){
-    $(this).find("i").toggleClass("fas far");
-    $(this).next().find("i").removeClass("fas")
-    $(this).next().find("i").addClass("far")
-    ansLikeHateCnt(this,"like","gongji");
+    if(loginChk()){
+        $(this).find("i").toggleClass("fas far");
+        $(this).next().find("i").removeClass("fas")
+        $(this).next().find("i").addClass("far")
+        ansLikeHateCnt(this,"like","gongji");
+    }else{
+        loginChkClos()
+    }
 })
 $(document).on('click', '.ansHateCnt',function(){
-    $(this).find("i").toggleClass("fas far");
-    $(this).prev().find("i").removeClass("fas")
-    $(this).prev().find("i").addClass("far")
-    ansLikeHateCnt(this,"hate","gongji");
+    if(loginChk()){
+        $(this).find("i").toggleClass("fas far");
+        $(this).prev().find("i").removeClass("fas")
+        $(this).prev().find("i").addClass("far")
+        ansLikeHateCnt(this,"hate","gongji");
+    }else{
+        loginChkClos()
+    }
 })
 $(document).on('click', '.deleteCnt',function(){
     ansLikeHateCnt(this,"ansDel","gongji");

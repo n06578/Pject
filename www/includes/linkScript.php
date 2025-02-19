@@ -49,3 +49,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <script src="<?=$rootPath?>js/mobiscroll.jquery.min.js"></script>
+    
+    <link href="<?=$rootPath?>mobiscroll.jquery.trial/css/mobiscroll.jquery.min.css" rel="stylesheet" />
+    <script src="<?=$rootPath?>mobiscroll.jquery.trial/js/mobiscroll.jquery.min.js"></script>
