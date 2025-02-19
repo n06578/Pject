@@ -43,9 +43,11 @@ else{$login="no";}
                             $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
                         }
                     ?>
-                    <label class="c-pointer ml-3 LikeCnt mr-1"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label><!--<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>-->
-                    <label class="c-pointer HateCnt mr-1"><i class="<?=$hateChk?> fa-thumbs-down"></i></label><!-- <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>-->
-                    <label class="c-pointer postDelete"><i class="fas fa-trash-alt"></i></label>
+                    <label class="c-pointer ml-3 mr-1 getCnt" id="LikeCnt" id="LikeCnt" data-seq="0" title="<?=getAnsCnt($_REQUEST['seq'],"postCommu","like")?>"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label>
+                    <label class="c-pointer mr-1 getCnt" id="HateCnt" id="LikeCnt" data-seq="0" title="<?=getAnsCnt($_REQUEST['seq'],"postCommu","hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
+                    <?if($commu_writer == "yes"){?>
+                        <label class="c-pointer postDelete"><i class="fas fa-trash-alt"></i></label>
+                    <?}?>
                 </div>
             </div>
             <div class="card mx-5 h-80 p-3 txt-9"> <?=$row_con['writeContents']?> </div>
@@ -73,8 +75,8 @@ else{$login="no";}
                         $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
                     }
                     ?>
-                    <label class="c-pointer ansLikeCnt mr-1"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label><!--<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>-->
-                    <label class="c-pointer ansHateCnt mr-1"><i class="<?=$hateChk?> fa-thumbs-down"></i></label><!-- <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>-->
+                    <label class="c-pointer mr-1 getCnt" id="ansLikeCnt" data-seq="<?=$row_ans['seq']?>" title="<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>"><i class="<?=$likeChk?> fa-thumbs-up"></i></label>
+                    <label class="c-pointer mr-1 getCnt" id="ansHateCnt" data-seq="<?=$row_ans['seq']?>" title="<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
                 <?if($commu_writer == "yes"){?>
                     <label class="c-pointer deleteCnt"><i class="fas fa-trash-alt"></i></label>
                 <? } ?>
@@ -120,7 +122,29 @@ $("#ansAdd").on("click",function(){
     }
 })
 
-$(document).on('click', '.LikeCnt',function(){
+$(document).on('mouseenter mouseleave', '.getCnt',function(){
+    var thisId = $(this).attr('id');
+    $.ajax({
+        url: "ajax/trv_getCnt.php",
+        type: "POST",
+        data: {
+            conSeq : "<?=$_REQUEST['seq']?>",
+            subSeq : $(this).data('seq'),
+            conType: thisId,
+            Type : "commu"
+        },
+        success: function(data){
+            $("#"+thisId).attr("title",data);
+            $("#"+thisId).addClass("chjk");
+        }
+    });
+});
+
+function loginChk(){
+    if("<?=$login?>" =="yes") {return true;}
+    else{return false;}
+}
+$(document).on('click', '#LikeCnt',function(){
     if(loginChk()){
         $(this).find("i").toggleClass("fas far");
         $(this).next().find("i").removeClass("fas")
@@ -130,33 +154,33 @@ $(document).on('click', '.LikeCnt',function(){
         loginChkClos();
     }
 })
-$(document).on('click', '.HateCnt',function(){
+$(document).on('click', '#HateCnt',function(){
     if(loginChk()){
-    $(this).find("i").toggleClass("fas far");
-    $(this).prev().find("i").removeClass("fas")
-    $(this).prev().find("i").addClass("far")
-    ansLikeHateCnt(this,"hate","postCommu");
+        $(this).find("i").toggleClass("fas far");
+        $(this).prev().find("i").removeClass("fas")
+        $(this).prev().find("i").addClass("far")
+        ansLikeHateCnt(this,"hate","postCommu");
     }else{
         loginChkClos();
     }
 })
 
-$(document).on('click', '.ansLikeCnt',function(){
+$(document).on('click', '#ansLikeCnt',function(){
     if(loginChk()){
-    $(this).find("i").toggleClass("fas far");
-    $(this).next().find("i").removeClass("fas")
-    $(this).next().find("i").addClass("far")
-    ansLikeHateCnt(this,"like","commu");
+        $(this).find("i").toggleClass("fas far");
+        $(this).next().find("i").removeClass("fas")
+        $(this).next().find("i").addClass("far")
+        ansLikeHateCnt(this,"like","commu");
     }else{
         loginChkClos();
     }
 })
-$(document).on('click', '.ansHateCnt',function(){
+$(document).on('click', '#ansHateCnt',function(){
     if(loginChk()){
-    $(this).find("i").toggleClass("fas far");
-    $(this).prev().find("i").removeClass("fas")
-    $(this).prev().find("i").addClass("far")
-    ansLikeHateCnt(this,"hate","commu");
+        $(this).find("i").toggleClass("fas far");
+        $(this).prev().find("i").removeClass("fas")
+        $(this).prev().find("i").addClass("far")
+        ansLikeHateCnt(this,"hate","commu");
     }else{
         loginChkClos();
     }

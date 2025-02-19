@@ -43,14 +43,8 @@ else{$login="no";}
                             $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
                         }
                     ?>
-                    <label class="c-pointer ml-3 LikeCnt mr-1 tooltip"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","like")?>">
-                        <i class="<?=$likeChk?> fa-thumbs-up"></i> 
-                    </label>
-                    <label class="c-pointer HateCnt mr-1 tooltip" data-toggle="tooltip" data-placement="bottom" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","hate")?>">
-                        <i class="<?=$hateChk?> fa-thumbs-down"></i>
-                    </label>
-                    <label class="c-pointer LikeCnt mr-1"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label><!--<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>-->
-                    <label class="c-pointer HateCnt mr-1"><i class="<?=$hateChk?> fa-thumbs-down"></i></label><!-- <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>-->
+                    <label class="c-pointer mr-1 getCnt" id="LikeCnt" data-seq="0" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","like")?>"><i class="<?=$likeChk?> fa-thumbs-up" ></i> </label>
+                    <label class="c-pointer mr-1 getCnt" id="HateCnt" data-seq="0" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
                     <?if($commu_writer == "yes"){?>
                     <label class="c-pointer postDelete"><i class="fas fa-trash-alt"></i></label>
                     <?}?>
@@ -80,8 +74,8 @@ else{$login="no";}
                         $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
                     }
                     ?>
-                    <label class="c-pointer ansLikeCnt mr-1"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label><!--<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>-->
-                    <label class="c-pointer ansHateCnt mr-1"><i class="<?=$hateChk?> fa-thumbs-down"></i></label><!-- <?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>-->
+                    <label class="c-pointer mr-1 getCnt" id="ansLikeCnt" data-seq="<?=$row_ans['seq']?>" title="<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label>
+                    <label class="c-pointer mr-1 getCnt" id="ansHateCnt" data-seq="<?=$row_ans['seq']?>" title="<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
                 <? if($row_ans['joinSeq'] == $_SESSION['loginNum']){ ?>
                     <label class="c-pointer deleteCnt"><i class="fas fa-trash-alt"></i></label>
                 <? } ?>
@@ -105,7 +99,7 @@ else{$login="no";}
 
 
 <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
-<script>    
+<script>
 $("#ansAdd").on("click",function(){
     if("<?=$login?>" =="yes") {
         $.ajax({
@@ -131,7 +125,24 @@ function loginChk(){
     else{return false;}
 }
 
-$(document).on('click', '.LikeCnt',function(){
+$(document).on('mouseenter mouseleave', '.getCnt',function(){
+    var thisId = $(this).attr('id');
+    $.ajax({
+        url: "ajax/trv_getCnt.php",
+        type: "POST",
+        data: {
+            conSeq : "<?=$_REQUEST['seq']?>",
+            subSeq : $(this).data('seq'),
+            conType: thisId,
+            Type : "gongji"
+        },
+        success: function(data){
+            $("#"+thisId).attr("title",data);
+            $("#"+thisId).addClass("chjk");
+        }
+    });
+});
+$(document).on('click', '#LikeCnt',function(){
     if(loginChk()){
         $(this).find("i").toggleClass("fas far");
         $(this).next().find("i").removeClass("fas")
@@ -141,7 +152,7 @@ $(document).on('click', '.LikeCnt',function(){
         loginChkClos()
     }
 })
-$(document).on('click', '.HateCnt',function(){
+$(document).on('click', '#HateCnt',function(){
     if(loginChk()){
         $(this).find("i").toggleClass("fas far");
         $(this).prev().find("i").removeClass("fas")
@@ -152,7 +163,7 @@ $(document).on('click', '.HateCnt',function(){
     }
 })
 
-$(document).on('click', '.ansLikeCnt',function(){
+$(document).on('click', '#ansLikeCnt',function(){
     if(loginChk()){
         $(this).find("i").toggleClass("fas far");
         $(this).next().find("i").removeClass("fas")
@@ -162,7 +173,7 @@ $(document).on('click', '.ansLikeCnt',function(){
         loginChkClos()
     }
 })
-$(document).on('click', '.ansHateCnt',function(){
+$(document).on('click', '#ansHateCnt',function(){
     if(loginChk()){
         $(this).find("i").toggleClass("fas far");
         $(this).prev().find("i").removeClass("fas")
