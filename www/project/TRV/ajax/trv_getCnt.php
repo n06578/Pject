@@ -13,10 +13,10 @@ switch($_REQUEST['conType']){
         echo getAnsCnt($_REQUEST['conSeq'],$mainType,"hate");
         break;
     case "ansLikeCnt" :
-        echo getAnsCnt($_REQUEST['subSeq'],$_REQUEST['Type'],"like");
+        echo getAnsCnt($_REQUEST['conSeq'],$_REQUEST['Type'],"like");
         break;
     case "ansHateCnt" :
-        echo getAnsCnt($_REQUEST['subSeq'],$_REQUEST['Type'],"hate");
+        echo getAnsCnt($_REQUEST['conSeq'],$_REQUEST['Type'],"hate");
         break;
 	default:
 		echo "error";

@@ -43,6 +43,20 @@
         </div>
     </div>
 </div>
+<div class="modal" id="moneDeclare" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-body _modalBody d-grid" ng-switch="invitationStep">
+                <input type="hidden" name="mType" id="mType" val="">
+                <input type="hidden" name="mConType" id="mConType" val="">
+                <input type="hidden" name="mConSeq" id="mConSeq" val="">
+                <input type="text" name="mDeclareReason" id="declareReason" class="form-control" placeholder="신고사유를 작성해주세요.">
+                <font class="text-left txt-7 mt-1" color="red">※ 악의적인 신고는 자재해주세요. ※</font>
+                <input type="button" id="decalreBtn" class="btn btn-sm btn-danger mt-1" value="신고하기">
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script>

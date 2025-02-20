@@ -43,10 +43,12 @@ else{$login="no";}
                             $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
                         }
                     ?>
-                    <label class="c-pointer mr-1 getCnt" id="LikeCnt" data-seq="0" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","like")?>"><i class="<?=$likeChk?> fa-thumbs-up" ></i> </label>
-                    <label class="c-pointer mr-1 getCnt" id="HateCnt" data-seq="0" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
+                    <label class="c-pointer mr-1 getCnt" id="LikeCnt" data-seq="<?=$_REQUEST['seq']?>" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","like")?>"><i class="<?=$likeChk?> fa-thumbs-up" ></i> </label>
+                    <label class="c-pointer mr-1 getCnt" id="HateCnt" data-seq="<?=$_REQUEST['seq']?>" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
                     <?if($commu_writer == "yes"){?>
                     <label class="c-pointer postDelete"><i class="fas fa-trash-alt"></i></label>
+                    <?}else{?>
+                        <label class="c-pointer" id="postDeclare" data-seq="<?=$_REQUEST['seq']?>"><i class="fas fa-exclamation-triangle"></i></label>
                     <?}?>
                 </div>
             </div>
@@ -78,6 +80,8 @@ else{$login="no";}
                     <label class="c-pointer mr-1 getCnt" id="ansHateCnt" data-seq="<?=$row_ans['seq']?>" title="<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
                 <? if($row_ans['joinSeq'] == $_SESSION['loginNum']){ ?>
                     <label class="c-pointer deleteCnt"><i class="fas fa-trash-alt"></i></label>
+                <? }else{ ?>
+                    <label class="c-pointer" id="ansDeclare" data-seq="<?=$row_ans['seq']?>"><i class="fas fa-exclamation-triangle"></i></label>
                 <? } ?>
                 </div>
             </div>
@@ -131,8 +135,7 @@ $(document).on('mouseenter mouseleave', '.getCnt',function(){
         url: "ajax/trv_getCnt.php",
         type: "POST",
         data: {
-            conSeq : "<?=$_REQUEST['seq']?>",
-            subSeq : $(this).data('seq'),
+            conSeq : $(this).data('seq'),
             conType: thisId,
             Type : "gongji"
         },
@@ -187,30 +190,6 @@ $(document).on('click', '.deleteCnt',function(){
     ansLikeHateCnt(this,"ansDel","gongji");
 })
 
-function ansLikeHateCnt(thisVal,ansType,conType){
-    if(conType=="gongji"){
-        var thisId = $(thisVal).parents().attr("id");
-        var ansSeq = thisId.replace("likeHate_","");
-    }else{
-        var ansSeq = "<?=$_REQUEST['seq']?>";
-    }
-    $.ajax({
-        url: "ajax/trv_commu_add_ok.php",
-        type: "POST",
-        data: {
-            answerContents: $("#ansText").val(),
-            conSeq : ansSeq,
-            conType : conType,
-            ansType : ansType
-        },
-        success: function(data){
-            if(ansType == "ansDel"){
-                $("#"+thisId).parent().remove();
-            }
-        }
-    });
-}
-
 $(document).on('click','.postDelete',function(){
     const notice = PNotify.info({
         title: '해당 모든 내역이 삭제됩니다.',
@@ -257,5 +236,67 @@ $(document).on('click','.postDelete',function(){
             }]
         ])
     });
+})
+
+function ansLikeHateCnt(thisVal,ansType,conType){
+    if(conType=="gongji"){
+        var thisId = $(thisVal).parents().attr("id");
+        var ansSeq = thisId.replace("likeHate_","");
+    }else{
+        var ansSeq = "<?=$_REQUEST['seq']?>";
+    }
+    $.ajax({
+        url: "ajax/trv_commu_add_ok.php",
+        type: "POST",
+        data: {
+            answerContents: $("#ansText").val(),
+            conSeq : ansSeq,
+            conType : conType,
+            ansType : ansType
+        },
+        success: function(data){
+            if(ansType == "ansDel"){
+                $("#"+thisId).parent().remove();
+            }
+        }
+    });
+}
+
+$(document).on('click','#postDeclare, #ansDeclare',function(){
+    if(loginChk()){
+        $("#moneDeclare").modal("show")
+        $("#declareReason").val("");
+        $("#declareReason").focus()
+        $("#mType").val("gongji");
+        $("#mConType").val($(this).attr("id"));
+        $("#mConSeq").val($(this).data("seq"));
+    }else{
+        loginChkClos()
+    }
+})
+
+$(document).on("click","#decalreBtn",function(){
+    if($("#declareReason").val() == ""){
+        pAlert("error","실패","신고사유를 입력하세요.",true);
+    }else{
+        $.ajax({
+            url: "ajax/trv_declare.php",
+            type: "POST",
+            data: {
+                conSeq : $("#mConSeq").val(),
+                conType: $("#mConType").val(),
+                declareReason:$("#declareReason").val(),
+                Type : "gongji"
+            },
+            success: function(data){
+                $("#moneDeclare").modal("hide")
+                if(data == ""){
+                    pAlert("error","신고접수","성공적으로 신고가 접수되었습니다.",true);
+                }else{
+                    pAlert("error","실패",data+"에 신고가 접수되었습니다.",true);
+                }
+            } 
+        });
+    }
 })
 </script>
