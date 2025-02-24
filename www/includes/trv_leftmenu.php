@@ -59,6 +59,12 @@
                     <ul class="big_menu" onclick="location.href='monE.php'">
                         <li><a href="#">문의사항</a></li>
                     </ul>
+                    <?if($_SESSION['loginNum'] == "0"){?>
+                        
+                    <ul class="big_menu" onclick="location.href='manageMonE.php'">
+                        <li><a href="#">문의답변등록</a></li>
+                    </ul>
+                    <?}?>
                     <ul class="big_menu" onclick="location.href='gongJi.php'">
                         <li><a href="#">공지사항</a></li>
                     </ul>

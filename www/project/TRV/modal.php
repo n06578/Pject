@@ -36,9 +36,14 @@
 <div class="modal" id="monePWModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <div class="modal-body _modalBody" ng-switch="invitationStep">
-                <input type="password" id="monePWInput">
-                <input type="button" id="monePwBtn" value="등록">
+            <div class="modal-header">
+                <h7 class="modal-title">비밀번호를 입력해주세요</h7>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body _modalBody d-flex" ng-switch="invitationStep">
+                <input type="hidden" id="mSeq">
+                <input type="password" class="form-control" id="monePWInput">
+                <input type="button" class="btn btn-sm btn-navy txt-white" id="monePwBtn" value="확인">
             </div>
         </div>
     </div>

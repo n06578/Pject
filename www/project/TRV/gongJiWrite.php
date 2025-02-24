@@ -68,7 +68,7 @@ $("#writeBtn").on("click",function(){
 
 function gongjiWriteOk(){
     $("#gongjiFrm").ajaxSubmit({
-        url: 'ajax/ajax_mone_write.php',
+        url: 'ajax/ajax_commu_write.php',
         type: 'post',
         success : function(val){
             console.log(val);

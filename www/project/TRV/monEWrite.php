@@ -57,18 +57,12 @@ if($_REQUEST['seq'] != ""){
 $("#writeBtn").click(function(){
     var content = tinyMCE.activeEditor.getContent();
     $("#editor").val(content);
-    $("#monePWModal").modal("show");
-});
-
-$("#monePwBtn").on("click",function(){
-    var PwInput = $("#monePWInput").val();
-    $("#monePW").val(PwInput);
     moneWriteOk();
 });
 
 function moneWriteOk(){
     $("#monEFrm").ajaxSubmit({
-        url: 'ajax/ajax_mone_write.php',
+        url: 'ajax/ajax_commu_write.php',
         type: 'post',
         success : function(val){
             location.href="monEView.php?seq="+val

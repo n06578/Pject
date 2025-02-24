@@ -22,14 +22,14 @@ else{$login="no";}
             $checked = "";
             $where = "";
             if($login == "yes"){
-                if(@$_REQUEST['myUpload'] == "on"){
+                if(@$_REQUEST['ansOk'] == "on"){
                     $checked = "checked";
                     $where =" where a.joinSeq = '".$_SESSION['loginNum']."' ";
                 }
             ?>
             <form id="sForm">
                 <div class="text-right">
-                    <input type="checkbox" id="myUpload" name="myUpload" val="chk" <?=$checked?>><label for="myUpload" class="txt-8 px-1">내 문의만 보기</label>
+                    <input type="checkbox" id="ansOk" name="ansOk" <?=$checked?>><label for="myUpload" class="txt-8 px-1">답변 미등록</label>
                 </div>
             </form>
             <?}?>
@@ -51,7 +51,7 @@ else{$login="no";}
                     $i = 1;
                     while($row_mone = mysql_fetch_array($res_mone)){
                     ?>
-                    <tr class="c-pointer" onclick="loginChk('<?=$row_mone['seq']?>','<?=$row_mone['joinSeq']?>')">
+                    <tr class="c-pointer" onclick="location.href='manageMoneWrite.php?seq=<?=$row_mone['seq']?>'">
                         <td class="text-center"><?=$i?></td>
                         <td><?=$row_mone['writeTitle']?></td>
                         <td class="text-center noWrap"><?=$row_mone['writeDateTime']?></td>
@@ -108,7 +108,7 @@ if($_SESSION['loginNum'] != '-' && $_SESSION['loginYn'] == "Y"){?>
             $("#monePWInput").val("");
             $("#monePWModal").modal("show");
         }else{
-            if(writer == '<?=$_SESSION['loginNum']?>' || '<?=$_SESSION['loginNum']?>' == '0'){
+            if(writer == '<?=$_SESSION['loginNum']?>'){
                 pAlert("error","경고","작성자만 열람가능합니다.",true);
             }else{
                 location.href='moneView.php?seq='+seq;

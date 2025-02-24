@@ -351,7 +351,20 @@ body {
   cursor: pointer;
 }
 
-#listBtn{
+#moneBtn{
+  z-index: 4;
+  position: fixed;
+  width: 100px;
+  bottom: 10px;
+  padding: 8px 0px;
+  border-radius: 50px;
+  background-color: #352e63b2;
+  color: #fff;
+  right: 10px;
+  cursor: pointer;
+}
+
+#moneViewBtn{
   z-index: 4;
   position: fixed;
   width: 100px;
@@ -363,6 +376,31 @@ body {
   left: 10px;
   cursor: pointer;
   
+}
+#manaMoneBtn{
+  z-index: 4;
+  position: fixed;
+  width: 100px;
+  bottom: 10px;
+  padding: 8px 0px;
+  border-radius: 50px;
+  background-color: #352e63b2;
+  color: #fff;
+  left: 10px;
+  cursor: pointer;
+}
+
+#listBtn{
+  z-index: 4;
+  position: fixed;
+  width: 100px;
+  bottom: 10px;
+  padding: 8px 0px;
+  border-radius: 50px;
+  background-color: #352e63b2;
+  color: #fff;
+  left: 10px;
+  cursor: pointer;
 }
 #saveBtn{
   z-index: 4;
@@ -557,8 +595,8 @@ body {
 .btn:focus{box-shadow: none !important; border-color: #2e266d26;}
 .btn-white{background-color: #ffffff;}
 .btn-white:hover{border-color: #2e266d26;    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
-.btn-navy{background-color: #2e266d;}
-.btn-navy:hover{background-color: #2b2363;  border-color: #ffffff80;  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
+.btn-navy{background-color: #2e266d; color:#ffffff}
+.btn-navy:hover{background-color: #2b2363;  border-color: #ffffff80; color:#d6d6d6; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
 .hr-navy{border-color: #2e266d42}
 .bg-white{background-color: #ffffff;}
 
