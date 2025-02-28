@@ -1,9 +1,4 @@
 
-    <!-- Page level plugins -->
-    <script src="<?=$rootPath?>vendor/chart.js/Chart.min.js"></script>
-    <script src="<?=$rootPath?>vendor/jquery/jquery.min.js"></script>
-    <script src="<?=$rootPath?>js/jquery-1.11.1.min.js"></script>
-    
     <script src="https://cdn.tiny.cloud/1/ajhw6o78srgkq6cu3900a48w0flx52dwsxc0el1qxxesa8vj/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/langs/ko.js" referrerpolicy="origin"></script>
 
@@ -52,3 +47,9 @@
     
     <link href="<?=$rootPath?>mobiscroll.jquery.trial/css/mobiscroll.jquery.min.css" rel="stylesheet" />
     <script src="<?=$rootPath?>mobiscroll.jquery.trial/js/mobiscroll.jquery.min.js"></script>
+    
+    <!-- Page level plugins -->
+    <script src="<?=$rootPath?>vendor/chart.js/Chart.min.js"></script>
+    <script src="<?=$rootPath?>vendor/jquery/jquery.min.js"></script>
+    <script src="<?=$rootPath?>js/jquery-1.11.1.min.js"></script>
+    

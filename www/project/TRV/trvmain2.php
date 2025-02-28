@@ -23,7 +23,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
             <div class="contents-col col ml-2 p-5 pt-2 text-lg" id="mainCardDiv">
                 <table class="table noTable">
                     <tr>
-                        <td class="w-15 text-blg text-right t-navy txt-18" id="tripArea">여행지</td>
+                        <td class="w-15 text-blg text-right t-navy tx-18" id="tripArea">여행지</td>
                         <td class="w-70">
                             <div class="search-div d-none">
                                 
@@ -43,13 +43,13 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                             $j = $i%8;
                         }
                     ?>
-                    <div class="col-xl-2 col-md-6 mb-4">
+                    <div class="col-xl-4 col-md-6 mb-4">
                         <div class="card h-500 py-2 c-pointer">
                             <div class="card-body listItem p-2">
                                 <div class="listItemBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
                                     <img class="listItemImg" src="../../img/trv/listItem/item<?=$j+1?>.jpg">
                                     
-                                    <div class="itemBigView text-right txt-7">
+                                    <div class="itemBigView text-right tx-10">
                                         크게보기
                                     </div>
                                 </div>
@@ -63,10 +63,10 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                                     내용이 아마도 이곳에?
                                     내용이 아마도 이곳에?
                                     내용이 아마도 이곳에?내용이 아마도 이곳에?내용이 아마도 이곳에?내용이 아마도 이곳에?
-                                    <div class="listItemWrt text-right txt-6">
+                                    <div class="listItemWrt text-right tx-10">
                                         작성자
                                     </div>
-                                    <div class="showDetail text-right txt-6" onclick="location.href='trvView.php'">
+                                    <div class="showDetail text-right tx-10" onclick="location.href='trvView.php'">
                                         자세히보기
                                     </div>
                                 </div>

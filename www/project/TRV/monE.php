@@ -11,7 +11,7 @@ else{$login="no";}
     <div class="contents-col col pt-2 text-lg h-100" id="mainCardDiv">
         <table class="table noTable">
             <tr>
-                <td class="w-15 text-blg text-right t-navy txt-17 pt-3" id="tripArea">문의사항</td>
+                <td class="w-15 text-blg text-right t-navy tx-17 pt-3" id="tripArea">문의사항</td>
                 <td class="w-75"><input type="text" class="form-control noBorder mr-4"></td>
                 <td class="w-10"><input type="button" class="btn btn-navy w-100 mr-4 text-blg t-white" id="search" value="검색"></td>
             </tr>
@@ -29,11 +29,11 @@ else{$login="no";}
             ?>
             <form id="sForm">
                 <div class="text-right">
-                    <input type="checkbox" id="myUpload" name="myUpload" val="chk" <?=$checked?>><label for="myUpload" class="txt-8 px-1">내 문의만 보기</label>
+                    <input type="checkbox" id="myUpload" name="myUpload" val="chk" <?=$checked?>><label for="myUpload" class="tx-8 px-1">내 문의만 보기</label>
                 </div>
             </form>
             <?}?>
-            <table class="table table-border table-hover">
+            <table class="table table-border table-hover tx-13">
                 <thead>
                     <tr class="text-center">
                         <td class="w-5">No.</td>
@@ -45,17 +45,22 @@ else{$login="no";}
                 </thead>
                 <tbody>
                     <?
-                    $que_mone = "select a.*,b.nickName from TmoneTbl a left join TjoinTbl b on a.joinSeq = b.seq $where order by writeDateTime desc";
+                    $que_mone = "select a.*,b.nickName,ifnull(c.seq,0) as ansSeq from TmoneTbl a 
+                                    left join TjoinTbl b on a.joinSeq = b.seq
+                                    left join TmoneAnswerTbl c on a.seq = c.moneSeq
+                                    $where order by writeDateTime desc";
                     $res_mone = mysql_query($que_mone);
                     $cnt_mone = mysql_num_rows($res_mone);
                     $i = 1;
                     while($row_mone = mysql_fetch_array($res_mone)){
+                        $ansChk = $row_mone['ansSeq'] > 0 ? "<b>답변완료</b>":"확인중";
                     ?>
                     <tr class="c-pointer" onclick="loginChk('<?=$row_mone['seq']?>','<?=$row_mone['joinSeq']?>')">
                         <td class="text-center"><?=$i?></td>
                         <td><?=$row_mone['writeTitle']?></td>
                         <td class="text-center noWrap"><?=$row_mone['writeDateTime']?></td>
                         <td class="text-center"><?=$row_mone['nickName']?></td>
+                        <td class="text-center"><?=$ansChk?></td>
                     </tr>
                     <?
                     $i++;

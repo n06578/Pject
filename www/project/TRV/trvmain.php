@@ -27,7 +27,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                         <td class="w-20"><input type="button" class="btn btn-secondary mr-4 text-blg" value="조회"></td>
                     </tr>
                 </table>
-                    <!-- <div class="row px-5 mt-2 text-blg w-100 d-ruby">
+                    <!-- <div class="row px-5 mt-2 text-blg w-100 d-ruby-t">
                         여행지 
                         <input type="text" class="form-control mr-4">
                         <input type="button" class="btn mr-4" value="조회">

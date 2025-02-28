@@ -33,7 +33,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                         
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2 my-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">여행시작</div>
+                                <div class="font-weight-bold text-primary text-uppercase mb-1">여행시작</div>
                                 <input type="date" name="startDay" class="form-control px-3 col mr-3" id="startDay">
                                 <input type="time" name="startTime" class="form-control px-3 col d-none" id="startTime">
                             </div>

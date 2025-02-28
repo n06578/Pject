@@ -14,7 +14,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
         
         <tr>
             <td id="loginBack" class="text-center">
-                <input type="text" class="loginInput mb-4 t-navy noBorder" id="loginId" placeholder="아이디" onkeypress="loginOk(event)">
+                <input type="email" class="loginInput mb-4 t-navy noBorder" id="loginId" placeholder="아이디" onkeypress="loginOk(event)">
                 <br>
                 <input type="password" class="loginInput t-navy noBorder" id="loginPW" placeholder="비밀번호" onkeypress="loginOk(event)">
             </td>

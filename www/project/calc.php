@@ -73,7 +73,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
         <!-- Record Section -->
         <div class="col-md-7 calcBody">
             <div class="card shadow mb-2">
-                <div class="card-header py-1 px-2 d-ruby">
+                <div class="card-header py-1 px-2 d-ruby-t">
                     <input type="text" class="m-0 p-0 form-control font-weight-bold text-primary calcTitle py-0" value="알수없음">
                     <input type="button" class="btn btn-sm btn-danger calMemoDel" value="삭제">
                 </div>
@@ -130,7 +130,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
             if(calc != ""){
                 if($(".calcMemo").text() != ""){
                     // 메모에 수식이 존재할경우 card 추가
-                    $(".calcBody").append('<div class="card shadow mb-2"><div class="card-header p-1 px-2 d-ruby"><input type="text" class="m-0 p-0 form-control font-weight-bold text-primary calcTitle w-80" value="알수없음"><input type="button" class="btn btn-sm btn-danger calMemoDel" value="삭제"></div><div class="card-body calcMemo py-2">'+calc+'</div></div>');
+                    $(".calcBody").append('<div class="card shadow mb-2"><div class="card-header p-1 px-2 d-ruby-t"><input type="text" class="m-0 p-0 form-control font-weight-bold text-primary calcTitle w-80" value="알수없음"><input type="button" class="btn btn-sm btn-danger calMemoDel" value="삭제"></div><div class="card-body calcMemo py-2">'+calc+'</div></div>');
 
 
                 }else{

@@ -6,14 +6,14 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
     <div class="contents-col col pt-2 text-lg h-100" id="mainCardDiv">
         <table class="table noTable">
             <tr>
-                <td class="w-15 text-blg text-right t-navy txt-17 pt-3" id="tripArea">공지사항</td>
+                <td class="w-15 text-blg text-right t-navy tx-17 pt-3" id="tripArea">공지사항</td>
                 <td><input type="text" class="form-control noBorder mr-4"></td>
                 <td class="w-10"><input type="button" class="btn btn-navy w-100 mr-4 text-blg t-white" id="search" value="검색"></td>
             </tr>
         </table>
         <hr class="hr-navy">
         <div class="card mx-5">
-            <table class="table table-border table-hover">
+            <table class="table table-border table-hover tx-13">
                 <thead>
                     <tr class="text-center">
                         <td class="w-10">No.</td>
