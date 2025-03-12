@@ -23,15 +23,15 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
             <div class="contents-col col ml-2 p-5 pt-2 text-lg" id="mainCardDiv">
                 <table class="table noTable">
                     <tr>
-                        <td class="w-15 text-blg text-right t-navy tx-18" id="tripArea">여행지</td>
+                        <td class="w-15 text-blg text-right t-navy tx-18 lh-40" id="tripArea">여행지</td>
                         <td class="w-70">
                             <div class="search-div d-none">
                                 
                             </div>
                             <input type="text" class="form-control noBorder searchInput mr-4">
                         </td>
-                        <td class="w-15"><input type="button" class="btn btn-white mr-4 w-100 text-blg t-navy" id="searchMap" value="지도에서 찾기" data-bs-toggle="modal" data-bs-target="#mapModal"></td>
-                        <td class="w-10"><input type="button" class="btn btn-navy w-100 mr-4 text-blg t-white" id="search" value="조회"></td>
+                        <td class="w-15"><input type="button" class="btn btn-sm btn-white mr-4 w-100 text-blg t-navy" id="searchMap" value="위치 확인" data-bs-toggle="modal" data-bs-target="#mapModal"></td>
+                        <td class="w-10"><input type="button" class="btn btn-sm btn-navy w-100 mr-4 text-blg t-white" id="search" value="조회"></td>
                     </tr>
                 </table>
                 <hr class="hr-navy">
@@ -44,10 +44,10 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                         }
                     ?>
                     <div class="col-xl-4 col-md-6 mb-4">
-                        <div class="card h-500 py-2 c-pointer">
+                        <div class="card h-500 py-2 c-pointer listItemCard">
                             <div class="card-body listItem p-2">
                                 <div class="listItemBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
-                                    <img class="listItemImg" src="../../img/trv/listItem/item<?=$j+1?>.jpg">
+                                    <img class="listItemImg" src="../../test/capture_20250305081728.png">
                                     
                                     <div class="itemBigView text-right tx-10">
                                         크게보기

@@ -11,7 +11,22 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-md-4 mb-2">
+        <div class="col-xl-4 col-md-4 mb-2" id="list-card">
+            <div class="card border-top-primary shadow h-100">
+                <div class="card-body pb-0 m-3 clicktitle">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>시작일</th>
+                                <th>종료일</th>
+                                <th>일정명</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-4 mb-2 d-none" id="info-card">
             <div class="card border-top-primary shadow h-100">
                 <div class="card-body pb-0 m-3 clicktitle">
 					<form id="infoData">
@@ -34,14 +49,14 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2 my-2">
                                 <div class="font-weight-bold text-primary text-uppercase mb-1">여행시작</div>
-                                <input type="date" name="startDay" class="form-control px-3 col mr-3" id="startDay">
+                                <input type="date" name="startDay" class="form-control px-3 col mr-3" id="startDay" value="<?=date('Y-m-d')?>">
                                 <input type="time" name="startTime" class="form-control px-3 col d-none" id="startTime">
                             </div>
 						</div>
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2 my-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">여행종료</div>
-                                <input type="date" name="endDay" class="form-control px-3 col mr-3" id="endDay">
+                                <input type="date" name="endDay" class="form-control px-3 col mr-3" id="endDay" value="<?=date('Y-m-d')?>">
                                 <input type="time" name="endTime" class="form-control px-3 col d-none" id="endTime">
 							</div>
 						</div>
@@ -148,11 +163,14 @@ $(function () {
     theme: 'windows',
     themeVariant: 'light'
     });
+
+
     $.ajax({
         type: "GET",
         url: "ajax/ajax_get_memo.php", // 데이터를 가져올 서버 URL
         dataType: "json", // 응답 형식은 JSON
         success: function(data) {
+            $("#dataTable").append("<tbody>");
             if (Array.isArray(data)) {
                 // 서버에서 받은 데이터를 Mobiscroll 캘린더 형식에 맞게 변환
                 const eventsData = data.map(event => ({
@@ -163,8 +181,14 @@ $(function () {
                     momo:event.momo,
                     allDay: event.allDay === 'true', // "true"를 boolean으로 변환
                     color: event.color || '#0078D7'  // color가 없으면 빈 문자열로 처리
+                    
                 }));
+                data.map(event => {
+                    $("#dataTable").append("<tr onclick='infoDataTr(this)' data-date="+event.start.substr(0, 10)+" data-info='Event 1'>"+"<td>"+event.start.substr(0, 10)+"</td>"+"<td>"+event.end.substr(0, 10)+"</td>"+"<td>"+event.title+"</td>"+"</tr>");
+                });
+                $("#dataTable").append("</tbody>");
 
+                
                 console.log(eventsData);
 
                 // Mobiscroll 캘린더 설정 및 데이터 추가
@@ -241,6 +265,7 @@ $(function () {
         }
     });
 
+
 	$("#btn-save").click(function(){
 		$("#infoData").ajaxSubmit({
 			url: 'ajax/ajax_memo.php',
@@ -260,6 +285,7 @@ $(function () {
     $('#btn-del').click(function(){
         calDataDel();
     })
+    
 
     function calDataDel(){
         const notice = PNotify.info({
@@ -307,4 +333,20 @@ $(function () {
 });
 
   
+function infoDataTr(thisval){
+
+    var selectedDate = $(thisval).data('date');  // 클릭한 날짜를 data-attribute에서 가져옴
+    var additionalInfo = $(thisval).data('info');  // 추가 정보 가져오기
+
+    // 달력 입력 필드에 날짜 값 설정
+    $('#calendar').val(selectedDate);
+
+    // MobiScroll에서 해당 날짜 선택
+    $('#calendar').mobiscroll('setVal', selectedDate);
+
+    // 추가 정보를 콘솔에 출력 (예시로 추가 정보 표시)
+    console.log('Selected Date: ' + selectedDate + ', Info: ' + additionalInfo);
+
+    // 추가적인 로직을 여기에 삽입 가능 (예: 날짜에 관련된 이벤트 표시 등)
+}
 </script>

@@ -1,5 +1,8 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
+$que_home = "select * from TjoinTbl where seq = '".$_SESSION['goUserNum']."'";
+$res_home = mysql_query($que_home);
+$row_home = mysql_fetch_array($res_home);
 ?>
 <div class="main-box h-90 d-none">
     <div class="p-0 m-0 h-100">
@@ -7,7 +10,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
             <div class="contents-col col px-5 text-lg">
                 <table class="table noTable tx-14">
                     <tr>
-                        <td class="w-20" rowspan="5">
+                        <td class="w-30" rowspan="5">
                             <div class="card ">
                                 <div class="card-body listItem p-2">
                                     <div class="profileBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
@@ -20,7 +23,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                                 </div>
                             </div>
                         </td>
-                        <td class="fw-800 tx-18 w-30"><?=$row_info['nickName']?></td>
+                        <td class="fw-800 tx-18 w-30"><?=$row_home['nickName']?></td>
                         <td class="w-35 text-right">
                             <span class="fw-800">국내여행횟수</span>
                             <span>0</span>
@@ -39,6 +42,9 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                     <tr>
                         <td colspan="3" class="fw-800">추구하는 여행 스타일</td>
                     </tr>
+                    <?
+                    if($_SESSION['goUserNum'] == $_SESSION['loginNum']) {
+                    ?>
                     <tr>
                         <td colspan="3" class="text-right">
                            <a href="#" class="btn btn-sm btn-warning">
@@ -49,6 +55,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                             </a>
                         </td>
                     </tr>
+                    <?}?>
                 </table>
                 <hr class="hr-navy">
                 <div class="row mt-5">

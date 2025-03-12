@@ -1,6 +1,7 @@
 @media (min-width: 1200px) {
   .main-box{
-    padding : 0px 300px;
+    width : 100vw !important;
+    padding : 0px 400px;
   }
   .item-box{
     padding : 0px 25% !important;
@@ -253,11 +254,15 @@ body {
 }
 
 /* 리스트 디자인 */
+.listItemCard{
+  border-radius : 0px !important;
+}
+
 .listItem{
-  height:253px;
+  height:353px;
 }
 .listItemBox{
-  height: 180px;
+  height: 300px;
   border: 2px solid #f4f4f4;
   opacity: 0.9;
   overflow: hidden; /* 벗어나는 부분 숨기기 */
@@ -286,7 +291,7 @@ body {
 
 
 .listItemCon{
-  height : 67px !important;
+  height : 50px !important;
   margin:1px 5px !important;
   padding-bottom: 2px;
   color: #231d52da;
@@ -621,11 +626,39 @@ body {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
+  overflow-y: hidden;
 }
 .imgItemTest{
+  width: 400px !important;
+  height: 400px !important;
   min-width: 400px !important;
-  min-height: 400px;
+  min-height: 400px !important;
+  max-width: 400px !important;
+  max-height: 400px !important;
+  border-radius: var(--bs-btn-border-radius) !important;
   border: 2px solid #f4f4f4;
+}
+
+.cropped-img{
+  max-width: 100%;   /* 가로 크기를 div에 맞게 조정 */
+  max-height: 100%;  /* 세로 크기를 div에 맞게 조정 */
+  object-fit: contain; /* 비율을 유지하면서 크기 조정 */
+}
+.btn-remove-img{
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #0000008f;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.addImgPart{
+  width : 400px !important;
+  height : 400px !important;
+  border-color: #2e266d26 !important;
 }
 /* bootstrap에 없는 css*/
 .w-5{width: 5%;}
@@ -655,7 +688,11 @@ body {
 .text-blg{font-weight: bold;}
 .t-white{color:#fff !important;}
 .t-navy{color:#2e266d !important;}
-
+.lh-15{line-height: 15px;}
+.lh-20{line-height: 20px;}
+.lh-30{line-height: 30px;}
+.lh-40{line-height: 40px;}
+.lh-50{line-height: 50px;}
 .d-ruby{display: ruby !important;}
 .d-ruby-t{display: ruby-text !important;}
 .btn:focus{box-shadow: none !important; border-color: #2e266d26;}
@@ -717,6 +754,9 @@ body {
   border: none;
 }
 
+.form-control{
+  border: 1px solid #ccc9e97a !important;
+}
 /* 캘린더 관련 css */
 .mbsc-calendar-cell-inner{
   border: 1px solid #00000026 !important;
@@ -825,3 +865,44 @@ gmp-map {
   word-wrap: break-word;
   text-wrap-mode: nowrap;
 }
+/* 게시글 자세히 보기 */
+.dItemImg{
+  width: 300px;
+  height: 300px;
+  object-fit: cover !important;
+  margin-bottom: .25rem !important;
+  /* position: absolute !important; */
+}
+.contentsOne{
+  margin: 30px 0px;
+}
+.content-cate{
+  margin-bottom: 5px; 
+}
+.content-div > text{
+  vertical-align: top;
+}
+
+/* .dAnsWrite{
+  background-color:#dddddd;
+  width : 80vw;
+  padding : 5px 0px;
+  border-radius: 10px 10px 0px 0px;
+  bottom: 0px;
+  position: absolute;
+  z-index: 2;
+  margin-left: 10vw;
+} */
+
+.dAnsWrite{
+  background-color:#dddddd;
+  width : 100%;
+  /* height : 130px; */
+  /* margin-bottom : 10px; */
+  border-radius: 10px 10px 0px 0px;
+  margin : 0px !important;
+  bottom: 0px;
+  position: sticky;
+  z-index: 2;
+}
+

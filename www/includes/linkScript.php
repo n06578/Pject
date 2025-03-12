@@ -43,13 +43,13 @@
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
-    <script src="<?=$rootPath?>js/mobiscroll.jquery.min.js"></script>
-    
-    <link href="<?=$rootPath?>mobiscroll.jquery.trial/css/mobiscroll.jquery.min.css" rel="stylesheet" />
-    <script src="<?=$rootPath?>mobiscroll.jquery.trial/js/mobiscroll.jquery.min.js"></script>
     
     <!-- Page level plugins -->
     <script src="<?=$rootPath?>vendor/chart.js/Chart.min.js"></script>
     <script src="<?=$rootPath?>vendor/jquery/jquery.min.js"></script>
     <script src="<?=$rootPath?>js/jquery-1.11.1.min.js"></script>
     
+    <script src="<?=$rootPath?>js/mobiscroll.jquery.min.js"></script>
+    
+    <link href="<?=$rootPath?>css/mobiscroll.jquery.min.css" rel="stylesheet" />
+    <script src="<?=$rootPath?>js/mobiscroll.jquery.min.js"></script>

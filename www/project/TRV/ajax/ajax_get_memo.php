@@ -3,7 +3,7 @@ session_start();
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 date_default_timezone_set('Asia/Seoul');
 
-$que = "select * from TcalanderTbl where joinSeq = '".$_SESSION['loginNum']."' ";
+$que = "select * from TcalanderTbl where joinSeq = '".$_SESSION['loginNum']."' order by startDateTime desc";
 $res = mysql_query($que);
 $events = array();
 while ($row = mysql_fetch_array($res)) {
