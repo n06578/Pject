@@ -369,7 +369,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                     <p>HTML, CSS, JAVASCRIPT, PHP, JQUERY</p>
                     <strong class="txt-black">설명 </strong>
                     <p>
-                        단순 계산기와는 다르게 결과값을 저장할 수 있도록 하는 사이트입니다. <br>
+                        단순 계산기와는 다르게 결과값과 코멘트를 함께 저장할 수 있도록 하는 기능입니다. <br>
                         기록해놓은 값이 무슨 값인지 직접 입력하여 값들끼리 비교 및 혼동없이 기록할 수 있도록 하는 계산기 입니다. <br>
                     </p>    
                     <button class="btn btn-secondary linkBtn"><i class="fas fa-link"></i> 바로가기</button>
