@@ -97,6 +97,11 @@ $(document).ready(function () {
     // 파일 선택 후 이미지 추가
     fileInput.on("change", function (event) {
         const file = event.target.files[0];
+        const scrollContainer = thisBtn.parent();
+        // console.log(scrollContainer);
+        // console.log(scrollContainer.scrollLeft());
+        
+        
         if (file) {
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -128,6 +133,7 @@ $(document).ready(function () {
                 });
 
                 croppers.push({ cropper, container: $newItem });
+                scrollToEnd(scrollContainer[0],scrollContainer);
             };
             reader.readAsDataURL(file);
         }
@@ -199,4 +205,9 @@ function numberChg(){
         number++;
     });
 }
+function scrollToEnd(container,thisDiv) {
+    setTimeout(() => {
+        thisDiv.animate( { scrollLeft : container.scrollWidth }, 700 );
+    }, 0);
+  }
 </script>
