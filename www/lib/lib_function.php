@@ -14,4 +14,24 @@ function getAnsCnt($conSeq,$conType,$likeHate){
 
     return $cnt;
 }
+
+function HomeViewWhere($mode,$user){
+    $Where = "";
+    switch($mode){
+        case "home":
+            $Where = " and joinSeq ='".$user."' ";
+            break;
+        case "recent":
+            $Where = " and 2=2 ";
+            break;
+        case "save":
+            $Where = " and 3=3 ";
+            break;
+        case "cal":
+            $Where = " and 4=4 ";
+            break;
+    }
+    return $Where;
+
+}
 ?>

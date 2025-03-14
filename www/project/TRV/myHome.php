@@ -61,7 +61,7 @@ $row_home = mysql_fetch_array($res_home);
                 <div class="row mt-4">
                     <?
                     $Where = HomeViewWhere($_SESSION['viewType'],$_SESSION['goUserNum']);
-                    $que_item = "select * from TuserItem where 1=1 joinSeq ='".$_SESSION['goUserNum']."' order by writeDate desc";
+                    $que_item = "select * from TuserItem where 1=1 $Where order by writeDate desc";
                     $res_item = mysql_query($que_item);
                     while($row_item = mysql_fetch_array($res_item)) {
                         $mainSeq = $row_item['seq'];

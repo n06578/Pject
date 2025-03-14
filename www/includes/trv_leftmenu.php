@@ -18,7 +18,7 @@
                                 <span class="text">일정</span>
                             </a>
                         <br>
-                        <a href="javascript:void(0)" class="btn" onclick="chkLogin('myHomeChk.php')">
+                        <a href="javascript:void(0)" class="btn" onclick="chkLogin('myHomeChk.php?viewType=home')">
                             <i class="fas fa-plane"></i>
                             <br>
                             <span class="text">프로필</span>
@@ -42,10 +42,10 @@
                     <ul class="big_menu">
                         <li>내 게시물 <i class="arrow fas fas2 fa-angle-right"></i></li>
                         <ul class="small_menu">
-                            <li onclick="chkLogin('myHomeChk.php')"><a href="javascript:void(0)">게시물</a></li>
-                            <li onclick="chkLogin('myHomeChk.php')"><a href="javascript:void(0)">최근 본 게시물</a></li>
-                            <li onclick="chkLogin('myHomeChk.php')"><a href="javascript:void(0)">찜한 게시물</a></li>
-                            <li onclick="chkLogin('myHomeChk.php')"><a href="javascript:void(0)">일정에 추가된 게시물</a></li>
+                            <li onclick="chkLogin('myHomeChk.php?viewType=home')"><a href="javascript:void(0)">게시물</a></li>
+                            <li onclick="chkLogin('myHomeChk.php?viewType=recent')"><a href="javascript:void(0)">최근 본 게시물</a></li>
+                            <li onclick="chkLogin('myHomeChk.php?viewType=save')"><a href="javascript:void(0)">찜한 게시물</a></li>
+                            <li onclick="chkLogin('myHomeChk.php?viewType=cal')"><a href="javascript:void(0)">일정에 추가된 게시물</a></li>
                         </ul>
                     </ul>
                 <?}?>
