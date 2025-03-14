@@ -259,10 +259,11 @@ body {
 }
 
 .listItem{
-  height:353px;
+  height:279px;
+
 }
 .listItemBox{
-  height: 300px;
+  height: 226px;
   border: 2px solid #f4f4f4;
   opacity: 0.9;
   overflow: hidden; /* 벗어나는 부분 숨기기 */

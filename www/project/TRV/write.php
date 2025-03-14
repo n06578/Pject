@@ -193,7 +193,7 @@ $(document).ready(function () {
                         color: "gray",
                         closeButton: false
                     });
-                    location.href = "itemList.php?seq="+response[1];
+                    location.href = "itemView.php?seq="+response[1];
                 }else{
                     mobiscroll.toast({
                         message: "업로드 실패",

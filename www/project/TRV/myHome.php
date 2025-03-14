@@ -58,33 +58,34 @@ $row_home = mysql_fetch_array($res_home);
                     <?}?>
                 </table>
                 <hr class="hr-navy">
-                <div class="row mt-5">
+                <div class="row mt-4">
                     <?
-                    for($i=0; $i<8; $i++) {
+                    $Where = HomeViewWhere($_SESSION['viewType'],$_SESSION['goUserNum']);
+                    $que_item = "select * from TuserItem where 1=1 joinSeq ='".$_SESSION['goUserNum']."' order by writeDate desc";
+                    $res_item = mysql_query($que_item);
+                    while($row_item = mysql_fetch_array($res_item)) {
+                        $mainSeq = $row_item['seq'];
+                        $que_sub = "select * from TuserItemList where itemSeq = '".$mainSeq."'";
+                        $res_sub = mysql_query($que_sub);
+                        $row_sub = mysql_fetch_array($res_sub);
+
+
+                        $que_file = "select * from TuserItemFile where itemSeq = '".$mainSeq."'";
+                        $res_file = mysql_query($que_file);
+                        $row_file = mysql_fetch_array($res_file);
                     ?>
-                    <div class="col-xl-4 col-md-6 mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
                         <div class="card h-500 py-2 c-pointer">
                             <div class="card-body listItem p-2">
                                 <div class="listItemBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
-                                    <img class="listItemImg" src="../../img/trv/listItem/item<?=$i+1?>.jpg">
+                                    <img class="listItemImg" src="<?=$row_file['filePath']?>">
                                     
                                     <div class="itemBigView text-right txt-7">
                                         크게보기
                                     </div>
                                 </div>
-                                <div class="listItemCon pt-2" onclick="location.href='itemList.php'" title="내용이 아마도 이곳에?내용이 아마도 이곳에?내용이 아마도 이곳에?
-                                    내용이 아마도 이곳에?
-                                    내용이 아마도 이곳에?
-                                    내용이 아마도 이곳에?내용이 아마도 이곳에?내용이 아마도 이곳에?내용이 아마도 이곳에?">
-                                    내용이 아마도 이곳에?
-                                    내용이 아마도 이곳에?
-                                    내용이 아마도 이곳에?
-                                    내용이 아마도 이곳에?
-                                    내용이 아마도 이곳에?
-                                    내용이 아마도 이곳에?내용이 아마도 이곳에?내용이 아마도 이곳에?내용이 아마도 이곳에?
-                                    <div class="listItemWrt text-right txt-6">
-                                        작성자
-                                    </div>
+                                <div class="listItemCon pt-2" onclick="location.href='itemView.php?seq=<?=$mainSeq?>'" title="<?=$row_sub['itemComment']?>">
+                                    <?=$row_sub['itemComment']?>
                                     <div class="showDetail text-right txt-6">
                                         자세히보기
                                     </div>
