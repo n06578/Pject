@@ -44,19 +44,9 @@ if($showFooter){
         </div>
     </div>
 </div>
-<!-- Page level custom scripts -->
-<!-- <script src="<?=$rootPath?>js/demo/chart-area-demo.js"></script>
-<script src="<?=$rootPath?>js/demo/chart-pie-demo.js"></script>
-<script src="<?=$rootPath?>js/demo/chart-bar-demo.js"></script>
-<script src="<?=$rootPath?>js/demo/datatables-demo.js"></script> -->
-
-
 
 <!-- Bootstrap core JavaScript-->
 <script src="<?=$rootPath?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<!-- <script src="<?=$rootPath?>vendor/jquery-easing/jquery.easing.min.js"></script> -->
 
 <!-- Custom scripts for all pages-->
 <script src="<?=$rootPath?>js/sb-admin-2.min.js"></script>
@@ -65,8 +55,6 @@ if($showFooter){
 <script src="<?=$rootPath?>vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="<?=$rootPath?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-<!-- Page level custom scripts -->
-<!-- <script src="<?=$rootPath?>js/demo/datatables-demo.js"></script> -->
 
 <? include $rootPath."lib/function.php"; ?>
 </body>

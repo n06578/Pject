@@ -1,4 +1,5 @@
 
+<!-- 이미지 확대 보기 -->
 <div class="modal " id="imgModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-xl">
         <div class="modal-body _modalBody p-0" ng-switch="invitationStep">
@@ -7,6 +8,7 @@
     </div>
 </div>
 <!-- <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpj9mhqC5Vd2Wn6FXPqEr5crupY0FRKXg&callback=console.debug&libraries=maps,marker&v=beta"></script> -->
+ <!-- google 지도 보기 -->
 <div class="modal " id="mapModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -15,24 +17,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body _modalBody" ng-switch="invitationStep" style="height: 90vh;">
-                <!-- <gmp-map center="40.12150192260742,-100.45039367675781" zoom="4" map-id="DEMO_MAP_ID">
-                    <gmp-advanced-marker position="40.12150192260742,-100.45039367675781" title="My location"></gmp-advanced-marker>
-                </gmp-map> -->
             </div>
         </div>
     </div>
 </div>
-
+<!-- 여행지 select 활성화  -->
 <div class="modal" id="searchModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-fit">
         <div class="modal-content">
             <div class="modal-body _modalBody" ng-switch="invitationStep" style="height: 90vh;">
-                <? include "test.php";?>
+                <? include "tripSearch.php";?>
             </div>
         </div>
     </div>
 </div>
-
+<!-- 로그인 안했을 경우 비밀번호로 문의 보기 활성화 -->
 <div class="modal" id="monePWModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -48,6 +47,7 @@
         </div>
     </div>
 </div>
+<!-- 문의 신고하기 활성화 -->
 <div class="modal" id="moneDeclare" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -84,4 +84,13 @@
             }
         });
     });
+
+    $(".searchInput").on("click", function() {
+        $(".search-div").removeClass("d-none")
+        $("#searchModal").modal("show");
+    });
+    
+    $("#searchClose").on("click",function(){
+        $("#searchModal").modal("hide")
+    })
 </script>

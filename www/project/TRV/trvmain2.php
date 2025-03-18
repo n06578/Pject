@@ -1,5 +1,4 @@
 <?php
-// require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 ?>
 
@@ -88,25 +87,14 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
         $(".showDetail").addClass("d-none");
         $(".itemBigView").addClass("d-none");
         
-
-        
         // 버튼 클릭 시 맨 위로 이동
         $("#cateBtn").on("click", function() {
             location.href = "mainCate.php";
         });
         
-        $(".searchInput").on("click", function() {
-            $(".search-div").removeClass("d-none")
-            $("#searchModal").modal("show");
-        });
-
         $(document).not(".search-div").click(function() {
             $(".search-div").addClass("d-none");
         });
-        
-		$("#searchClose").on("click",function(){
-			$("#searchModal").modal("hide")
-		})
     });
 
     $(".listItemBox").on({
