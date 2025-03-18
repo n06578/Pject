@@ -20,6 +20,8 @@ if (!is_dir($uploadDir)) {
 
 $itemList = count($_REQUEST['select']);
 for ($i = 1; $i <= $itemList; $i++) {
+    $subNumFiles = (!isset($_FILES['croppedImages']['name'][$i]))? 0:count($_FILES['croppedImages']['name'][$i]);
+    if($subNumFiles==0 && str_Replace(" ","",$_REQUEST['textarea'][$i]) == "") continue;
     $que = "insert into TuserItemList set
             itemSeq = '".$mainSeq."',
             itemType = '".$_REQUEST['select'][$i]."',
@@ -29,8 +31,7 @@ for ($i = 1; $i <= $itemList; $i++) {
     mysql_query($que);
 
     $subSeq = mysql_insert_id();
-    
-    $subNumFiles = count($_FILES['croppedImages']['name'][$i]);
+
     for ($j = 0; $j < $subNumFiles; $j++) {
             $fileName = $_FILES['croppedImages']['name'][$i][$j];
             $fileTmpName = $_FILES['croppedImages']['tmp_name'][$i][$j];

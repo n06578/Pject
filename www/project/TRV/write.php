@@ -32,7 +32,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                             <button type="button" class="btn w-100 h-100 addImgPart"><i class="fas fa-plus"></i></button>
                         </div>
                     </div>
-                    <textarea class="form-control" name="textarea[]" rows="6"></textarea>
+                    <textarea class="form-control textarea" name="textarea[]" rows="6"></textarea>
                 </div>
                 <div class="addDivBtn mb-5">
                     <button type="button" class="btn w-100 h-100 addDivPart"><i class="fas fa-plus"></i></button>
@@ -61,7 +61,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                     <button type="button" class="btn w-100 h-100 addImgPart"><i class="fas fa-plus"></i></button>
                 </div>
             </div>
-            <textarea class="form-control mt-2" name="textarea[]" rows="6"></textarea>
+            <textarea class="form-control textarea mt-2" name="textarea[]" rows="6"></textarea>
         </div>
     </div>
 </div>
@@ -147,8 +147,20 @@ $(document).ready(function () {
 
     // 저장 버튼 클릭 시 크롭한 이미지 업로드
     $("#saveBtn").click(async function (event) {
-        
-        return false;
+        if($(".searchInput ").val() == ""){
+            pAlert("error","등록실패","여행지를 선택해주세요.",true);
+            return false;
+        }
+        var textarea = 0;
+        $(".textarea:visible").each(function(){
+            if($(this).val() != ""){
+                textarea++;
+            }
+        });
+        if(textarea == 0 && $(".cropped-img").length == 0){
+            pAlert("error","등록실패","내용 입력 또는 사진을 등록해주세요.",true);
+            return false;
+        }
         event.preventDefault();
         // numberChk를 기준으로 각각의 select와 textarea의 name을 변경
         $(".filebox").each(function () {
