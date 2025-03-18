@@ -35,6 +35,7 @@ include $rootPath."lib/PNotify.php"; // PNotiry관련 함수
 
 //footer box 기본값 x
 $showFooter = false;
+//로그인 여부 체크
 if(!isset($_SESSION['loginYn'])){
     $_SESSION['loginNum'] = '-';
     $_SESSION['loginYn'] = "N";
@@ -45,7 +46,9 @@ if(!isset($_SESSION['loginYn'])){
         $row_info = mysql_fetch_array($res_info);
     }
 }
+//seq 값이 없을때
 if(!isset($_REQUEST['seq'])){$_REQUEST['seq'] = "";}
+// 로그인 했을경우에만 접근가능한 페이지일 경우 체크
 if( ($baseName[0] == "myCal" || $baseName[0] == "myHome") && $_SESSION['loginYn'] != "Y" ){ 
     ?>
     <script>
@@ -55,6 +58,10 @@ if( ($baseName[0] == "myCal" || $baseName[0] == "myHome") && $_SESSION['loginYn'
     </script>
 <?
     exit;
+}
+// 메인과 카테를 벗어날 경우 session 초기화
+if($baseName[0] != "trvmain2" && $baseName[0] != "mainCate"){
+    $_SESSION['searchCountry'] = "";
 }
 ?>
 <body id="page-top">

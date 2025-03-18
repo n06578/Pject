@@ -5,20 +5,6 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 <div class="main-box h-90 d-none">
     <div class="p-0 m-0 h-100">
         <div class="row h-100">
-            <!-- <div class="sub-col mb-2">
-                <aside class="side-bar list1">
-                    <ul><li><a href="#" id="menu1">인기</a></li></ul>
-                </aside>
-                <aside class="side-bar list2">
-                    <ul><li><a href="#" id="menu2">추천</a></li></ul>
-                </aside>
-                <aside class="side-bar list3">
-                    <ul><li><a href="#" id="menu3">찜</a></li></ul>
-                </aside>
-                <aside class="side-bar list4">
-                    <ul><li><a href="#" id="menu4">친구들</a></li></ul>
-                </aside>
-            </div> -->
             <div class="contents-col col ml-2 p-5 pt-2 text-lg" id="mainCardDiv">
                 <table class="table noTable">
                     <tr>
@@ -27,57 +13,22 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                             <div class="search-div d-none">
                                 
                             </div>
-                            <input type="text" class="form-control noBorder searchInput mr-4">
+                            <input type="text" class="form-control noBorder searchInput mr-4" value="<?=$_SESSION['searchCountry']?>">
                         </td>
-                        <td class="w-15"><input type="button" class="btn btn-sm btn-white mr-4 w-100 text-blg t-navy" id="searchMap" value="위치 확인" data-bs-toggle="modal" data-bs-target="#mapModal"></td>
                         <td class="w-10"><input type="button" class="btn btn-sm btn-navy w-100 mr-4 text-blg t-white" id="search" value="조회"></td>
+                        <? $addClass =$_SESSION['searchCountry'] == ""?"d-none":"";?>
+                        <td class="w-10"><input type="button" class="btn btn-sm btn-warning w-100 mr-4 text-blg <?=$addClass?>" id="clear" value="초기화"></td>
+                        <td class="w-10"><input type="button" class="btn btn-sm btn-white mr-4 w-100 text-blg t-navy <?=$addClass?>" id="searchMap" value="위치 확인" data-bs-toggle="modal" data-bs-target="#mapModal"></td>
                     </tr>
                 </table>
                 <hr class="hr-navy">
-                <div class="row mt-5">
-                    <?
-                    $que_item = "select * from TuserItem order by writeDate desc";
-                    $res_item = mysql_query($que_item);
-                    while($row_item = mysql_fetch_array($res_item)) {
-                        $mainSeq = $row_item['seq'];
-                        $que_sub = "select * from TuserItemList where itemSeq = '".$mainSeq."'";
-                        $res_sub = mysql_query($que_sub);
-                        $row_sub = mysql_fetch_array($res_sub);
-
-
-                        $que_file = "select * from TuserItemFile where itemSeq = '".$mainSeq."'";
-                        $res_file = mysql_query($que_file);
-                        $row_file = mysql_fetch_array($res_file);
-                    ?>
-                    <div class="col-xl-4 col-md-6 mb-4">
-                        <div class="card h-500 py-2 c-pointer listItemCard">
-                            <div class="card-body listItem p-2">
-                                <div class="listItemBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
-                                    <img class="listItemImg" src="<?=$row_file['filePath']?>">
-                                    
-                                    <div class="itemBigView text-right tx-10">
-                                        크게보기
-                                    </div>
-                                </div>
-                                <div class="listItemCon pt-2" onclick="location.href='itemView.php?seq=<?=$mainSeq?>'" title="<?=$row_sub['itemComment']?>">
-                                <?=$row_sub['itemComment']?>
-                                    <div class="listItemWrt text-right tx-10">
-                                        작성자
-                                    </div>
-                                    <div class="showDetail text-right tx-10" onclick="location.href='trvView.php'">
-                                        자세히보기
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?}?>
+                <div class="row mt-5 itemListView">
+                    <? include "include/itemListView.php"; ?>
                 </div>
             </div> 
         </div>
     </div>
 </div>
-<div class="text-center" id="cateBtn"><i class="fas fa-arrow-up"></i> 카테고리로 보기</div>
 <!-- /.container-fluid -->
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <script>
@@ -96,7 +47,41 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
             $(".search-div").addClass("d-none");
         });
     });
-
+    $(document).on("click","#clear",function(){
+        $.ajax({
+            url: "include/itemListView.php",
+            type: "POST",
+            data: "search=clear",
+            success: function (data) {
+                $(".searchInput").val("");
+                $("#searchMap").addClass("d-none");
+                $("#clear").addClass("d-none");
+                $(".itemListView").html(data);
+            }
+        });
+    });
+    $(document).on("click","#cateBtn",function(){
+        location.href = "mainCate.php";
+    });
+    
+    $(document).on("click","#search",function(){
+        // alert("여행지를 선택해주세요");
+        if($(".searchInput").val()!=""){
+            $.ajax({
+                url: "include/itemListView.php",
+                type: "POST",
+                data: "search=ajax&searchCountry="+$(".searchInput").val(),
+                success: function (data) {
+                    $("#searchMap").removeClass("d-none")
+                    $("#clear").removeClass("d-none");
+                    $(".itemListView").html(data);
+                }
+            });
+        }else{
+            alert("여행지를 선택해주세요");
+        }
+    });
+    
     $(".listItemBox").on({
         "mouseover":function() {
             $(this).find(".itemBigView").removeClass("d-none").addClass("d-flex");

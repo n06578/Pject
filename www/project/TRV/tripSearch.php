@@ -47,7 +47,7 @@
         // const select = document.getElementById('country-select');
         data.sort((a, b) => a.translations.kor.common.localeCompare(b.translations.kor.common));
         data.forEach(country => { 
-            $("#category1").append("<li class='li1' data-code='"+country.cca2+"'><img src='"+country.flags.png+"'>"+country.translations.kor.common+"</li>");
+            $("#category1").append("<li class='li1' data-code='"+country.cca2+"' data-lng='"+country.latlng[1]+"' data-lat='"+country.latlng[0]+"'><img src='"+country.flags.png+"'>"+country.translations.kor.common+"</li>");
         });
     })
     .catch(error => console.error('Error fetching country data:', error));
@@ -72,7 +72,7 @@
 				if (isEnglish) { 
 				// cityName = trans(city.name); 
 			}
-			$("#category2").append("<li class='li2' data-id='"+city.geonameId+"'>"+cityName+"</li>");
+			$("#category2").append("<li class='li2' data-id='"+city.geonameId+"' data-lng='"+city.lng+"' data-lat='"+city.lat+"'>"+cityName+"</li>");
 		});
 	})
 	.catch(error => console.error('도시 데이터를 가져오는 중 오류 발생:', error));
@@ -96,7 +96,7 @@
 				$("#category3").append("<li>행정구역 정보 없음</li>");
 			} else {
 				data.geonames.forEach(region => {
-					$("#category3").append("<li class='li3'>"+region.name+"</li>");
+					$("#category3").append("<li class='li3' data-lng='"+region.lng+"' data-lat='"+region.lat+"'>"+region.name+"</li>");
 				});
 			}
 		})
@@ -118,14 +118,25 @@
 			pAlert("error","","항목을 선택하세요.","choose");
 		}else{
 			inputTxt = area1;
-			if(area2 != ""){ inputTxt += " > "+ area2; }
-			if(area3 != ""){ inputTxt += " > "+ area3; }
+			var lng = $("#category1").find(".chkAck").data('lng');
+			var lat = $("#category1").find(".chkAck").data('lat');
+			if(area2 != ""){ 
+				inputTxt += " > "+ area2; 
+				lng = $("#category2").find(".chkAck").data('lng');
+				lat = $("#category2").find(".chkAck").data('lat');
+			}
+			if(area3 != ""){ 
+				inputTxt += " > "+ area3; 
+				lng = $("#category3").find(".chkAck").data('lng');
+				lat = $("#category3").find(".chkAck").data('lat');
+			}
 			$(".searchInput").val(inputTxt);
 			$("#searchModal").modal("hide");
+
 			$.ajax({
             type: "GET",
             url: "ajax/ajax_search.php", // 데이터를 가져올 서버 URL
-            data: "area1="+area1+"&area2="+area2+"&area3="+area3,
+            data: "area1="+area1+"&area2="+area2+"&area3="+area3+"&lat="+lat+"&lng="+lng,
             success: function(data) {
 				console.log(data);
             }

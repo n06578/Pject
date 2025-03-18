@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,7 +12,7 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       gmp-map {
-        height: 100%;
+        height: 95%;
       }
 
       /* Optional: Makes the sample page fill the window. */
@@ -29,9 +32,10 @@
         <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
       </div>
     </div>
+    <?=$_SESSION["lat"]?>,<?=$_SESSION["lng"]?>
 <BR>
-    <gmp-map center="40.12150192260742,-100.45039367675781" zoom="4" map-id="DEMO_MAP_ID">
-      <gmp-advanced-marker position="40.12150192260742,-100.45039367675781" title="My location"></gmp-advanced-marker>
+    <gmp-map center="<?=$_SESSION["lat"]?>,<?=$_SESSION["lng"]?>" zoom="4" map-id="DEMO_MAP_ID">
+      <gmp-advanced-marker position="<?=$_SESSION["lat"]?>,<?=$_SESSION["lng"]?>" title="My location"></gmp-advanced-marker>
     </gmp-map>
   </body>
 </html>

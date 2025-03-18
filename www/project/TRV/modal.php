@@ -12,10 +12,10 @@
 <div class="modal " id="mapModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            <!-- <div class="modal-header">
                 <h5 class="modal-title" id="employeeModalLabel"> </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+            </div> -->
             <div class="modal-body _modalBody" ng-switch="invitationStep" style="height: 90vh;">
             </div>
         </div>

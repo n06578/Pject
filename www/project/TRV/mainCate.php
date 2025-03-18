@@ -34,7 +34,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
         </div>
     </div>
 </div>
-<div class="text-center" id="writeBtn" onclick="location.href='gongJiWrite.php'"><i class="fas fa-pen"></i> 작성하기</div>
+<div class="text-center" id="writeBtn" onclick="location.href='trvmain2.php'"><i class="fas fa-list"></i> 목록보기</div>
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <script>
 </script>

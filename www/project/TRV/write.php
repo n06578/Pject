@@ -147,6 +147,8 @@ $(document).ready(function () {
 
     // 저장 버튼 클릭 시 크롭한 이미지 업로드
     $("#saveBtn").click(async function (event) {
+        
+        return false;
         event.preventDefault();
         // numberChk를 기준으로 각각의 select와 textarea의 name을 변경
         $(".filebox").each(function () {
