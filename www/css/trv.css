@@ -872,6 +872,7 @@ gmp-map {
   height: 300px;
   object-fit: cover !important;
   margin-bottom: .25rem !important;
+  overflow: visible !important;
   /* position: absolute !important; */
 }
 .contentsOne{

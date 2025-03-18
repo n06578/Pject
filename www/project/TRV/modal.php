@@ -66,7 +66,11 @@
 
 <script>
     $(".modal-open").on("click", function() {
-        var imgSrc = $(this).find("img").attr("src");
+        if($(this).hasClass("dItemImg")){
+            var imgSrc = $(this).attr("src");
+        }else{
+            var imgSrc = $(this).find("img").attr("src");
+        }
         $(".modal-title").text("이미지");
         $("#imgModal").find(".modal-body").html("<img src='"+imgSrc+"' class='modalImg' style='height: 90vh;'>");
         $("#imgModal").modal("show");

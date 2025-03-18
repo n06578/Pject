@@ -12,28 +12,32 @@ if($itemComment !=""){
         <div class="content-div">
 <?
 switch($type){
-    case "1":
-            while($row_file = mysql_fetch_array($res_file)){?>
-                <img class="dItemImg" src="<?=$row_file['filePath']?>">
+    case "1":?>
+            <div class="x-scroll my-2"> <?
+                while($row_file = mysql_fetch_array($res_file)){?>
+                    <img class="dItemImg c-pointer ml-1 modal-open" data-bs-toggle="modal" data-bs-target="#imgModal" src="<?=$row_file['filePath']?>">
             <? } ?>
+            </div>
             <br>
-            <text><?=$itemComment?></text> <?
+            <text><?=nl2br($itemComment)?></text> <?
         break;
-    case "2":
+    case "2":?>
+        <div class="x-scroll my-2"> <?
         while($row_file = mysql_fetch_array($res_file)){?>
-            <img class="dItemImg" src="<?=$row_file['filePath']?>">
-        <? } ?>
-            <text><?=$itemComment?></text>
+            <img class="dItemImg c-pointer ml-1 modal-open" data-bs-toggle="modal" data-bs-target="#imgModal"  src="<?=$row_file['filePath']?>">
+    <? } ?>
+    </div>
+            <text><?=nl2br($itemComment)?></text>
             <?
         break;
     case "3":
             ?>
-            <text><?=$itemComment?></text>
+            <text><?=nl2br($itemComment)?></text>
             <?
         break;
     case "4":
         while($row_file = mysql_fetch_array($res_file)){?>
-            <img class="dItemImg" src="<?=$row_file['filePath']?>">
+            <img class="dItemImg c-pointer ml-1 modal-open" data-bs-toggle="modal" data-bs-target="#imgModal"  src="<?=$row_file['filePath']?>">
         <? } 
         break;
 }

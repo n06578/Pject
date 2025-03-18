@@ -66,14 +66,6 @@ $res_sub = mysql_query($que_sub);
 <!-- /.container-fluid -->
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <script>
-    $(document).ready(function() {
-        $(".modal-open").on("click", function() {
-            var imgSrc = $(this).find("img").attr("src");
-            $(".modal-title").text("이미지");
-            $(".modal-body").html("<img src='"+imgSrc+"' class='modalImg' style='height: 90vh;'>");
-            $("#imgModal").modal("show");
-        });
-    });
 
     $(".listItemBox").on({
         "mouseover":function() {
