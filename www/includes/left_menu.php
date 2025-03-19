@@ -39,13 +39,13 @@ $activeSubYn = $cnt_active > 0 ? "active" : "collapsed";
 $activeShow = $cnt_active > 0 ? "show" : "";
 ?>
 
-<li class="nav-item <?=$activeMainYn?>">
-    <a class="nav-link  <?=$activeSubYn?>" href="<?=$rootPath?>#" data-toggle="collapse" data-target="#collapsePro"
+<li class="nav-item active">
+    <a class="nav-link  active" href="<?=$rootPath?>#" data-toggle="collapse" data-target="#collapsePro"
         aria-expanded="true" aria-controls="collapsePro">
         <i class="fas fa-clipboard-list"></i>
         <span>Project List</span>
     </a>
-    <div id="collapsePro" class="collapse <?=$activeShow?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div id="collapsePro" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">younAh project:</h6>
         <?
