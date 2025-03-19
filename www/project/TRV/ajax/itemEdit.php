@@ -45,6 +45,6 @@ else if($type == "likeHate"){
     $que = "delete from TlikeHateTbl where conSeq = '".$_REQUEST['conSeq']."' and conType = '".$_REQUEST['conType']."'";
     mysql_query($que);
 
-    $que = "delete from TcommuniAnswerTbl where seq = '".$_REQUEST['conSeq']."'";
+    $que = "delete from TitemAnswerTbl where seq = '".$_REQUEST['conSeq']."'";
     mysql_query($que);
 }
