@@ -60,5 +60,9 @@
             return json_decode($response,JSON_UNESCAPED_UNICODE);
         }
     }
-    
+    // 로그인 여부 확인   
+    function loginChk(){
+        if("<?=$login?>" =="yes") {return true;}
+        else{return false;}
+    }
 </script>

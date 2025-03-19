@@ -15,9 +15,6 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
 }else{
     $commu_writer = "yes";
 }
-//로그인 확인
-if($_SESSION['loginNum'] !="-" && $_SESSION['loginNum'] !="") {$login="yes";}
-else{$login="no";}
 
 ?>
 <div class="main-box row container-fluid h-90">
@@ -143,10 +140,6 @@ $(document).on('mouseenter mouseleave', '.getCnt',function(){
     });
 });
 
-function loginChk(){
-    if("<?=$login?>" =="yes") {return true;}
-    else{return false;}
-}
 $(document).on('click', '#LikeCnt',function(){
     if(loginChk()){
         $(this).find("i").toggleClass("fas far");

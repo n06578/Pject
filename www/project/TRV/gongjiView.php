@@ -15,10 +15,6 @@ if($_SESSION['loginNum'] != "0"){
     $commu_writer = "yes";
 }
 
-//로그인 확인
-if($_SESSION['loginNum'] !="-" && $_SESSION['loginNum'] !="") {$login="yes";}
-else{$login="no";}
-
 ?>
 <div class="main-box container-fluid h-90">
     <div class="h-100">
@@ -124,10 +120,7 @@ $("#ansAdd").on("click",function(){
     }
 })
 
-function loginChk(){
-    if("<?=$login?>" =="yes") {return true;}
-    else{return false;}
-}
+
 
 $(document).on('mouseenter mouseleave', '.getCnt',function(){
     var thisId = $(this).attr('id');

@@ -36,14 +36,16 @@ include $rootPath."lib/PNotify.php"; // PNotiry관련 함수
 //footer box 기본값 x
 $showFooter = false;
 //로그인 여부 체크
+$login="no";
 if(!isset($_SESSION['loginYn'])){
     $_SESSION['loginNum'] = '-';
     $_SESSION['loginYn'] = "N";
 }else{
-    if($_SESSION['loginNum'] != 0){
+    if($_SESSION['loginNum'] != 0 && $_SESSION['loginYn'] == "Y"){
         $que_info = "select * from TjoinTbl where seq = '".$_SESSION['loginNum']."'";
         $res_info = mysql_query($que_info);
         $row_info = mysql_fetch_array($res_info);
+        $login="yes";
     }
 }
 //seq 값이 없을때
@@ -60,7 +62,7 @@ if( ($baseName[0] == "myCal" || $baseName[0] == "myHome") && $_SESSION['loginYn'
     exit;
 }
 // 메인과 카테를 벗어날 경우 session 초기화
-if($baseName[0] != "trvmain2" && $baseName[0] != "mainCate"){
+if(($baseName[0] != "trvmain2" && $baseName[0] != "mainCate") || !isset($_REQUEST['searchCountry'])){
     $_SESSION['searchCountry'] = "";
 }
 ?>

@@ -2,10 +2,6 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 
-//로그인 확인
-if($_SESSION['loginNum'] !="-" && $_SESSION['loginNum'] !="") {$login="yes";}
-else{$login="no";}
-
 ?>
 <div class="main-box container-fluid h-90">
     <div class="contents-col col pt-2 text-lg h-100" id="mainCardDiv">
