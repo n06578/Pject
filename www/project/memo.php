@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
 ?>
 <div class="container-fluid">
-    <h1 class="h3 mb-4 text-gray-80">Blank Page</h1>
+    <h1 class="h3 mb-4 text-gray-80">Month 메모</h1>
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-2">
             <div class="card border-top-primary shadow h-100 py-">
