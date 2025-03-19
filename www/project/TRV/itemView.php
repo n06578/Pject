@@ -77,8 +77,20 @@ $res_sub = mysql_query($que_sub);
                 <input type="button" class="btn btn-white txt-8" id="ansAdd" value="일정추가">
             </div>
             <div class="col text-right">
-                <button type="button" class="btn btn-white txt-8" ><i class="far fa-thumbs-up" ></i></button>
-                <button type="button" class="btn btn-white txt-8" ><i class="far fa-thumbs-down" ></i></button>
+                <?
+                $likeChk = $hateChk = "far";
+                if($login == "yes"){
+                    $que_lh = "select * from TlikeHateTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$mainSeq."' and conType = 'item'";
+                    $res_lh = mysql_query($que_lh);
+                    $cnt_lh = mysql_num_rows($res_lh);
+                    if($cnt_lh>0){
+                        $row_lh  = mysql_fetch_array($res_lh);
+                        $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
+                    }
+                }
+                ?>
+                <button type="button" class="btn btn-white txt-8" id="likeCnt"><i class="<?=$likeChk?> fa-thumbs-up" ></i></button>
+                <button type="button" class="btn btn-white txt-8" id="hateCnt"><i class="<?=$hateChk?> fa-thumbs-down" ></i></button>
                 <button type="button" class="btn btn-white txt-8" ><i class="fas fa-exclamation-triangle" ></i></button>
                 <? if($row_main['joinSeq'] == $_SESSION['loginNum']){ ?>
                 <button type="button" class="btn btn-white txt-8" id="delBtn"><i class="fas fa-trash-alt"></i></label></button>
@@ -200,6 +212,28 @@ $res_sub = mysql_query($que_sub);
             ])
         });
     });
+    
+    $(document).on('click', '#likeCnt',function(){
+        if(loginChk()){
+            $(this).find("i").toggleClass("fas far");
+            $(this).next().find("i").removeClass("fas")
+            $(this).next().find("i").addClass("far")
+            ansLikeHateCnt(this,"likeHate","like","item");
+        }else{
+            loginChkClos()
+        }
+    })
+    $(document).on('click', '#hateCnt',function(){
+        if(loginChk()){
+            $(this).find("i").toggleClass("fas far");
+            $(this).prev().find("i").removeClass("fas")
+            $(this).prev().find("i").addClass("far")
+            ansLikeHateCnt(this,"likeHate","hate","item");
+        }else{
+            loginChkClos()
+        }
+    })
+
     $(document).on('click', '#ansLikeCnt',function(){
         if(loginChk()){
             $(this).find("i").toggleClass("fas far");
