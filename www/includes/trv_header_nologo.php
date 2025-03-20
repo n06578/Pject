@@ -11,6 +11,11 @@ $rootPath =  str_repeat($rootPath,count($documentPath)-1);
 
 //footer box 기본값 x
 $showFooter = false;
+//로그인 여부 체크
+$login="no";
+if($_SESSION['loginNum'] != 0 && $_SESSION['loginYn'] == "Y"){
+    $login="yes";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

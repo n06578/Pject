@@ -13,10 +13,10 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
                     <div class="joinDiv">
                         <div class="joinMailDiv">
                             <i class="fas fa-envelope"></i>
-                            <input type="text" class="joinInput t-navy noBorder" id="eMail" name="eMail" placeholder="이메일">
+                            <input type="text" class="joinInput t-navy noBorder" id="eMail" name="eMail" placeholder="이메일" data-toggle="tooltip"  data-placement="bottom" title="메일 인증 후 가입이 완료됩니다.">
                         </div>
                     </div>
-                    <div class="joinDiv"><i class="fas fa-unlock"></i><input type="password" class="joinInput t-navy noBorder" id="loginPW" name="loginPW" placeholder="비밀번호"  data-toggle="tooltip"  data-placement="bottom" title="비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요."><i class="far fa-eye eyeI"></i></div><!--<i class="far fa-eye-slash eyeI"></i>-->
+                    <div class="joinDiv"><i class="fas fa-unlock"></i><input type="password" class="joinInput t-navy noBorder" id="loginPW" name="loginPW" placeholder="비밀번호" data-toggle="tooltip"  data-placement="bottom" title="비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요."><i class="far fa-eye eyeI"></i></div><!--<i class="far fa-eye-slash eyeI"></i>-->
                     <div class="joinDiv"><i class="fas fa-phone"></i><input type="tel" class="joinInput t-navy noBorder" id="phoneNum" name="phoneNum" placeholder="연락처"></div>
                     <div class="joinDiv"><i class="fas fa-globe-asia"></i><input type="text" class="joinInput t-navy noBorder" id="country" name="country" placeholder="국적"></div>
                     <div class="joinDiv">
@@ -108,8 +108,33 @@ $(function() {
 
     // focusout 이벤트: 툴팁 숨기기
     tooltipTrigger.addEventListener('focusout', () => tooltip.hide());
-});
+    /* 메일 인증 안내 */
+    const tooltipMailrigger = document.querySelector('#eMail');
+    const tooltipMail = new bootstrap.Tooltip(tooltipMailrigger, {
+        trigger: 'manual' // 수동으로 제어
+    });
 
+    // focusin 이벤트: 툴팁 표시
+    tooltipMailrigger.addEventListener('focusin', () => tooltipMail.show());
+
+    // focusout 이벤트: 툴팁 숨기기
+    tooltipMailrigger.addEventListener('focusout', () => tooltipMail.hide());
+});
+    $(document).on("input","#loginPW",function(){
+        var user_pass = $("#loginPW").val();
+
+        var num = user_pass.search(/[0-9]/g); // 숫자
+        var eng = user_pass.search(/[a-zA-Z]/ig); // 영문 대소문자
+        var spe = user_pass.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi); // 특수문자
+
+        if ((user_pass).length < 8 || num < 0 || eng < 0 || spe < 0 ) {
+            $(this).addClass("t-red")
+            $(this).removeClass("t-navy")
+        }else{
+            $(this).removeClass("t-red")
+            $(this).addClass("t-navy")
+        }
+    })
     
     $(".eyeI").on("click",function(){
         $(".eyeI").toggleClass("fa-eye-slash");
@@ -174,10 +199,36 @@ $(function() {
     }
 
     function joinOk(){
+        if($("#userName").val() == ""){
+            pAlert("error","가입실패","성명을 입력해주세요.",true);
+            return false;
+        }
+        if($("#eMail").val() == ""){
+            pAlert("error","가입실패","이메일을 입력해주세요.",true);
+            return false;
+        }else{
+            let email = $("#eMail").val();
+            if((email.match(/@/g) || []).length != 1){
+                pAlert("error","가입실패","올바른 메일 형식을 입력해주세요.",true);
+                return false;
+            }
+        }
+        if($("#phoneNum").val() == ""){
+            pAlert("error","가입실패","연락처를 입력해주세요.",true);
+            return false;
+        }
+        if($("#country").val() == ""){
+            pAlert("error","가입실패","국적을 입력해주세요.",true);
+            return false;
+        }
+        if($("#loginPW").hasClass("t-red")){
+            pAlert("error","가입실패","비밀번호는 8~16자의 영문 대/소문자, 숫자, 특수문자가 포함되어야합니다..",true);
+            return false;
+        }
         $("#joinFrm").ajaxSubmit({
-			url: 'ajax/ajax_join.php',
-			type: 'post',
-			success : function(val){
+            url: 'ajax/ajax_join.php',
+            type: 'post',
+            success : function(val){
                 if(val == "joinDone"){
                     joinLogin();
                 }else{
@@ -185,7 +236,8 @@ $(function() {
                     $("#eMail").val("");
                     $("#eMail").focus();
                 }
-			}
-		});
+            }
+        });
+        
     }
 </script>

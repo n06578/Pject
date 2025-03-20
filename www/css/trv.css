@@ -519,18 +519,17 @@ body {
 .joinTbl{
   /* height: 420px; */
   /* background-color: bisque; */
-  width: 550px;
+  width: 550px !important;
   border-top: 1px solid #2e266d17 !important;
   border-bottom: 1px solid #2e266d17 !important;
   border-radius : 25px;
 }
 .joinBtm{
-  width: 550px;
+  width: 550px !important;
   text-align: center;
 }
 #joinLogo{
   margin-bottom: 4.5vh !important;
-  width: 10vw;
   height: 5vh;
   background-image: url("../img/trv/joinImg.PNG");
   background-size: contain; /* 이미지를 화면에 맞게 조절 */
@@ -541,7 +540,7 @@ body {
 #joinBack{
   margin-top : 2vh;
   margin-bottom : 2vh;
-  width: 100%;
+  width: 100% !important;
   height: 52vh;
   /* background-image: url("../img/trv/joinBackdev2.PNG"); */
   background-size: contain; /* 이미지를 화면에 맞게 조절 */
@@ -699,6 +698,7 @@ body {
 .btn-secondary{background-color: #615e7a9a;}
 .text-blg{font-weight: bold;}
 .t-white{color:#fff !important;}
+.t-red{color:#ac1111 !important;}
 .t-navy{color:#2e266d !important;}
 .lh-15{line-height: 15px;}
 .lh-20{line-height: 20px;}
