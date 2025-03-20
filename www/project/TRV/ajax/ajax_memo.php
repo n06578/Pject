@@ -5,8 +5,15 @@ date_default_timezone_set('Asia/Seoul');
 
 
 $dataMode = $_REQUEST['dataMode'] != "" ? $_REQUEST['dataMode'] : "insertChk";
+$seq = $_REQUEST['seq'] != "" ? $_REQUEST['seq'] : "";
 
-if($dataMode == "insertChk"){
+if($dataMode == "delData"){
+    $que = "delete from TcalanderTbl where seq='".$_REQUEST['seq']."' and joinSeq = '".$_SESSION['loginNum']."'";
+    mysql_query($que);
+    exit;
+}
+
+if($seq == ""){
     $_REQUEST['color'] = @$_REQUEST['color'] =="" ? "":$_REQUEST['color'];
     $que = "select * from TcalanderTbl where memoId='".$_REQUEST['id']."' and joinSeq = '".$_SESSION['loginNum']."'";
     $res = mysql_query($que) or die(mysql_error());
@@ -34,30 +41,12 @@ if($dataMode == "insertChk"){
                     color = '".$_REQUEST['color']."'
                     ";
         mysql_query($que);
-    }else{
-        $que = "update TcalanderTbl set
-                    allDay = '".$_REQUEST['allDay']."',
-                    color = '".$_REQUEST['color']."',
-                    title = '".$_REQUEST['title']."'
-                where memoId='".$_REQUEST['id']."' and joinSeq = '".$_SESSION['loginNum']."'
-                    ";
-        mysql_query($que);
+        $seq = mysql_insert_id();
     }
 
-    $que = "select * from TcalanderTbl where memoId='".$_REQUEST['id']."' and joinSeq = '".$_SESSION['loginNum']."'";
-    $res = mysql_query($que) or die(mysql_error());
-    $row = mysql_fetch_array($res);
 
-    $data['allDay'] = $row['allDay'];
-    $data['endDate'] = $row['endDateTime'];
-    $data['startDate'] = $row['startDateTime'];
-    $data['color'] = $row['color'];
-    $data['title'] = $row['title'];
-    $data['subTitle'] = $row['subTitle'];
-    $data['memo'] = $row['contents'];
-    echo json_encode($data);
     
-}else if($dataMode == "updateData"){
+}else if($seq != "" && $dataMode == "updateData"){
     
     $_REQUEST['startDateTime'] = $_REQUEST['startDay']. " " . $_REQUEST['startTime'];
     $_REQUEST['endDateTime'] = $_REQUEST['endDay']. " " . $_REQUEST['endTime'];
@@ -71,10 +60,18 @@ if($dataMode == "insertChk"){
                 contents = '".$_REQUEST['memo']."'
             where memoId='".$_REQUEST['id']."' and joinSeq = '".$_SESSION['loginNum']."'";
     mysql_query($que);
-}else if($dataMode == "delData"){
-    var_dump($_REQUEST);
-    $que = "delete from TcalanderTbl where memoId='".$_REQUEST['id']."' and joinSeq = '".$_SESSION['loginNum']."'";
-    mysql_query($que);
 }
+    $que = "select * from TcalanderTbl where seq='".$seq."' and joinSeq = '".$_SESSION['loginNum']."'";
+    $res = mysql_query($que) or die(mysql_error());
+    $row = mysql_fetch_array($res);
 
+    $data['allDay'] = $row['allDay'];
+    $data['endDate'] = $row['endDateTime'];
+    $data['startDate'] = $row['startDateTime'];
+    $data['color'] = $row['color'];
+    $data['title'] = $row['title'];
+    $data['subTitle'] = $row['subTitle'];
+    $data['memo'] = $row['contents'];
+    $data['seq'] = $seq;
+    echo json_encode($data);
 ?>

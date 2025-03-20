@@ -33,6 +33,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2 my-2">
 								<input type="hidden" name="dataMode" value="updateData">
+                                <input type="hidden" name="seq" id="seq">
 								<input type="hidden" name="id" id="id">
 								<input type="hidden" name="allDay" id="allDay">
 								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">일정명</div>
@@ -170,10 +171,12 @@ $(function () {
         url: "ajax/ajax_get_memo.php", // 데이터를 가져올 서버 URL
         dataType: "json", // 응답 형식은 JSON
         success: function(data) {
+            console.table(data);
             $("#dataTable").append("<tbody>");
             if (Array.isArray(data)) {
                 // 서버에서 받은 데이터를 Mobiscroll 캘린더 형식에 맞게 변환
                 const eventsData = data.map(event => ({
+                    seq: event.seq,
                     start: new Date(event.start),  // start는 Date 객체로 변환
                     end: new Date(event.end),      // end도 마찬가지
                     title: event.title,
@@ -213,7 +216,7 @@ $(function () {
                                 color: "gray",
                                 closeButton: false
                             });
-
+                            
                             // AJAX 요청 최적화
                             $.ajax({
                                 type: "POST",
@@ -221,7 +224,6 @@ $(function () {
                                 data: args.event,
 								dataType : "json",
                                 success: function (data) {
-									$(".info-card").removeClass("d-none")
                                     $("#title").val(data['title']);
                                     var startDate = data['startDate'];
                                     startDay = startDate.split(" ");
@@ -233,14 +235,16 @@ $(function () {
                                     if(data['color'] == "" ){
                                         data['color'] = "#0078D7";
                                     }
+									$("#id").val(args.event.id);
+                                    $("#seq").val(args.event.seq);
                                     $("#endDay").val(endDay[0]);
                                     $("#endTime").val(endDay[1]);
 									$("#color").val(data['color']);
                                     $("#subTitle").val(data['subTitle']);
 									$("#memo").val(data['memo']);
-									$("#id").val(args.event.id);
 									$("#allDay").val(args.event.allDay);
-
+                                    $("#list-card").addClass("d-none");
+                                    $("#info-card").removeClass("d-none");
                                     // 로딩 표시 제거 후 결과 토스트
                                     mobiscroll.toast({
                                         message: args.event.title,
@@ -313,7 +317,7 @@ $(function () {
                                 $.ajax({
                                     type: "POST",
                                     url: "ajax/ajax_memo.php",
-                                    data: "id="+$("#id").val()+"&dataMode=delData",
+                                    data: "seq="+$("#seq").val()+"&dataMode=delData",
                                     success: function (data) {
                                         console.log("action");
                                         location.reload();
