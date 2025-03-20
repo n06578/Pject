@@ -705,6 +705,8 @@ body {
 .lh-30{line-height: 30px;}
 .lh-40{line-height: 40px;}
 .lh-50{line-height: 50px;}
+.d-contents{display: contents !important;}
+.d-table-cell{display: table-cell !important;}
 .d-ruby{display: ruby !important;}
 .d-ruby-t{display: ruby-text !important;}
 .btn:focus{box-shadow: none !important; border-color: #2e266d26;}

@@ -1,62 +1,14 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
-$que_home = "select * from TjoinTbl where seq = '".$_SESSION['goUserNum']."'";
-$res_home = mysql_query($que_home);
-$row_home = mysql_fetch_array($res_home);
+
 ?>
 <div class="main-box h-90 d-none">
     <div class="p-0 m-0 h-100">
         <div class="row h-100">
             <div class="contents-col col px-5 text-lg">
-                <table class="table noTable tx-14">
-                    <tr>
-                        <td class="w-30" rowspan="5">
-                            <div class="card ">
-                                <div class="card-body listItem p-2">
-                                    <div class="profileBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
-                                        <img class="listItemImg" src="../../img/trv/listItem/item1.jpg">
-                                        
-                                        <div class="itemBigView text-right txt-7 d-none">
-                                            크게보기
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="fw-800 tx-18 w-30"><?=$row_home['nickName']?></td>
-                        <td class="w-35 text-right">
-                            <span class="fw-800">국내여행횟수</span>
-                            <span>0</span>
-                        </td>
-                        <td class="w-35 text-left pl-4">
-                            <span class="fw-800">국외여행횟수</span>
-                            <span>0</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="fw-800">한줄소개</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">한줄소개</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="fw-800">추구하는 여행 스타일</td>
-                    </tr>
-                    <?
-                    if($_SESSION['goUserNum'] == $_SESSION['loginNum']) {
-                    ?>
-                    <tr>
-                        <td colspan="3" class="text-right">
-                           <a href="#" class="btn btn-sm btn-warning">
-                                <span class="text">변경내용 초기화</span>
-                            </a>
-                            <a href="#" class="btn btn-sm btn-success">
-                                <span class="text">저장</span>
-                            </a>
-                        </td>
-                    </tr>
-                    <?}?>
-                </table>
+                <div class="showInfoBox">
+                    <? include "include/showInfo.php"; ?>
+                </div>
                 <hr class="hr-navy">
                 <div class="row mt-4">
                     <?
@@ -125,6 +77,57 @@ $row_home = mysql_fetch_array($res_home);
             $("#imgModal").modal("show");
         });
     });
+    $(document).on("click","#changInfo, #infoReload",function(){
+        showInfoBox("edit","add")
+    })
+    $(document).on("click","#infoSave",function(){
+        mobiscroll.toast({
+            message: "닉네임 중복 검사중...",
+            display: "center",
+            color: "gray",
+            closeButton: false
+        });
+        $.ajax({
+            type: "GET",
+            url: "ajax/ajax_nickChk.php", // 데이터를 가져올 서버 URL
+            data: {type:"nickChg",nick:$("#nickName").val()},
+            success: function(data) {
+                if(data == "ok"){
+                    $("#infoFrm").ajaxSubmit({
+                        url: 'ajax/ajax_info_save.php',
+                        type: 'post',
+                        success : function(val){
+                            mobiscroll.toast({
+                                message: "저장되었습니다.",
+                                display: "center",
+                                color: "gray",
+                                closeButton: false
+                            });
+                            showInfoBox("","add");
+                        }
+                    });
+                }else{
+                    mobiscroll.toast({
+                        message: "닉네임 사용 불가",
+                        display: "center",
+                        color: "gray",
+                        closeButton: false
+                    });
+                }
+            }
+        });
+    })
+    
+    function showInfoBox(infoType,dbType){
+        $.ajax({
+            type: "GET",
+            url: "include/showInfo.php", // 데이터를 가져올 서버 URL
+            data: {showType:infoType,dbType:dbType},
+            success: function(data) {
+                $(".showInfoBox").html(data);
+            }
+        });
+    }
 
     $(".listItemBox").on({
         "mouseover":function() {
