@@ -15,6 +15,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                     $Where = HomeViewWhere($_SESSION['viewType'],$_SESSION['goUserNum']);
                     $que_item = "select * from TuserItem where 1=1 $Where order by writeDate desc";
                     $res_item = mysql_query($que_item);
+                    $num_item = mysql_num_rows($res_item);
                     while($row_item = mysql_fetch_array($res_item)) {
                         $mainSeq = $row_item['seq'];
                         $que_sub = "select * from TuserItemList where itemSeq = '".$mainSeq."'";
@@ -45,7 +46,11 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                             </div>
                         </div>
                     </div>
-                    <?}?>
+                    <?} if($num_item < 1){ ?>
+                        <div class="text-center mt-4 tx-16 fw-600">
+                            등록된 게시글이 없습니다.
+                        </div>
+                    <? } ?>
                 </div>
             </div> 
         </div>
