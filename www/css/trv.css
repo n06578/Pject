@@ -629,6 +629,17 @@ body {
   overflow-x: scroll;
   overflow-y: hidden;
 }
+
+.y-scroll{
+  scrollbar-width: thin;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.y-scroll .card{
+  display:contents !important;
+}
 .imgItemTest{
   width: 400px !important;
   height: 400px !important;
@@ -697,8 +708,9 @@ body {
 .d-ruby{display: ruby !important;}
 .d-ruby-t{display: ruby-text !important;}
 .btn:focus{box-shadow: none !important; border-color: #2e266d26;}
-.btn-white{background-color: #ffffff;}
-.btn-white:hover{border-color: #2e266d26;    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
+.btn-xs{padding: .1rem .2rem; font-size: .59rem; line-height: 1.5; border-radius: .2rem;}
+.btn-white{background-color: #ffffff; border-color: #eeeeee;}
+.btn-white:hover{background-color: #f5f5f5; border-color: #2e266d26;    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
 .btn-navy{background-color: #2e266d; color:#ffffff}
 .btn-navy:hover{background-color: #2b2363;  border-color: #ffffff80; color:#d6d6d6; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
 .hr-navy{border-color: #2e266d42}

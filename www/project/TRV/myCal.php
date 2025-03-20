@@ -75,8 +75,13 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 						</div>
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2 my-2">
-								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">해당일정 게시물</div>
-								<div class="card miniCard h-500 py-2 c-pointer">
+                                <div class="row">
+                                    <div class="col text-xs font-weight-bold text-primary text-uppercase mb-1">해당일정 게시물</div>
+                                    <div class="col text-xs  text-primary text-uppercase mb-1 text-right c-pointer">
+                                        <input type="button" class="btn btn-xs btn-white font-weight-bold text-primary showMore" value="더보기">
+                                    </div>
+                                </div>
+                                <div class="card miniCard h-500 py-2 c-pointer">
                                     <div class="card-body listItem p-2">
                                         <div class="listItemBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
                                             <img class="calItemImg" src="../../img/trv/listItem/item1.jpg">
@@ -158,14 +163,14 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
     });
     
 
-$(function () {
-    mobiscroll.setOptions({
-    locale: mobiscroll.localeKo,
-    theme: 'windows',
-    themeVariant: 'light'
+    $(function () {
+        mobiscroll.setOptions({
+        locale: mobiscroll.localeKo,
+        theme: 'windows',
+        themeVariant: 'light'
     });
 
-
+    /* 달력 데이터 가져오기 및 클릭 이벤트 활성화 */
     $.ajax({
         type: "GET",
         url: "ajax/ajax_get_memo.php", // 데이터를 가져올 서버 URL
@@ -268,7 +273,7 @@ $(function () {
         }
     });
 
-
+    /* 일정 내용 저장 버튼 */
 	$("#btn-save").click(function(){
 		$("#infoData").ajaxSubmit({
 			url: 'ajax/ajax_memo.php',
@@ -285,11 +290,12 @@ $(function () {
 		});
 	})
 	
+    /* 달력 일정 삭제 버튼 */
     $('#btn-del').click(function(){
         calDataDel();
     })
     
-
+    /* 일정 삭제 함수 */
     function calDataDel(){
         const notice = PNotify.info({
             title: '삭제 후 복구가 불가능합니다.',
@@ -336,20 +342,24 @@ $(function () {
 });
 
   
-function infoDataTr(thisval){
+    function infoDataTr(thisval){
 
-    var selectedDate = $(thisval).data('date');  // 클릭한 날짜를 data-attribute에서 가져옴
-    var additionalInfo = $(thisval).data('info');  // 추가 정보 가져오기
+        var selectedDate = $(thisval).data('date');  // 클릭한 날짜를 data-attribute에서 가져옴
+        var additionalInfo = $(thisval).data('info');  // 추가 정보 가져오기
 
-    // 달력 입력 필드에 날짜 값 설정
-    $('#calendar').val(selectedDate);
+        // 달력 입력 필드에 날짜 값 설정
+        $('#calendar').val(selectedDate);
 
-    // MobiScroll에서 해당 날짜 선택
-    $('#calendar').mobiscroll('setVal', selectedDate);
+        // MobiScroll에서 해당 날짜 선택
+        $('#calendar').mobiscroll('setVal', selectedDate);
 
-    // 추가 정보를 콘솔에 출력 (예시로 추가 정보 표시)
-    console.log('Selected Date: ' + selectedDate + ', Info: ' + additionalInfo);
+        // 추가 정보를 콘솔에 출력 (예시로 추가 정보 표시)
+        console.log('Selected Date: ' + selectedDate + ', Info: ' + additionalInfo);
 
-    // 추가적인 로직을 여기에 삽입 가능 (예: 날짜에 관련된 이벤트 표시 등)
-}
+        // 추가적인 로직을 여기에 삽입 가능 (예: 날짜에 관련된 이벤트 표시 등)
+    }
+
+    $(document).on("click",".showMore",function(){
+        location.href='myCalItem.php?seq='+$("#seq").val();
+    })
 </script>
