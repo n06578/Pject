@@ -207,7 +207,6 @@ $(function () {
                             calendar: { labels: true },
                         },
                         onEventClick: function (args) {
-                            args.event.dataMode = "insertChk";
                             args.event.subTitle = '';
                             // UI 차단: 로딩 표시
                             mobiscroll.toast({
