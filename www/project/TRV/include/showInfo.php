@@ -69,6 +69,9 @@ if(@$_REQUEST['showType']=="edit"){
             ?>
             <tr>
                 <td colspan="3" class="text-right">
+                    <a href="#" class="btn btn-sm btn-white" id="cancelBtn">
+                        <span class="text">취소</span>
+                    </a>
                     <a href="#" class="btn btn-sm btn-warning" id="infoReload">
                         <span class="text">변경내용 초기화</span>
                     </a>

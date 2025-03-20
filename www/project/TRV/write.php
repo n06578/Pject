@@ -107,7 +107,6 @@ $(document).ready(function () {
                 const $newItem = $(`
                     <div class="imgItemTest mr-1">
                         <img class="cropped-img" src="${e.target.result}">
-                        <button type="button" class="btn btn-sm btn-danger txt-white btn-remove-img">X</button>
                     </div>
                 `);
 
@@ -128,7 +127,14 @@ $(document).ready(function () {
                     cropBoxMovable: true,
                     cropBoxResizable: true,
                     background : 'transparent',
-                    dragMode : 'move'
+                    dragMode : 'move',
+                    ready() { 
+                        // Cropper가 준비된 후 실행
+                        setTimeout(() => {
+                            const container = $newItem.find(".cropper-container");
+                            container.append('<button type="button" class="btn btn-sm btn-danger txt-white btn-remove-img">X</button>');
+                        }, 100);
+                    }
                 });
 
                 croppers.push({ cropper, container: $newItem });

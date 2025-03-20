@@ -84,7 +84,12 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
     });
     $(document).on("click","#changInfo, #infoReload",function(){
         showInfoBox("edit","add")
+    });
+
+    $(document).on("click","#cancelBtn, #infoReload",function(){
+        showInfoBox("","add")
     })
+    
     $(document).on("click","#infoSave",function(){
         mobiscroll.toast({
             message: "닉네임 중복 검사중...",

@@ -677,7 +677,7 @@ body {
   position: absolute;
   right: 0;
   top: 0;
-  background-color: #0000008f;
+  /* background-color: #0000008f; */
   color: #ffffff;
   border-radius: 5px;
   padding: 5px;
