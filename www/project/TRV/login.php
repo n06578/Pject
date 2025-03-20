@@ -26,8 +26,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
         <tr height="50px">
             <td>
                 <input type="button" class="btn t-navy" value="회원가입" onclick="location.href='join.php'">
-                <input type="button" class="btn t-navy" value="아이디 찾기">
-                <input type="button" class="btn t-navy" value="비밀번호 찾기">
+                <input type="button" class="btn t-navy" id="searchPass" value="비밀번호 찾기">
             </td>
         </tr>
         <tr height="50px">
@@ -51,11 +50,13 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
             var id = $("#loginId").val();
             var pw = $("#loginPW").val();
             if(id == ""){
-                alert("아이디를 입력해주세요.");
+                pAlert("error","실패","아이디를 입력해주세요.",true);
+                $("#loginId").focus();
                 return;
             }
             if(pw == ""){
-                alert("비밀번호를 입력해주세요.");
+                pAlert("error","실패","비밀번호를 입력해주세요.",true);
+                $("#loginPW").focus();
                 return;
             }
             $.ajax({
@@ -69,9 +70,9 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
                     if(data == "success" || data == "manager"){
                         location.href = "trvmain2.php";
                     }else if(data == "fail_1"){
-                        alert("이메일 인증후 사용가능합니다.");
+                        pAlert("error","실패","이메일 인증후 사용가능합니다.",true);
                     }else{
-                        alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+                        pAlert("error","실패","아이디 또는 비밀번호가 일치하지 않습니다.",true);
                         $("#loginId").val("")
                         $("#loginPW").val("")
                     }
@@ -85,5 +86,18 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-        }
+    }
+
+    $(document).on("click","#searchPass",function(){
+        var width=500;
+        var height=300;
+        
+        var posx = (screen.width - width)/2-1;
+        var posy = (screen.height - height)/2-1;
+        
+        url = "popup/searchPass.php";
+        newwin = window.open(url,"setting","width="+width+",height="+height+",toolbar=0,scrollbars=1,resizable=0,status=0");
+        newwin.moveTo(posx,posy);
+        newwin.focus();
+    });
 </script>

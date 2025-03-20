@@ -1,8 +1,5 @@
 <?php
-
 include $_SERVER['DOCUMENT_ROOT'] . '/project/TRV/api/mail_proc.php';  // mail 전송 필수 페이지 include
-
-
 
 date_default_timezone_set("Asia/Seoul");
 

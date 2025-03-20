@@ -4,14 +4,21 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/function.php';
 
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
-
-
-$que = "select * from TjoinTbl where seq = '".$_REQUEST['seq']."' and joinAgreeChk = 0";
+if($_REQUEST['sendMode'] == "passFindChk"){
+    $que = "select * from TjoinTbl where seq = '".$_REQUEST['seq']."' and joinAgreeChk = 1 and userPassWord='990903userPassWordChangeChk'";
+}else{
+    $que = "select * from TjoinTbl where seq = '".$_REQUEST['seq']."' and joinAgreeChk = 0";
+}
 $res = mysql_query($que);
 $row = mysql_fetch_array($res);
 $cnt = mysql_num_rows($res);
 
 $action = $cnt>0? "yes" : "no";
+if($_REQUEST['sendMode'] == "passFindChk" && $action == "yes"){ ?>
+    <script>
+        location.href= "../passFind.php?seq=<?=$_REQUEST['seq']?>";
+    </script>
+<? } 
 if($action == "yes"){
     $que_ok = " update TjoinTbl set joinAgreeChk=1 where seq = '".$_REQUEST['seq']."'";
     mysql_query($que_ok);
@@ -47,7 +54,7 @@ if($action == "yes"){
     }
     
 </style>
-</div>
+
 <div class="main-container container-fluid mt-5 pt-5 p-5" >
     <div class="row justify-content-center">
         <div class="col-md-12 w-50">
@@ -76,7 +83,9 @@ if($action == "yes"){
 </div>
 
 
-<?    
+<? 
+
+
 if($action == "no"){
     $title = "유효하지 않은 접근입니다.";
     $sub_title = "관리자에게 문의해주세요.";
@@ -94,4 +103,3 @@ if($title !="" || $sub_title != ""){
     </script>
 <?
 }
-?>

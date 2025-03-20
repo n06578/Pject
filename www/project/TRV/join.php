@@ -201,28 +201,34 @@ $(function() {
     function joinOk(){
         if($("#userName").val() == ""){
             pAlert("error","가입실패","성명을 입력해주세요.",true);
+            $("#userName").focus();
             return false;
         }
         if($("#eMail").val() == ""){
             pAlert("error","가입실패","이메일을 입력해주세요.",true);
+            $("#eMail").focus();
             return false;
         }else{
             let email = $("#eMail").val();
             if((email.match(/@/g) || []).length != 1){
                 pAlert("error","가입실패","올바른 메일 형식을 입력해주세요.",true);
+                $("#eMail").focus();
                 return false;
             }
         }
         if($("#phoneNum").val() == ""){
             pAlert("error","가입실패","연락처를 입력해주세요.",true);
+            $("#phoneNum").focus();
             return false;
         }
         if($("#country").val() == ""){
             pAlert("error","가입실패","국적을 입력해주세요.",true);
+            $("#country").focus();
             return false;
         }
-        if($("#loginPW").hasClass("t-red")){
-            pAlert("error","가입실패","비밀번호는 8~16자의 영문 대/소문자, 숫자, 특수문자가 포함되어야합니다..",true);
+        if($("#loginPW").hasClass("t-red") || $("#loginPW").val()==""){
+            pAlert("error","가입실패","비밀번호는 8~16자의 영문 대/소문자, 숫자, 특수문자가 포함되어야합니다.",true);
+            $("#loginPW").focus();
             return false;
         }
         $("#joinFrm").ajaxSubmit({

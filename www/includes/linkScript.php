@@ -6,16 +6,16 @@
 <link href="<?=$rootPath?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 <!-- Custom styles -->
 <link href="<?=$rootPath?>css/sb-admin-2.min.css" rel="stylesheet">
 <link href="<?=$rootPath?>css/font.css?v=<?=time()?>" rel="stylesheet">
 <link href="<?=$rootPath?>css/trv.css?v=<?=time()?>" rel="stylesheet">
-<link href="<?=$rootPath?>css/trv_leftmenu.css" rel="stylesheet">
-<link href="<?=$rootPath?>css/searchbar.css?>" rel="stylesheet">
-
-<!-- Bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<link href="<?=$rootPath?>css/trv_leftmenu.css?v=<?=time()?>" rel="stylesheet">
+<link href="<?=$rootPath?>css/searchbar.css?v=<?=time()?>" rel="stylesheet">
 
 <!-- jQuery (최신 버전 유지) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

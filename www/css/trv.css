@@ -26,7 +26,7 @@ body {
   box-shadow: 0 0.1rem 0.5rem 0 rgba(58, 59, 69, .15) !important;
 }
 .main-box{
-  margin-top: 90px;
+  margin-top: 70px;
 }
 #content-wrapper::-webkit-scrollbar {
     display: none;
@@ -62,6 +62,24 @@ body {
     background-repeat: no-repeat; 
 }
 
+#trvLogo{   
+  margin-top : 2vh;
+  margin-bottom : 2vh;
+  width: 10vw;
+  height: 5vh;
+  background-image: url("../img/trv/navyLogo.PNG");
+  background-size: contain; /* 이미지를 화면에 맞게 조절 */
+  background-position: center; /* 이미지를 중앙에 위치 */
+  background-repeat: no-repeat; 
+}
+
+#trvLogoPopUp{   
+  height: 16vh;
+  background-image: url("../img/trv/navyLogo.PNG");
+  background-size: contain; /* 이미지를 화면에 맞게 조절 */
+  background-position: center; /* 이미지를 중앙에 위치 */
+  background-repeat: no-repeat; 
+}
 #topButtonDiv{
     width: 100%;
 }
@@ -713,8 +731,8 @@ body {
 .btn-xs{padding: .1rem .2rem; font-size: .59rem; line-height: 1.5; border-radius: .2rem;}
 .btn-white{background-color: #ffffff; border-color: #eeeeee;}
 .btn-white:hover{background-color: #f5f5f5; border-color: #2e266d26;    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
-.btn-navy{background-color: #2e266d; color:#ffffff}
-.btn-navy:hover{background-color: #2b2363;  border-color: #ffffff80; color:#d6d6d6; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
+.btn-navy{background-color: #2e266d !important; color:#ffffff !important;}
+.btn-navy:hover{background-color: #2b2363 !important;  border-color: #ffffff80 !important; color:#d6d6d6 !important; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
 .hr-navy{border-color: #2e266d42}
 .bg-white{background-color: #ffffff;}
 
@@ -853,7 +871,9 @@ gmp-map {
 [data-pnotify] .brighttheme-btn:hover {
   border: 1px solid #2b23633d !important;
 }
-
+.pnotify-pre-line {
+  padding-left: 0px !important;
+}
 /* [data-pnotify] .brighttheme-btn:hover:nth-child(2) {
   border: 1px solid #ff000033 !important;
 } */
