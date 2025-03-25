@@ -25,7 +25,19 @@ if($cnt < 1){
     if($_REQUEST['conType']=="postDeclare"){
         mailSend("신고가 접수되었습니다.","관리자",$row_send['userName']."님이 해당 게시물을 신고하였습니다.<br>버튼을 눌러 게시물을 확인해주세요.","n06578@gmail.com","declare,".$_REQUEST['Type'].",".$_REQUEST['conType']  ,"&seq=".$_REQUEST['conSeq']);
     }else{
-        // ATagNoSend("신고가 접수되었습니다.","관리자",$row_send['userName']."님이 해당 게시물을 신고하였습니다.<br>","n06578@gmail.com",$_REQUEST['mType']."|".$_REQUEST['mConType']  ,"&seq=".$_REQUEST['conSeq']);
+        if($_REQUEST['Type']=="item"){
+            $que_ans = "select * from TitemAnswerTbl where seq = '".$_REQUEST['conSeq']."'";
+        }else{
+            $que_ans = "select * from TcommuniAnswerTbl where seq = '".$_REQUEST['conSeq']."'";
+        }
+        $res_ans = mysql_query($que_ans);
+        $row_ans = mysql_fetch_array($res_ans);
+        $seq = $row_ans['conSeq'];
+
+        $que_wr = "select * from TjoinTbl where seq = '".$row_ans['joinSeq']."'";
+        $res_wr = mysql_query($que_wr);
+        $row_wr = mysql_fetch_array($res_wr);
+        mailSend("신고가 접수되었습니다.","관리자",$row_send['userName']."님이 ".$row_wr['userName']."(".$row_send['nickName'].")님의 댓글을 [".$_REQUEST['declareReason']."] 사유로 신고하였습니다.<br>「".$row_ans['answerContents']."」<br>버튼을 눌러 게시물을 확인해주세요.","n06578@gmail.com","declare,".$_REQUEST['Type'].",".$_REQUEST['conType']  ,"&seq=".$seq);
     }
 
 }else{
