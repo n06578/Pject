@@ -18,7 +18,27 @@ if($_REQUEST['sendMode'] == "passFindChk" && $action == "yes"){ ?>
     <script>
         location.href= "../passFind.php?seq=<?=$_REQUEST['seq']?>";
     </script>
-<? } 
+<? } else if(substr($_REQUEST['sendMode'],0,7) == "declare"){
+    $mode = explode(",",$_REQUEST['sendMode']);
+    switch($mode[1]){
+        case "item":
+            $url = "itemView.php?seq=".$_REQUEST['seq'];
+            break;
+        case "commu":
+            $url = "commuView.php?seq=".$_REQUEST['seq'];
+            break;
+        case "gongji":
+            $url = "gongjiView.php?seq=".$_REQUEST['seq'];
+            break;
+    }
+    ?>
+    <script>
+        location.href= "../<?=$url?>";
+    </script>
+<?}
+
+
+
 if($action == "yes"){
     $que_ok = " update TjoinTbl set joinAgreeChk=1 where seq = '".$_REQUEST['seq']."'";
     mysql_query($que_ok);

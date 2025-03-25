@@ -55,9 +55,10 @@
                 <input type="hidden" name="mType" id="mType" val="">
                 <input type="hidden" name="mConType" id="mConType" val="">
                 <input type="hidden" name="mConSeq" id="mConSeq" val="">
+                <input type="hidden" name="type" id="type" val="">
                 <input type="text" name="mDeclareReason" id="declareReason" class="form-control" placeholder="신고사유를 작성해주세요.">
-                <font class="text-left txt-7 mt-1" color="red">※ 악의적인 신고는 자재해주세요. ※</font>
-                <input type="button" id="decalreBtn" class="btn btn-sm btn-danger mt-1" value="신고하기">
+                <font class="text-left txt-7 mt-1" color="red">※ 악의적인 신고는 제재대상입니다. ※</font>
+                <input type="button" id="declareBtn" class="btn btn-sm btn-danger mt-1" value="신고하기">
             </div>
         </div>
     </div>
@@ -96,5 +97,29 @@
     
     $("#searchClose").on("click",function(){
         $("#searchModal").modal("hide")
+    })
+    $(document).on("click","#declareBtn",function(){
+        if($("#declareReason").val() == ""){
+            pAlert("error","실패","신고사유를 입력하세요.",true);
+        }else{
+            $.ajax({
+                url: "ajax/trv_declare.php",
+                type: "POST",
+                data: {
+                    conSeq : $("#mConSeq").val(),
+                    conType: $("#mConType").val(),
+                    declareReason:$("#declareReason").val(),
+                    Type : $("#type").val()
+                },
+                success: function(data){
+                    $("#moneDeclare").modal("hide")
+                    if(data == ""){
+                        pAlert("error","신고접수","성공적으로 신고가 접수되었습니다.",true);
+                    }else{
+                        pAlert("error","실패",data+"에 신고가 접수되었습니다.",true);
+                    }
+                } 
+            });
+        }
     })
 </script>

@@ -25,7 +25,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
             ?>
             <form id="sForm">
                 <div class="text-right">
-                    <input type="checkbox" id="myUpload" name="myUpload" val="chk" <?=$checked?>><label for="myUpload" class="tx-8 px-1">내 문의만 보기</label>
+                    <input type="checkbox" id="myUpload" name="myUpload" val="chk" <?=$checked?>><label for="myUpload" class="tx-12 px-1">내 문의만 보기</label>
                 </div>
             </form>
             <?}?>
@@ -63,7 +63,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                     }
                     if($cnt_mone == 0){ ?>
                         <tr>
-                            <td class="text-center" colspan="4">등록된 문의가 없습니다.</td>
+                            <td class="text-center" colspan="5">등록된 문의가 없습니다.</td>
                         </tr>
                     <? } ?>
                 </tbody>

@@ -263,33 +263,9 @@ $(document).on('click','#postDeclare, #ansDeclare',function(){
         $("#mType").val("gongji");
         $("#mConType").val($(this).attr("id"));
         $("#mConSeq").val($(this).data("seq"));
+        $("#type").val("gongji");
     }else{
         loginChkClos()
-    }
-})
-
-$(document).on("click","#decalreBtn",function(){
-    if($("#declareReason").val() == ""){
-        pAlert("error","실패","신고사유를 입력하세요.",true);
-    }else{
-        $.ajax({
-            url: "ajax/trv_declare.php",
-            type: "POST",
-            data: {
-                conSeq : $("#mConSeq").val(),
-                conType: $("#mConType").val(),
-                declareReason:$("#declareReason").val(),
-                Type : "gongji"
-            },
-            success: function(data){
-                $("#moneDeclare").modal("hide")
-                if(data == ""){
-                    pAlert("error","신고접수","성공적으로 신고가 접수되었습니다.",true);
-                }else{
-                    pAlert("error","실패",data+"에 신고가 접수되었습니다.",true);
-                }
-            } 
-        });
     }
 })
 </script>

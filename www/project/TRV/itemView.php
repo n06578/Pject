@@ -91,7 +91,7 @@ $res_sub = mysql_query($que_sub);
                 ?>
                 <button type="button" class="btn btn-white txt-8" id="likeCnt"><i class="<?=$likeChk?> fa-thumbs-up" ></i></button>
                 <button type="button" class="btn btn-white txt-8" id="hateCnt"><i class="<?=$hateChk?> fa-thumbs-down" ></i></button>
-                <button type="button" class="btn btn-white txt-8" ><i class="fas fa-exclamation-triangle" ></i></button>
+                <button type="button" class="btn btn-white txt-8" data-seq="<?=$_REQUEST['seq']?>" id="postDeclare"><i class="fas fa-exclamation-triangle" ></i></button>
                 <? if($row_main['joinSeq'] == $_SESSION['loginNum']){ ?>
                 <button type="button" class="btn btn-white txt-8" id="delBtn"><i class="fas fa-trash-alt"></i></label></button>
                 <? } ?>
@@ -283,4 +283,18 @@ $res_sub = mysql_query($que_sub);
             }
         });
     }
+    
+    $(document).on('click','#postDeclare, #ansDeclare',function(){
+        if(loginChk()){
+            $("#moneDeclare").modal("show")
+            $("#declareReason").val("");
+            $("#declareReason").focus()
+            $("#mType").val("item");
+            $("#mConType").val($(this).attr("id"));
+            $("#mConSeq").val($(this).data("seq"));
+            $("#type").val("item");
+        }else{
+            loginChkClos()
+        }
+    })
 </script>
