@@ -1,19 +1,22 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
+$type = (@$_REQUEST["userEmail"] == "")? "":"kakao";
+$readonly = (@$_REQUEST["userEmail"] == "")? "":"readonly";
 ?>
 <form id="joinFrm">
+    <input type="hidden" name="type" value="<?=$type?>">
     <div class="container-fluid h-95">
         <div class="contents-col col joinBox py-5 mt-5">
             <div class="row j-c w-100 my-4" id="joinLogo"></div>
             <div class="row j-c w-100 pt-5 mb-4">
                 <div class="joinTbl py-3 px-5">
                     <div class="joinDiv"><i class="fas fa-user"></i><input type="text" class="joinInput t-navy noBorder" id="nickName" name="nickName" placeholder="닉네임"><input type="button" class="btn btn-sm btn-secondary" id="nickChkBtn" value="중복확인"></div>
-                    <div class="joinDiv"><i class="fas fa-user"></i><input type="text" class="joinInput t-navy noBorder" id="userName" name="userName" placeholder="성명"></div>
+                    <div class="joinDiv"><i class="fas fa-user"></i><input type="text" class="joinInput t-navy noBorder" id="userName" name="userName" placeholder="성명" value="<?=@$_REQUEST['userName']?>" <?=$readonly?>></div>
                     <div class="joinDiv">
                         <div class="joinMailDiv">
                             <i class="fas fa-envelope"></i>
-                            <input type="text" class="joinInput t-navy noBorder" id="eMail" name="eMail" placeholder="이메일" data-toggle="tooltip"  data-placement="bottom" title="메일 인증 후 가입이 완료됩니다.">
+                            <input type="text" class="joinInput t-navy noBorder" id="eMail" name="eMail" value="<?=@$_REQUEST['userEmail']?>" <?=$readonly?> placeholder="이메일" data-toggle="tooltip"  data-placement="bottom" title="메일 인증 후 가입이 완료됩니다." $readonly>
                         </div>
                     </div>
                     <div class="joinDiv"><i class="fas fa-unlock"></i><input type="password" class="joinInput t-navy noBorder" id="loginPW" name="loginPW" placeholder="비밀번호" data-toggle="tooltip"  data-placement="bottom" title="비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요."><i class="far fa-eye eyeI"></i></div><!--<i class="far fa-eye-slash eyeI"></i>-->
@@ -59,7 +62,11 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
 <!-- /.container-fluid -->
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <script>
-
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // 기본 동작(폼 제출) 방지
+    }
+});
 $(function() {    
     $('#phoneNum').mask('000-0000-0000');
 
@@ -109,16 +116,18 @@ $(function() {
     // focusout 이벤트: 툴팁 숨기기
     tooltipTrigger.addEventListener('focusout', () => tooltip.hide());
     /* 메일 인증 안내 */
-    const tooltipMailrigger = document.querySelector('#eMail');
-    const tooltipMail = new bootstrap.Tooltip(tooltipMailrigger, {
-        trigger: 'manual' // 수동으로 제어
-    });
+    <?if(@$_REQUEST["userEmail"] == ""){?>
+        const tooltipMailrigger = document.querySelector('#eMail');
+        const tooltipMail = new bootstrap.Tooltip(tooltipMailrigger, {
+            trigger: 'manual' // 수동으로 제어
+        });
 
-    // focusin 이벤트: 툴팁 표시
-    tooltipMailrigger.addEventListener('focusin', () => tooltipMail.show());
+        // focusin 이벤트: 툴팁 표시
+        tooltipMailrigger.addEventListener('focusin', () => tooltipMail.show());
 
-    // focusout 이벤트: 툴팁 숨기기
-    tooltipMailrigger.addEventListener('focusout', () => tooltipMail.hide());
+        // focusout 이벤트: 툴팁 숨기기
+        tooltipMailrigger.addEventListener('focusout', () => tooltipMail.hide());
+    <?}?>
 });
     $(document).on("input","#loginPW",function(){
         var user_pass = $("#loginPW").val();
@@ -236,7 +245,12 @@ $(function() {
             type: 'post',
             success : function(val){
                 if(val == "joinDone"){
-                    joinLogin();
+                    <?if(@$_REQUEST["userEmail"] == ""){?>
+                        joinLogin();
+                    <?}else{?>
+                        pAlert("error","가입성공","로그인이 활성화되었습니다.",true);
+                        location.href="login.php";
+                    <?}?>
                 }else{
                     pAlert("error","가입실패","이미 가입된 이메일입니다.",true);
                     $("#eMail").val("");

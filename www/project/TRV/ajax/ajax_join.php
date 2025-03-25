@@ -7,6 +7,7 @@ $que = "SELECT * FROM TjoinTbl where nickName = '".$_REQUEST['nickName']."'";
 $res = mysql_query($que);
 $cnt = mysql_num_rows($res);
 
+if($_REQUEST['type'] != ""){$appendQue = " , joinAgreeChk = '1'";}
 if($cnt > 0){
     echo "joinFail";
 }else{
@@ -19,6 +20,7 @@ if($cnt > 0){
         userPhone = '".str_replace("-","",$_REQUEST['phoneNum'])."',
         userCountry = '".$_REQUEST['country']."',
         joinDateTime = '".date("Y-m-d H:i:s")."'
+        $appendQue
     ";
     mysql_query($que);
     $thisSeq = mysql_insert_id();

@@ -13,7 +13,7 @@ $rootPath =  str_repeat($rootPath,count($documentPath)-1);
 $showFooter = false;
 //로그인 여부 체크
 $login="no";
-if($_SESSION['loginNum'] != 0 && $_SESSION['loginYn'] == "Y"){
+if(@$_SESSION['loginNum'] != 0 && $_SESSION['loginYn'] == "Y"){
     $login="yes";
 }
 ?>

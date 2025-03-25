@@ -31,16 +31,31 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
         </tr>
         <tr height="50px">
             <td>
-                <input type="button" class="btn t-navy g-signin2" value="google" data-onsuccess="onSignIn">
-                <input type="button" class="btn t-navy" value="kakaO">
-                <input type="button" class="btn t-navy" value="naver">
+                <!-- <input type="button" class="btn t-navy g-signin2" value="google" data-onsuccess="onSignIn"> -->
+                <input type="button" class="btn t-navy" id="kakaoBtn" value="kakaO">
+                <!-- <input type="button" class="btn t-navy" value="naver"> -->
             </td>
         </tr>
     </table>
 </div>
 <!-- /.container-fluid -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <script>
+    window.Kakao.init("c37359dcd8b254cf080cb84e7c99e927");
+    // 로그인된 토큰 초기화
+    // Kakao.API.request({
+    //     url: "/v1/user/unlink",
+    //     success: function(response) {
+    //         console.log("카카오 계정 연결 해제 완료", response);
+    //     },
+    //     fail: function(error) {
+    //         console.error("연결 해제 실패", error);
+    //     }
+    // });
+
+
     $("#loginBtn").click(function(){
         loginOk("click");
     });
@@ -64,7 +79,8 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
                 type: "POST",
                 data: {
                     id: id,
-                    pw: pw
+                    pw: pw,
+                    type: "login"
                 },
                 success: function(data){
                     if(data == "success" || data == "manager"){
@@ -100,4 +116,70 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
         newwin.moveTo(posx,posy);
         newwin.focus();
     });
+
+    $(document).on("click","#kakaoBtn",function(){
+        kakaoLogin()
+    });
+    function kakaoLogin(){
+        window.Kakao.Auth.login({
+            scope:'profile_nickname, account_email',
+            success:function(authObj){
+                console.log(authObj);
+                window.Kakao.API.request({
+                    url:"/v2/user/me",
+                    success:res=>{
+                        const kakao_account = res.kakao_account;
+                        console.log(kakao_account);
+                        $.ajax({
+                            url: "ajax/ajax_kakao_chk.php",
+                            type: "POST",
+                            data: kakao_account,
+                            success: function(data){
+                               console.log(data);
+                                if(data == "noJoin"){
+                                    // console.log(kakao_account.email,kakao_account.profile.nickname)
+                                    let form = document.createElement("form");
+                                    form.method = "POST";
+                                    form.action = "join.php";
+                                    let input = document.createElement("input");
+                                    input.type = "hidden";
+                                    input.name = "userName";
+                                    input.value = kakao_account.profile.nickname;
+                                    let input2 = document.createElement("input");
+                                    input2.name = "userEmail";
+                                    input2.value = kakao_account.email;
+                                    form.appendChild(input);
+                                    form.appendChild(input2);
+                                    document.body.appendChild(form);
+                                    form.submit();
+                                }else{
+                                    $.ajax({
+                                        url: "ajax/trv_login_ok.php",
+                                        type: "POST",
+                                        data: {
+                                            id: kakao_account.email,
+                                            pw: data,
+                                            type: "kakao"
+                                        },
+                                        success: function(data){
+                                            if(data == "success" || data == "manager"){
+                                                location.href = "trvmain2.php";
+                                            }else if(data == "fail_1"){
+                                                pAlert("error","실패","이메일 인증후 사용가능합니다.",true);
+                                            }else{
+                                                pAlert("error","실패","아이디 또는 비밀번호가 일치하지 않습니다.",true);
+                                                $("#loginId").val("")
+                                                $("#loginPW").val("")
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                })
+
+            }
+        })
+    }
 </script>
