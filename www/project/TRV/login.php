@@ -32,7 +32,8 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
         <tr height="50px">
             <td>
                 <!-- <input type="button" class="btn t-navy g-signin2" value="google" data-onsuccess="onSignIn"> -->
-                <input type="button" class="btn t-navy" id="kakaoBtn" value="kakaO">
+                
+                <button type="button" class="btn t-navy" id="kakaoBtn"><i class="fab fa-kickstarter-k"></i> kakaO</button>
                 <!-- <input type="button" class="btn t-navy" value="naver"> -->
             </td>
         </tr>
