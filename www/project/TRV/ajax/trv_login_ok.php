@@ -12,7 +12,7 @@ if($_REQUEST['id'] == "n06578" && $_REQUEST['pw'] == "1234"){
         $where = " and seq = '".$_REQUEST['pw']."'";
         $que = "select * from TjoinTbl where userId = '".$_REQUEST['id']."'";
     }
-    $que = "select * from TjoinTbl where userId = '".$_REQUEST['id']."'";
+    $que = "select * from TjoinTbl where userId = '".$_REQUEST['id']."' $where";
     $res = mysql_query($que);
     $cnt = mysql_num_rows($res);
     if($cnt > 0 ){
