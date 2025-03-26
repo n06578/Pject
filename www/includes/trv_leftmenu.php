@@ -44,7 +44,7 @@
                         <ul class="small_menu">
                             <li onclick="chkLogin('myHomeChk.php?viewType=home')"><a href="javascript:void(0)">게시물</a></li>
                             <li onclick="chkLogin('myHomeChk.php?viewType=recent')"><a href="javascript:void(0)">최근 본 게시물</a></li>
-                            <li onclick="chkLogin('myHomeChk.php?viewType=save')"><a href="javascript:void(0)">찜한 게시물</a></li>
+                            <li onclick="chkLogin('myHomeChk.php?viewType=heart')"><a href="javascript:void(0)">찜한 게시물</a></li>
                             <li onclick="chkLogin('myHomeChk.php?viewType=cal')"><a href="javascript:void(0)">일정에 추가된 게시물</a></li>
                         </ul>
                     </ul>

@@ -24,8 +24,8 @@ function HomeViewWhere($mode,$user){
         case "recent":
             $que = "select a.* from TuserItem a left join TanotherTbl b on a.seq = b.conSeq where 1=1 and b.joinSeq='".$_SESSION['loginNum']."' and b.type='recent' order by b.addDateTime desc ";
             break;
-        case "save":
-            $que = " and 3=3 ";
+        case "heart":
+            $que = "select a.* from TuserItem a left join TanotherTbl b on a.seq = b.conSeq where 1=1 and b.joinSeq='".$_SESSION['loginNum']."' and b.type='heart' order by b.addDateTime desc ";
             break;
         case "cal":
             $que = " and 4=4 ";
