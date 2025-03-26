@@ -13,7 +13,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
         </div>
         <div class="col-xl-4 col-md-4 mb-2" id="list-card">
             <div class="card border-top-primary shadow h-100">
-                <div class="card-body pb-0 m-3 clicktitle">
+                <div class="card-body pb-0 my-3 clicktitle">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -28,7 +28,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
         </div>
         <div class="col-xl-4 col-md-4 mb-2 d-none" id="info-card">
             <div class="card border-top-primary shadow h-100">
-                <div class="card-body pb-0 m-3 clicktitle">
+                <div class="card-body pb-0 my-1 mx-3 clicktitle">
 					<form id="infoData">
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2 my-2">
@@ -82,24 +82,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                                     </div>
                                 </div>
                                 <div class="card miniCard h-500 py-2 c-pointer">
-                                    <div class="card-body listItem p-2">
-                                        <div class="listItemBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
-                                            <img class="calItemImg" src="../../img/trv/listItem/item1.jpg">
-                                            
-                                            <div class="itemBigView text-right txt-7 d-none">
-                                                크게보기
-                                            </div>
-                                        </div>
-                                        <div class="calItemCon pt-2" title="내용이 아마도 이곳에?내용이 아마도 이곳에?내용이 아마도 이곳에?">
-                                            내용이 아마도 이곳에?내용이 아마도 이곳에?내용이 아마도 이곳에?내용이 아마도 이곳에?
-                                            <div class="calItemWrt text-right txt-6 d-none">
-                                                작성자
-                                            </div>
-                                            <div class="showDetail text-right txt-6 d-none">
-                                                자세히보기
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
 							</div>
 						</div>
@@ -234,7 +217,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                                 data: args.event,
 								dataType : "json",
                                 success: function (data) {
-                                    $("#title").val(data['title']);
+                                $("#title").val(data['title']);
                                     var startDate = data['startDate'];
                                     startDay = startDate.split(" ");
 									$("#startDay").val(startDay[0]);
@@ -253,6 +236,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                                     $("#subTitle").val(data['subTitle']);
 									$("#memo").val(data['memo']);
 									$("#allDay").val(args.event.allDay);
+                                    $(".miniCard").html(data['card']);
                                     $("#list-card").addClass("d-none");
                                     $("#info-card").removeClass("d-none");
                                     // 로딩 표시 제거 후 결과 토스트
