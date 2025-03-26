@@ -22,6 +22,11 @@ if($num_self > 0){
     $selfPresent="";
 }
 
+$que_pro = "select * from TuserprofileFile where joinSeq = '".$_SESSION['loginNum']."'";
+$res_pro = mysql_query($que_pro);
+$cnt_pro = mysql_num_rows($res_pro);
+$row_pro = mysql_fetch_array($res_pro);
+
 if(@$_REQUEST['showType']=="edit"){
 ?>
     <form id="infoFrm">
@@ -32,12 +37,11 @@ if(@$_REQUEST['showType']=="edit"){
                 <td class="w-30" rowspan="5">
                     <div class="card ">
                         <div class="card-body listItem p-2">
-                            <div class="profileBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
-                                <img class="listItemImg" src="../../img/trv/listItem/item1.jpg">
-                                
-                                <div class="itemBigView text-right txt-7 d-none">
-                                    크게보기
-                                </div>
+                            <div class="imgItemBtn profileBox">
+                                <?if($cnt_pro>0){?>
+                                <img class="listItemImg" src="<?=$row_pro['filePath']?>">
+                                <?}?>
+                                <button type="button" class="btn w-100 h-100 proImgChg"><i class="fas fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
@@ -91,11 +95,12 @@ if(@$_REQUEST['showType']=="edit"){
                 <div class="card ">
                     <div class="card-body listItem p-2">
                         <div class="profileBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
-                            <img class="listItemImg" src="../../img/trv/listItem/item1.jpg">
-                            
-                            <div class="itemBigView text-right txt-7 d-none">
-                                크게보기
-                            </div>
+                            <?if($cnt_pro>0){?>
+                                <img class="listItemImg" src="<?=$row_pro['filePath']?>">
+                                <div class="itemBigView text-right txt-7 d-none">
+                                    크게보기
+                                </div>
+                            <?}?>                            
                         </div>
                     </div>
                 </div>

@@ -372,6 +372,18 @@ body {
   right : 0;
 }
 /* 프로필 css*/
+.profileCropper{
+  height: 100%;
+  border: 2px solid #f4f4f4;
+  opacity: 0.9;
+  overflow: hidden;
+  position: relative;
+}
+.proImgChg{
+  z-index: 3 !important;
+  position: absolute;
+  background-color: #00000038;
+}
 .profileBox{
   height: 100%;
   border: 2px solid #f4f4f4;
