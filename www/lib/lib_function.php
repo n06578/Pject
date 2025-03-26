@@ -22,7 +22,7 @@ function HomeViewWhere($mode,$user){
             $Where = " and joinSeq ='".$user."' ";
             break;
         case "recent":
-            $Where = " and 2=2 ";
+            $Where = "  and seq in (select conSeq from TanotherTbl where joinSeq='".$_SESSION['loginNum']."' and type='recent')";
             break;
         case "save":
             $Where = " and 3=3 ";

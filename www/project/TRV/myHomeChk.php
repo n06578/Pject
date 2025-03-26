@@ -1,11 +1,13 @@
 <?
 session_start(); 
 if(!isset($_REQUEST['userNum'])) {
+    //내 게시물 관련
     $_SESSION['goUserNum'] = $_SESSION['loginNum'];
-    $_SESSION['viewType'] = "home";
+    $_SESSION['viewType'] = @$_REQUEST['viewType'];
 }else{
+    // 방문
     $_SESSION['goUserNum'] = $_REQUEST['userNum'];
-    $_SESSION['viewType'] = $_REQUEST['viewType'];
+    $_SESSION['viewType'] = "home";
 }
 ?>
 <script>

@@ -10,6 +10,13 @@ $writeDate = $row_main['writeDate'];
 
 $que_sub = "select * from TuserItemList where itemSeq = '".$mainSeq."'";
 $res_sub = mysql_query($que_sub);
+
+if($row_main['joinSeq'] != $_SESSION['loginNum'] && $_SESSION['loginNum'] !="-"){
+$que_recent ="insert into TanotherTbl set joinSeq ='".$_SESSION['loginNum']."', conSeq = '".$mainSeq."',type = 'recent',addDateTime='".date("Y-m-d H:i:s")."'
+                ON DUPLICATE KEY UPDATE addDateTime='".date("Y-m-d H:i:s")."'";
+mysql_query($que_recent);
+}
+
 ?>
 <div class="main-box item-box h-90">
     <div class="h-100 p-3" id="mainCardDiv">
@@ -74,6 +81,7 @@ $res_sub = mysql_query($que_sub);
     <div class="col dAnsWrite p-2">
         <div class="row mb-2">
             <div class="col text-left">
+                <button type="button" class="btn btn-white txt-8" id="heartBtn"><i class="far fa-heart"></i></i></button>
                 <input type="button" class="btn btn-white txt-8" id="ansAdd" value="일정추가">
             </div>
             <div class="col text-right">
@@ -89,6 +97,7 @@ $res_sub = mysql_query($que_sub);
                     }
                 }
                 ?>
+                
                 <button type="button" class="btn btn-white txt-8" id="likeCnt"><i class="<?=$likeChk?> fa-thumbs-up" ></i></button>
                 <button type="button" class="btn btn-white txt-8" id="hateCnt"><i class="<?=$hateChk?> fa-thumbs-down" ></i></button>
                 <button type="button" class="btn btn-white txt-8" data-seq="<?=$_REQUEST['seq']?>" id="postDeclare"><i class="fas fa-exclamation-triangle" ></i></button>
@@ -297,4 +306,15 @@ $res_sub = mysql_query($que_sub);
             loginChkClos()
         }
     })
+    $(document).on('click','#heartBtn',function(){
+        $(this).find("i").toggleClass("fas far");
+
+        mobiscroll.toast({
+            message: "찜 등록",
+            display: "bottom",
+            color: "gray",
+            closeButton: false
+        });
+    })
+    
 </script>
