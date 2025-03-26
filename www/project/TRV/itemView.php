@@ -88,7 +88,7 @@ mysql_query($que_recent);
                 $heartChk = $cnt_heart > 0 ?"fas":"far";
                 ?>
                 <button type="button" class="btn btn-white txt-8" id="heartBtn"><i class="<?=$heartChk?> fa-heart"></i></i></button>
-                <input type="button" class="btn btn-white txt-8" id="ansAdd" value="일정추가">
+                <input type="button" class="btn btn-white txt-8" id="calBtn" value="일정추가">
             </div>
             <div class="col text-right">
                 <?
@@ -335,6 +335,48 @@ mysql_query($que_recent);
             });
         }else{
             loginChkClos()
+        }
+    })
+    
+    $(document).on('click','#calBtn',function(){
+        if(loginChk()){
+            $(this).find("i").toggle("일정추가 일정제거");
+            $.ajax({
+                url: "ajax/ajax_cal_list.php",
+                type: "POST",
+                data: {
+                    conSeq:"<?=$_REQUEST['seq']?>",
+                    type : 'item'
+                },
+                success: function(data){
+                    $("#calListModal").find("tbody").html(data);
+                    $("#calListModal").find("#itemconSeq").val("<?=$_REQUEST['seq']?>");
+                    $("#calListModal").find("#itemtype").val("calander");
+                    $("#calListModal").modal("show");
+                }
+            });
+        }else{
+            loginChkClos()
+        }
+    })
+    $(document).on('click','#calAddBtn',function(){
+        if ($('.calSeq:checked').length === 0) {
+            pAlert("error","실패","하나 이상의 체크박스를 선택해야 합니다.",true);
+            return false;
+        }else{
+            $("#itemCalFrm").ajaxSubmit({
+                url: 'ajax/itemEdit.php',
+                type: 'post',
+                success : function(val){
+                    $("#calListModal").modal("hide");
+                    mobiscroll.toast({
+                        message: "일정에 추가되었습니다.",
+                        display: "bottom",
+                        color: "gray",
+                        closeButton: false
+                    });
+                }
+            });
         }
     })
     

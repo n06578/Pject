@@ -61,3 +61,12 @@ else if($type == "heart"){
     }
     mysql_query($que_heart);
 }
+else if($type == "calander"){
+    $que_del = "delete from TcalanItemTbl where joinSeq ='".$_SESSION['loginNum']."' and itemSeq = '".$_REQUEST['conSeq']."' and calanSeq not in (".implode(",",$_REQUEST['calSeq']).")";
+    mysql_query($que_del);
+    foreach ($_REQUEST['calSeq'] as $calSeq) {
+        $que ="insert into TcalanItemTbl set joinSeq ='".$_SESSION['loginNum']."', calanSeq = '".$calSeq."',	itemSeq = '".$_REQUEST['conSeq']."',addDateTime	='".date("Y-m-d H:i:s")."'
+                    ON DUPLICATE KEY UPDATE joinSeq = '".$_SESSION['loginNum']."'";
+        mysql_query($que);
+    }
+}

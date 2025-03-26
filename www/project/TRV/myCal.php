@@ -173,7 +173,8 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
     /* 달력 데이터 가져오기 및 클릭 이벤트 활성화 */
     $.ajax({
         type: "GET",
-        url: "ajax/ajax_get_memo.php", // 데이터를 가져올 서버 URL
+        url: "ajax/ajax_cal_list.php", // 데이터를 가져올 서버 URL
+        data:{type:"calander"},
         dataType: "json", // 응답 형식은 JSON
         success: function(data) {
             console.table(data);

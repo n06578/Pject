@@ -7,8 +7,7 @@
         </div>
     </div>
 </div>
-<!-- <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpj9mhqC5Vd2Wn6FXPqEr5crupY0FRKXg&callback=console.debug&libraries=maps,marker&v=beta"></script> -->
- <!-- google 지도 보기 -->
+<!-- google 지도 보기 -->
 <div class="modal " id="mapModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -63,7 +62,35 @@
         </div>
     </div>
 </div>
-
+<!-- 일정 리스트 모달 -->
+<div class="modal " id="calListModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-body _modalBody" ng-switch="invitationStep" style="height: 90vh;">
+                <div class="h-95">
+                    <form id="itemCalFrm">
+                        <input type="hidden" name="conSeq" id="itemconSeq">
+                        <input type="hidden" name="type" id="itemtype">
+                        <table class="table table-border table-hover tx-13">
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                    <td>일정명</td>
+                                    <td>일정시작일</td>
+                                    <td>일정종료일</td>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </form>
+                </div>
+                <div class="text-right">
+                    <input type="button" class="btn btn-sm btn-success" id="calAddBtn" value="일정에 추가">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     $(".modal-open").on("click", function() {
