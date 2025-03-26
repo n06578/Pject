@@ -16,22 +16,22 @@ function getAnsCnt($conSeq,$conType,$likeHate){
 }
 
 function HomeViewWhere($mode,$user){
-    $Where = "";
+    $que = "";
     switch($mode){
         case "home":
-            $Where = " and joinSeq ='".$user."' ";
+            $que = "select * from TuserItem where 1=1 and joinSeq ='".$user."' order by writeDate desc";
             break;
         case "recent":
-            $Where = "  and seq in (select conSeq from TanotherTbl where joinSeq='".$_SESSION['loginNum']."' and type='recent')";
+            $que = "select a.* from TuserItem a left join TanotherTbl b on a.seq = b.conSeq where 1=1 and b.joinSeq='".$_SESSION['loginNum']."' and b.type='recent' order by b.addDateTime desc ";
             break;
         case "save":
-            $Where = " and 3=3 ";
+            $que = " and 3=3 ";
             break;
         case "cal":
-            $Where = " and 4=4 ";
+            $que = " and 4=4 ";
             break;
     }
-    return $Where;
+    return $que;
 
 }
 ?>

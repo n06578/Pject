@@ -12,8 +12,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                 <hr class="hr-navy">
                 <div class="row mt-4">
                     <?
-                    $Where = HomeViewWhere($_SESSION['viewType'],$_SESSION['goUserNum']);
-                    $que_item = "select * from TuserItem where 1=1 $Where order by writeDate desc";
+                    $que_item = HomeViewWhere($_SESSION['viewType'],$_SESSION['goUserNum']);
                     $res_item = mysql_query($que_item);
                     $num_item = mysql_num_rows($res_item);
                     while($row_item = mysql_fetch_array($res_item)) {
