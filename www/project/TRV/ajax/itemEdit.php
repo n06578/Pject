@@ -48,3 +48,16 @@ else if($type == "likeHate"){
     $que = "delete from TitemAnswerTbl where seq = '".$_REQUEST['conSeq']."'";
     mysql_query($que);
 }
+else if($type == "heart"){
+    $que_chk = "select * from TanotherTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$_REQUEST['conSeq']."' and type='heart'";
+    $res_chk = mysql_query($que_chk);
+    $cnt_chk = mysql_num_rows($res_chk);
+    if($cnt_chk > 0 ){
+        $que_heart = "delete from TanotherTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$_REQUEST['conSeq']."' and type='heart'";
+        echo "del";
+    }else{
+        $que_heart ="insert into TanotherTbl set joinSeq ='".$_SESSION['loginNum']."', conSeq = '".$_REQUEST['conSeq']."',type = 'heart',addDateTime='".date("Y-m-d H:i:s")."'";
+        echo "add";
+    }
+    mysql_query($que_heart);
+}

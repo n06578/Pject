@@ -81,7 +81,13 @@ mysql_query($que_recent);
     <div class="col dAnsWrite p-2">
         <div class="row mb-2">
             <div class="col text-left">
-                <button type="button" class="btn btn-white txt-8" id="heartBtn"><i class="far fa-heart"></i></i></button>
+                <?
+                $que_heart = "select * from TanotherTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$mainSeq."' and type='heart'";
+                $res_heart = mysql_query($que_heart);
+                $cnt_heart = mysql_num_rows($res_heart);
+                $heartChk = $cnt_heart > 0 ?"fas":"far";
+                ?>
+                <button type="button" class="btn btn-white txt-8" id="heartBtn"><i class="<?=$heartChk?> fa-heart"></i></i></button>
                 <input type="button" class="btn btn-white txt-8" id="ansAdd" value="일정추가">
             </div>
             <div class="col text-right">
@@ -307,14 +313,29 @@ mysql_query($que_recent);
         }
     })
     $(document).on('click','#heartBtn',function(){
-        $(this).find("i").toggleClass("fas far");
-
-        mobiscroll.toast({
-            message: "찜 등록",
-            display: "bottom",
-            color: "gray",
-            closeButton: false
-        });
+        if(loginChk()){
+            $(this).find("i").toggleClass("fas far");
+            $.ajax({
+                url: "ajax/itemEdit.php",
+                type: "POST",
+                data: {
+                    conSeq : "<?=$_REQUEST['seq']?>",
+                    type : 'heart'
+                },
+                success: function(data){
+                    var message= "찜 등록";
+                    if(data == "del"){message= "찜 삭제";}
+                    mobiscroll.toast({
+                        message: message,
+                        display: "bottom",
+                        color: "gray",
+                        closeButton: false
+                    });
+                }
+            });
+        }else{
+            loginChkClos()
+        }
     })
     
 </script>
