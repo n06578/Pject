@@ -28,8 +28,19 @@ function HomeViewWhere($mode,$user){
             $que = "select a.* from TuserItem a left join TanotherTbl b on a.seq = b.conSeq where 1=1 and b.joinSeq='".$_SESSION['loginNum']."' and b.type='heart' order by b.addDateTime desc ";
             break;
         case "cal":
-            $que = " and 4=4 ";
-            break;
+
+        $que ="select a.itemSeq, b.* from (
+                    select itemSeq, 
+                        max(joinSeq) as joinSeq, 
+                        max(calanSeq) as calanSeq, 
+                        max(addDateTime) as addDateTime
+                    from TcalanItemTbl
+                    where joinSeq = '".$_SESSION['loginNum']."'
+                    group by itemSeq
+                ) a 
+            left join TuserItem b on a.itemSeq = b.seq order by a.addDateTime desc ";
+        break;
+            
     }
     return $que;
 
