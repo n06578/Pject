@@ -191,9 +191,14 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                     color: event.color || '#0078D7'  // color가 없으면 빈 문자열로 처리
                     
                 }));
+                var i = 0;
                 data.map(event => {
                     $("#dataTable").append("<tr onclick='infoDataTr(this)' data-date="+event.start.substr(0, 10)+" data-info='Event 1'>"+"<td>"+event.start.substr(0, 10)+"</td>"+"<td>"+event.end.substr(0, 10)+"</td>"+"<td>"+event.title+"</td>"+"</tr>");
+                    i++;
                 });
+                if(i == 0){
+                    $("#dataTable").append("<tr><td class='text-center' colspan=3>등록된 일정이 없습니다.</td></tr>")
+                }
                 $("#dataTable").append("</tbody>");
 
                 
@@ -240,7 +245,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                                         data['color'] = "#0078D7";
                                     }
 									$("#id").val(args.event.id);
-                                    $("#seq").val(args.event.seq);
+                                    $("#seq").val(data['seq']);
                                     $("#endDay").val(endDay[0]);
                                     $("#endTime").val(endDay[1]);
 									$("#color").val(data['color']);
