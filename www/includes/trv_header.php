@@ -62,7 +62,7 @@ if( ($baseName[0] == "myCal" || $baseName[0] == "myHome") && $_SESSION['loginYn'
     exit;
 }
 // 메인과 카테를 벗어날 경우 session 초기화
-if(($baseName[0] != "trvmain2" && $baseName[0] != "mainCate") || !isset($_REQUEST['searchCountry'])){
+if(($baseName[0] != "trvmain2" && $baseName[0] != "mainCate" && $baseName[0] != "cateItemView") || !isset($_SESSION['searchCountry'])){
     $_SESSION['searchCountry'] = "";
 }
 ?>

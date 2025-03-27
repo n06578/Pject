@@ -42,7 +42,7 @@ if (in_array($fileExt, $allowedExts)) {
         if ($fileSize <= 5 * 1024 * 1024) {
             // 파일 이름을 안전하게 변경 (중복을 피하기 위해 랜덤하게 처리)
             $newFileName = $_SESSION['loginNum'].date("YmdHis") . '.' . $fileExt;
-            $uploadDir = '../itemImgFile/user_'.$_SESSION['loginNum'];  // 이 디렉토리가 존재하고 쓰기 권한이 있어야 합니다.
+            $uploadDir = '../itemImgFile/user_'.$_SESSION['loginNum']."/profile";  // 이 디렉토리가 존재하고 쓰기 권한이 있어야 합니다.
             $fileDestination = $uploadDir ."/" . $newFileName;
 
             if (!is_dir($uploadDir)) {

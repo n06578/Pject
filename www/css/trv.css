@@ -270,7 +270,28 @@ body {
   right: 10px;
   cursor: pointer;
 }
-
+/* 카테고리 디자인 */
+.cateBox {
+  margin : 0 0px 20px 0px;
+  text-align: center;
+  min-height: 180px;
+}
+.merged-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom : 20px;
+  height: 100%; /* 전체 높이 차지 */
+}
+.cateBtn{border:none;}
+#cateBtn1{background-color:#d6e8f7; color:#cb962e;}
+#cateBtn1:hover{border : 1px solid #cb962e;}
+#cateBtn2,#cateBtn6,#cateBtn10{background-color:#76a8ff; color:#e7e7e7;}
+#cateBtn2:hover, #cateBtn6:hover, #cateBtn10:hover { border : 1px solid #e7e7e7; }
+#cateBtn3,#cateBtn7,#cateBtn8{background-color:#b3cfff; color:#5a4dbd;}
+#cateBtn3:hover, #cateBtn7:hover, #cateBtn8:hover { border : 1px solid #5a4dbd; }
+#cateBtn4,#cateBtn5,#cateBtn9{background-color:#e6e3ff; color:#755777;}
+#cateBtn4:hover, #cateBtn5:hover, #cateBtn9:hover { border : 1px solid #755777; }
 /* 리스트 디자인 */
 .listItemCard{
   border-radius : 0px !important;
@@ -740,6 +761,7 @@ body {
 .t-navy{color:#2e266d !important;}
 .lh-15{line-height: 15px;}
 .lh-20{line-height: 20px;}
+.lh-24{line-height: 24px;}
 .lh-30{line-height: 30px;}
 .lh-40{line-height: 40px;}
 .lh-50{line-height: 50px;}
@@ -961,4 +983,3 @@ gmp-map {
   position: sticky;
   z-index: 2;
 }
-
