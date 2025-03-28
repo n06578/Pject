@@ -8,6 +8,13 @@
   }
 }
 
+@media (min-width: 800px) and (max-width: 1199px) { /* 태블릿 */
+  .main-box, .item-box {
+    padding: 0px 20px;
+  }
+}
+
+
 @media (min-width: 992px) and (max-width: 1199px) {
   .main-box, .item-box{
     padding : 0px 10px;
