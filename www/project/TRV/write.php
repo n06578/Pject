@@ -25,7 +25,14 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                     </div>
                     <select class="form-select" name="select[]">
                         <option value="음식">음식</option>
+                        <option value="관광">관광</option>
+                        <option value="쇼핑">쇼핑</option>
+                        <option value="패션">패션</option>
+                        <option value="문화">문화</option>
+                        <option value="휴양">휴양</option>
+                        <option value="교통">교통</option>
                         <option value="숙소">숙소</option>
+                        <option value="이색여행">이색여행</option>
                     </select>
                     <div class="x-scroll my-2">
                         <div class="imgItemBtn">
@@ -53,7 +60,14 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
             </div>
             <select class="form-select" name="select[]">
                 <option value="음식">음식</option>
+                <option value="관광">관광</option>
+                <option value="쇼핑">쇼핑</option>
+                <option value="패션">패션</option>
+                <option value="문화">문화</option>
+                <option value="휴양">휴양</option>
+                <option value="교통">교통</option>
                 <option value="숙소">숙소</option>
+                <option value="이색여행">이색여행</option>
             </select>
             <div class="x-scroll my-2">
                 <!-- <div class="imgItemTest"></div> -->
