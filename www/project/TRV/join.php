@@ -5,7 +5,7 @@ $type = (@$_REQUEST["userEmail"] == "")? "":"kakao";
 $readonly = (@$_REQUEST["userEmail"] == "")? "":"readonly";
 ?>
 <form id="joinFrm">
-    <input type="hidden" name="type" value="<?=$type?>">
+    <input type="hidden" name="emailType" value="<?=$type?>">
     <div class="container-fluid h-95">
         <div class="contents-col col joinBox py-5 mt-5">
             <div class="row j-c w-100 my-4" id="joinLogo"></div>
