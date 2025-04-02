@@ -23,7 +23,7 @@ if($cnt < 1){
     $res_send = mysql_query($que_send);
     $row_send = mysql_fetch_array($res_send);
     if($_REQUEST['conType']=="postDeclare"){
-        mailSend("신고가 접수되었습니다.","관리자",$row_send['userName']."님이 해당 게시물을 신고하였습니다.<br>버튼을 눌러 게시물을 확인해주세요.","n06578@gmail.com","declare,".$_REQUEST['Type'].",".$_REQUEST['conType']  ,"&seq=".$_REQUEST['conSeq']);
+        mailSend("신고가 접수되었습니다.","관리자",$row_send['userName']."(".$row_send['nickName'].")님이 해당 게시물을 [".$_REQUEST['declareReason']."] 사유로 신고하였습니다. 신고하였습니다.<br>버튼을 눌러 게시물을 확인해주세요.","n06578@gmail.com","declare,".$_REQUEST['Type'].",".$_REQUEST['conType']  ,"&seq=".$_REQUEST['conSeq']);
     }else{
         if($_REQUEST['Type']=="item"){
             $que_ans = "select * from TitemAnswerTbl where seq = '".$_REQUEST['conSeq']."'";

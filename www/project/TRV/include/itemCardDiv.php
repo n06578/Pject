@@ -5,6 +5,9 @@ header.php에서 col-xl-4로 설정되어있음
 -->
 <?$cardItemCol = @$cardItemCol =="" ? "col-xl-4":$cardItemCol;?>
 <div class="<?=$cardItemCol?> col-md-6 mb-4">
+    <div class="showChkBox text-right" title="<?=$mainSeq?>">
+        <input type="checkbox" class="form-check-input" id="checkItem<?=$mainSeq?>" name="checkItem[]" value="<?=$mainSeq?>">
+    </div>
     <div class="card h-500 py-2 c-pointer listItemCard">
         <div class="card-body listItem p-2">
             <?
@@ -13,7 +16,7 @@ header.php에서 col-xl-4로 설정되어있음
                 $contentCss= "listItemCon ";
             ?>
             <div class="listItemBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
-                <img class="listItemImg" src="<?=$src?>">
+                <img class="listItemImg" src="<?=$srcItem?>">
                 
                 <div class="itemBigView text-right tx-10">
                     크게보기

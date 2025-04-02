@@ -404,6 +404,16 @@ body {
   align-items: center;
   z-index: 10; /* 겹침 우선순위 설정 */
 }
+.showChkBox{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding: 0px 7px;
+  margin: 0px 0px 0px 30px;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
 
 /* 일정 css */
 .bottom-div{
@@ -799,7 +809,13 @@ body {
 .btn-white{background-color: #ffffff; border-color: #eeeeee;}
 .btn-white:hover{background-color: #f5f5f5; border-color: #2e266d26;    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
 .btn-navy{background-color: #2e266d !important; color:#ffffff !important;}
-.btn-navy:hover{background-color: #2b2363 !important;  border-color: #ffffff80 !important; color:#d6d6d6 !important; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
+.btn-navy:hover{background-color: #2b2363 !important;  border-color: #fff !important; color:#fff !important; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
+.btn-sky{background-color: #9ad1ff !important; color:#ffffff !important;}
+.btn-sky:hover{background-color: #9ad1ff !important;  border-color: #9ad1ff !important; color:#fff !important; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
+.btn-pink{background-color: #ffa7a7 !important; color:#ffffff !important;}
+.btn-pink:hover{background-color: #ff9c9c !important;  border-color: #ff9c9c !important; color:#fff !important; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
+.btn-gray{background-color: #aaaaaa !important; color:#ffffff !important;}
+.btn-gray:hover{background-color: #8d8d8d !important;  border-color: #8d8d8d !important; color:#fff !important; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;}
 .hr-navy{border-color: #2e266d42}
 .bg-white{background-color: #ffffff;}
 
@@ -834,7 +850,7 @@ body {
 .fw-700{font-weight: 700;}
 .fw-800{font-weight: 800;}
 .fw-900{font-weight: 900;}
-
+.f-left{float:left !important;}
 .f-right{float:right !important;}
 .c-pointer{cursor: pointer;}
 

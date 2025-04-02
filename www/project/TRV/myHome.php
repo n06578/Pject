@@ -1,5 +1,15 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
+
+$thisPage = $_SESSION['homeType'] == "myPost" ?  $_SESSION['viewType']:"";
+$PageName = "";
+switch(@$thisPage) {
+    case "home": $PageName = "게시물"; break;
+    case "recent": $PageName = "최근 본 게시물"; break;
+    case "cal": $PageName = "일정에 추가된 게시물"; break;
+    case "heart": $PageName = "찜한 게시물"; break;
+    default: $PageName = "";
+}
 ?>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" crossorigin="anonymous">
 <link rel="stylesheet" href="../../../css/main/cropper.css">
@@ -12,7 +22,16 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                     <? include "include/showInfo.php"; ?>
                 </div>
                 <hr class="hr-navy">
-                <div class="row mt-4">
+                <?if(@$_SESSION['homeType'] == "myPost"){?>
+                <div class="mt-4 text-right">
+                    <text class="f-left fw-600 tx-13"><?=$PageName ?></text>
+                    <?if($thisPage!="home"){?><input type="button" class="btn btn-sm btn-navy" onclick="location.href='myHomeChk.php?viewType=home'" value="게시물"><?}?>
+                    <?if($thisPage!="recent"){?><input type="button" class="btn btn-sm btn-sky ml-1" onclick="location.href='myHomeChk.php?viewType=recent'" value="최근본"><?}?>
+                    <?if($thisPage!="cal"){?><input type="button" class="btn btn-sm btn-gray ml-1" onclick="location.href='myHomeChk.php?viewType=cal'" value="일정"><?}?>
+                    <?if($thisPage!="heart"){?><input type="button" class="btn btn-sm btn-pink ml-1" onclick="location.href='myHomeChk.php?viewType=heart'" value="찜"><?}?>
+                </div>
+                <?}?>
+                <div class="row mt-1">
                     <?
                     $que_item = HomeViewWhere($_SESSION['viewType'],$_SESSION['goUserNum']);
                     $res_item = mysql_query($que_item);
@@ -30,7 +49,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                         $row_file = mysql_fetch_array($res_file);
                         
                         /* include에서 사용하는 변수 */
-                        $srcItem = ($cnt_file > 0)? "../".$row_file['filePath']:"";
+                        $srcItem = ($cnt_file > 0)? $row_file['filePath']:"";
                         $contentsItem = (@$row_sub['itemComment'] !="") ? nl2br($row_sub['itemComment']) : "";
                         $nameItem = getName($row_item['joinSeq']);
 
