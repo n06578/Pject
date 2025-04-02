@@ -8,8 +8,11 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
         <table class="table noTable">
             <tr>
                 <td class="w-15 text-blg text-right t-navy tx-17 pt-3" id="tripArea">문의사항</td>
-                <td class="w-75"><input type="text" class="form-control noBorder mr-4"></td>
+                <td class=""><input type="text" class="form-control noBorder mr-4" id="searchBar" placeholder="제목을 검색하세요." value="<?=@$_REQUEST['searchBar']?>"></td>
                 <td class="w-10"><input type="button" class="btn btn-navy w-100 mr-4 text-blg t-white" id="search" value="검색"></td>
+                <?if(@$_REQUEST['searchBar'] != ""){?>
+                    <td class="w-10"><input type="button" class="btn btn-warning w-100 mr-4 text-blg t-white" id="searchClear" value="초기화"></td>
+                <?}?>
             </tr>
         </table>
         <hr class="hr-navy">
@@ -17,10 +20,13 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
             <?
             $checked = "";
             $where = "";
+            if(@$_REQUEST['searchBar'] != ""){
+                $where = " where a.writeTitle like '%".$_REQUEST['searchBar']."%' ";
+            }
             if($login == "yes"){
                 if(@$_REQUEST['ansOk'] == "on"){
                     $checked = "checked";
-                    $where =" where a.joinSeq = '".$_SESSION['loginNum']."' ";
+                    $where =" , a.joinSeq = '".$_SESSION['loginNum']."' ";
                 }
             ?>
             <form id="sForm">
@@ -36,12 +42,14 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                         <td>공지사항 제목</td>
                         <td class="w-15">등록일시</td>
                         <td class="w-15">작성자</td>
-                        <td class="w-15">답변 여부</td>
                     </tr>
                 </thead>
                 <tbody>
                     <?
-                    $que_mone = "select a.*,b.nickName from TmoneTbl a left join TjoinTbl b on a.joinSeq = b.seq $where order by writeDateTime desc";
+                    $que_mone = "select a.*,b.nickName from TmoneTbl a 
+                                    left join TjoinTbl b on a.joinSeq = b.seq
+                                    left join TmoneAnswerTbl c on a.seq = c.moneSeq
+                                    where ifnull(c.seq,0) = 0 $where order by writeDateTime desc";
                     $res_mone = mysql_query($que_mone);
                     $cnt_mone = mysql_num_rows($res_mone);
                     $i = 1;
@@ -75,6 +83,18 @@ if($_SESSION['loginNum'] != '-' && $_SESSION['loginYn'] == "Y"){?>
     $(document).on("change","#myUpload",function(){
         $("#sForm").submit();
     })
+
+    $(document).on("click","#search",function(){
+        if($("#searchBar").val() == ""){
+            pAlert("error","오류","검색어를 입력하세요.",true);
+        }else{
+            location.href='monE.php?searchBar='+$("#searchBar").val();
+        }
+    });
+    
+    $(document).on("click","#searchClear",function(){
+        location.href='monE.php';
+    });
 
     $(document).on("click","#monePwBtn",function(){
         if($("#monePWInput").val() == ""){

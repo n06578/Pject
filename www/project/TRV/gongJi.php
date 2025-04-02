@@ -7,8 +7,11 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
         <table class="table noTable">
             <tr>
                 <td class="w-15 text-blg text-right t-navy tx-17 pt-3" id="tripArea">공지사항</td>
-                <td><input type="text" class="form-control noBorder mr-4"></td>
+                <td class="w-75"><input type="text" class="form-control noBorder mr-4" id="searchBar" placeholder="제목을 검색하세요." value="<?=@$_REQUEST['searchBar']?>"></td>
                 <td class="w-10"><input type="button" class="btn btn-navy w-100 mr-4 text-blg t-white" id="search" value="검색"></td>
+                <?if(@$_REQUEST['searchBar'] != ""){?>
+                    <td class="w-10"><input type="button" class="btn btn-warning w-100 mr-4 text-blg t-white" id="searchClear" value="초기화"></td>
+                <?}?>
             </tr>
         </table>
         <hr class="hr-navy">
@@ -24,7 +27,11 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                 </thead>
                 <tbody>
                     <?
-                    $que_gongji = "select * from TgongjiTbl order by writeDateTime desc";
+                    $where ="";
+                    if(@$_REQUEST['searchBar'] != ""){
+                        $where = " where writeTitle like '%".$_REQUEST['searchBar']."%' ";
+                    }
+                    $que_gongji = "select * from TgongjiTbl $where order by writeDateTime desc";
                     $res_gongji = mysql_query($que_gongji);
                     $cnt_gongji = mysql_num_rows($res_gongji);
                     $i = 1;
@@ -54,4 +61,17 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 <?}?>
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <script>
+    
+    $(document).on("click","#search",function(){
+        if($("#searchBar").val() == ""){
+            pAlert("error","오류","검색어를 입력하세요.",true);
+        }else{
+            location.href='gongji.php?searchBar='+$("#searchBar").val();
+        }
+    });
+
+    $(document).on("click","#searchClear",function(){
+        location.href='gongji.php';
+    });
+
 </script>

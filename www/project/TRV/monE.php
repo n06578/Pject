@@ -8,8 +8,11 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
         <table class="table noTable">
             <tr>
                 <td class="w-15 text-blg text-right t-navy tx-17 pt-3" id="tripArea">문의사항</td>
-                <td class="w-75"><input type="text" class="form-control noBorder mr-4"></td>
+                <td class="w-75"><input type="text" class="form-control noBorder mr-4" id="searchBar" placeholder="제목을 검색하세요." value="<?=@$_REQUEST['searchBar']?>"></td>
                 <td class="w-10"><input type="button" class="btn btn-navy w-100 mr-4 text-blg t-white" id="search" value="검색"></td>
+                <?if(@$_REQUEST['searchBar'] != ""){?>
+                    <td class="w-10"><input type="button" class="btn btn-warning w-100 mr-4 text-blg t-white" id="searchClear" value="초기화"></td>
+                <?}?>
             </tr>
         </table>
         <hr class="hr-navy">
@@ -17,6 +20,9 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
             <?
             $checked = "";
             $where = "";
+            if(@$_REQUEST['searchBar'] != ""){
+                $where = " where a.writeTitle like '%".$_REQUEST['searchBar']."%' ";
+            }
             if($login == "yes"){
                 if(@$_REQUEST['myUpload'] == "on"){
                     $checked = "checked";
@@ -33,15 +39,15 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                 <thead>
                     <tr class="text-center">
                         <td class="w-5">No.</td>
-                        <td>공지사항 제목</td>
+                        <td>문의사항 제목</td>
                         <td class="w-15">등록일시</td>
                         <td class="w-15">작성자</td>
-                        <td class="w-15">답변 여부</td>
+                        <td class="w-20">답변 여부</td>
                     </tr>
                 </thead>
                 <tbody>
                     <?
-                    $que_mone = "select a.*,b.nickName,ifnull(c.seq,0) as ansSeq from TmoneTbl a 
+                    $que_mone = "select a.*,b.nickName,ifnull(c.answerDateTime,0) as answerDateTime from TmoneTbl a 
                                     left join TjoinTbl b on a.joinSeq = b.seq
                                     left join TmoneAnswerTbl c on a.seq = c.moneSeq
                                     $where order by writeDateTime desc";
@@ -49,7 +55,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
                     $cnt_mone = mysql_num_rows($res_mone);
                     $i = 1;
                     while($row_mone = mysql_fetch_array($res_mone)){
-                        $ansChk = $row_mone['ansSeq'] > 0 ? "<b>답변완료</b>":"확인중";
+                        $ansChk = $row_mone['answerDateTime'] > 0 ? "<b>".substr($row_mone['answerDateTime'],0,16)."</b>":"확인중";
                     ?>
                     <tr class="c-pointer" onclick="loginChk('<?=$row_mone['seq']?>','<?=$row_mone['joinSeq']?>')">
                         <td class="text-center"><?=$i?></td>
@@ -81,6 +87,18 @@ if($_SESSION['loginNum'] != '-' && $_SESSION['loginYn'] == "Y"){?>
         $("#sForm").submit();
     })
 
+    $(document).on("click","#search",function(){
+        if($("#searchBar").val() == ""){
+            pAlert("error","오류","검색어를 입력하세요.",true);
+        }else{
+            location.href='monE.php?searchBar='+$("#searchBar").val();
+        }
+    });
+
+    $(document).on("click","#searchClear",function(){
+        location.href='monE.php';
+    });
+
     $(document).on("click","#monePwBtn",function(){
         if($("#monePWInput").val() == ""){
             pAlert("error","오류","비밀번호를 입력하세요.",true);
@@ -109,7 +127,7 @@ if($_SESSION['loginNum'] != '-' && $_SESSION['loginYn'] == "Y"){?>
             $("#monePWInput").val("");
             $("#monePWModal").modal("show");
         }else{
-            if(writer == '<?=$_SESSION['loginNum']?>' || '<?=$_SESSION['loginNum']?>' == '0'){
+            if(writer != '<?=$_SESSION['loginNum']?>' || '<?=$_SESSION['loginNum']?>' == '0'){
                 pAlert("error","경고","작성자만 열람가능합니다.",true);
             }else{
                 location.href='moneView.php?seq='+seq;

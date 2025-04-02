@@ -40,7 +40,7 @@
             </div>
             <div class="modal-body _modalBody d-flex" ng-switch="invitationStep">
                 <input type="hidden" id="mSeq">
-                <input type="password" class="form-control" id="monePWInput">
+                <input type="password" class="form-control mr-1" id="monePWInput">
                 <input type="button" class="btn btn-sm btn-navy txt-white" id="monePwBtn" value="확인">
             </div>
         </div>
