@@ -30,23 +30,7 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
                 <div class="mx-5 col text-left mb-1 txt-8"> <?=getName($row_con['joinSeq'])?> [ 작성일시 <?=$row_con['writeDateTime']?> ]</div>
                 <div class="mx-5 col text-right mb-1 txt-8"> 
                     
-                    <?
-                        $que_lh = "select * from TlikeHateTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$_REQUEST['seq']."' and conType = 'postCommu'";
-                        $res_lh = mysql_query($que_lh);
-                        $cnt_lh = mysql_num_rows($res_lh);
-                        $likeChk = $hateChk = "far";
-                        if($cnt_lh>0){
-                            $row_lh  = mysql_fetch_array($res_lh);
-                            $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
-                        }
-                    ?>
-                    <label class="c-pointer mr-1 getCnt" id="LikeCnt" data-seq="<?=$_REQUEST['seq']?>" title="<?=getAnsCnt($_REQUEST['seq'],"postCommu","like")?>"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label>
-                    <label class="c-pointer mr-1 getCnt" id="LikeCnt" data-seq="<?=$_REQUEST['seq']?>" title="<?=getAnsCnt($_REQUEST['seq'],"postCommu","hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
-                    <?if($commu_writer == "yes"){?>
-                        <label class="c-pointer postDelete"><i class="fas fa-trash-alt"></i></label>
-                    <?}else{?>
-                        <label class="c-pointer" id="postDeclare" data-seq="<?=$_REQUEST['seq']?>"><i class="fas fa-exclamation-triangle"></i></label>
-                    <?}?>
+                    
                 </div>
             </div>
             <div class="card mx-5 h-80 p-3 txt-9"> <?=$row_con['writeContents']?> </div>
@@ -85,12 +69,36 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
             </div>
         <?}?>
     </div>
-    <div class="col ansWrite">
-        <div class="row p-3 pb-0">
-            <textarea class="form-control col-9 w-100 mb-2" id="ansText"></textarea>
-            <input type="button" class="btn btn-white col-1 f-right txt-8" id="ansAdd" value="등록">
+    
+    <div class="col dAnsWrite p-2">
+        <div class="row mb-2">
+            <div class="col text-right">
+            <?
+                    $que_lh = "select * from TlikeHateTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$_REQUEST['seq']."' and conType = 'postCommu'";
+                    $res_lh = mysql_query($que_lh);
+                    $cnt_lh = mysql_num_rows($res_lh);
+                    $likeChk = $hateChk = "far";
+                    if($cnt_lh>0){
+                        $row_lh  = mysql_fetch_array($res_lh);
+                        $row_lh['likeHate'] == "like"?  $likeChk = "fas": $hateChk = "fas";
+                    }
+                ?>
+                <label class="c-pointer mr-1 btn btn-white txt-8 getCnt" id="LikeCnt" data-seq="<?=$_REQUEST['seq']?>" title="<?=getAnsCnt($_REQUEST['seq'],"postCommu","like")?>"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label>
+                <label class="c-pointer mr-1 btn btn-white txt-8 getCnt" id="LikeCnt" data-seq="<?=$_REQUEST['seq']?>" title="<?=getAnsCnt($_REQUEST['seq'],"postCommu","hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
+                <?if($commu_writer == "yes"){?>
+                    <label class="c-pointer mr-1 btn btn-white txt-8 postDelete"><i class="fas fa-trash-alt"></i></label>
+                <?}else{?>
+                    <label class="c-pointer mr-1 btn btn-white txt-8" id="postDeclare" data-seq="<?=$_REQUEST['seq']?>"><i class="fas fa-exclamation-triangle"></i></label>
+                <?}?>
+                <label type="button" class="btn btn-white txt-8"  id="showAnsWrite" ><i class="fas fa-angle-up" ></i></label>
+            </div>
         </div>
-    </div>
+        <div class="row pb-0 text-right d-none" id="dAnsWrite">
+            <div class="col text-left">    
+                <textarea class="form-control col-12 w-100 mb-2" id="ansText"></textarea>
+                <input type="button" class="btn btn-white f-right txt-8" id="ansAdd" value="등록">
+            </div>
+        </div>
 </div>
 
 <div class="text-center" id="listBtn" onclick="location.href='commu.php'"><i class="fas fa-list"></i> 목록</div>
@@ -122,6 +130,11 @@ $("#ansAdd").on("click",function(){
         loginChkClos()
     }
 })
+
+$(document).on("click", "#showAnsWrite", function() {
+    $("#dAnsWrite").toggleClass("d-none");
+    $(this).find("i").toggleClass("fa-angle-down fa-angle-up");
+});
 
 $(document).on('mouseenter mouseleave', '.getCnt',function(){
     var thisId = $(this).attr('id');
