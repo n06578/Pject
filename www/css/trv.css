@@ -350,6 +350,20 @@ body {
   width: 95%; /* div의 너비 설정 */
 }
 
+.listItemMoreCon{
+  height : 265px !important;
+  margin:1px 5px !important;
+  padding-bottom: 2px;
+  color: #231d52da;
+  font-weight: 600;
+  font-size: 0.6rem !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 20; /* 표시할 줄 수 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 95%; /* div의 너비 설정 */
+}
 .listItemWrt{
   position: absolute;
   right: 65px;

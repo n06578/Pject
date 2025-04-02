@@ -83,24 +83,34 @@ if($seq == ""){
 
     $que_file = "select * from TuserItemFile where itemSeq = '".$row_item['seq']."'";
     $res_file = mysql_query($que_file);
+    $cnt_file = mysql_num_rows($res_file);
     $row_file = mysql_fetch_array($res_file);
 
-    $data['card'] = 
-    '<div class="card-body listItem p-2">
-        <div class="listItemBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
-            <img class="listItemImg" src="'.$row_file['filePath'].'">
-            
-            <div class="itemBigView text-right txt-7">
-                크게보기
-            </div>
-        </div>
-        <div class="listItemCon pt-2" onclick="location.href=\'itemView.php?seq='.$row_item['seq'].'\'" title="'.$row_sub['itemComment'].'">
-            '.$row_sub['itemComment'].'
+    $contents =(@$row_sub['itemComment'] !="") ? nl2br($row_sub['itemComment']) : "";
+
+    
+    $html = '<div class="card-body listItem p-2">';
+    $contentCss= "listItemMoreCon ";
+    if($cnt_file > 0){
+        $contentCss= "listItemCon ";
+        $html .=' 
+                <div class="listItemBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
+                    <img class="listItemImg" src="'.$row_file['filePath'].'">
+                    
+                    <div class="itemBigView text-right txt-7">
+                        크게보기
+                    </div>
+                </div>';
+    }
+    $html .= ' 
+        <div class="'.$contentCss.' pt-2" onclick="location.href=\'itemView.php?seq='.$row_item['seq'].'\'" title="'.$row_sub['itemComment'].'">
+            '.$contents.'
             <div class="showDetail text-right txt-6">
                 자세히보기
             </div>
-        </div>
-    </div>';
+        </div>';
+    $html .= '</div>';
+    $data['card'] = $html;
 
 ?>
 

@@ -10,6 +10,7 @@ $documentPath = explode("/",$documentRoot);
 $rootPath = "../";
 $rootPath =  str_repeat($rootPath,count($documentPath)-1);
 
+$cardItemCol = "col-xl-4";
 ?>
 <!DOCTYPE html>
 <html lang="ko">

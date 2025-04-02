@@ -1,5 +1,6 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
+$cardItemCol = "col-xl-3";
 ?>
 <div class="main-box h-90 d-none">
     <div class="p-0 m-0 h-100">
@@ -20,28 +21,16 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 
                         $que_file = "select * from TuserItemFile where itemSeq = '".$mainSeq."'";
                         $res_file = mysql_query($que_file);
+                        $cnt_file = mysql_num_rows($res_file);
                         $row_file = mysql_fetch_array($res_file);
+                        /* include에서 사용하는 변수 */
+                        $srcItem = ($cnt_file > 0)? "../".$row_file['filePath']:"";
+                        $contentsItem = (@$row_sub['itemComment'] !="") ? nl2br($row_sub['itemComment']) : "";
+                        $nameItem = getName($row_item['joinSeq']);
+
+                        include "include/itemCardDiv.php";
+                    }
                     ?>
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card h-500 py-2 c-pointer">
-                            <div class="card-body listItem p-2">
-                                <div class="listItemBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
-                                    <img class="listItemImg" src="<?=$row_file['filePath']?>">
-                                    
-                                    <div class="itemBigView text-right txt-7">
-                                        크게보기
-                                    </div>
-                                </div>
-                                <div class="listItemCon pt-2" onclick="location.href='itemView.php?seq=<?=$mainSeq?>'" title="<?=$row_sub['itemComment']?>">
-                                    <?=$row_sub['itemComment']?>
-                                    <div class="showDetail text-right txt-6">
-                                        자세히보기
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?}?>
                 </div>
             </div> 
         </div>
