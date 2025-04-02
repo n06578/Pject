@@ -51,7 +51,7 @@ $readonly = (@$_REQUEST["userEmail"] == "")? "":"readonly";
                 </div>
                 <div class="row j-c w-100 mb-4">
                     <div class="joinBtm py-2 px-5">
-                        <div class="joinDivb pb-5"><input type="checkbox" id="agreeChk" class="mr-2 mb-1"><label for="agreeChk" id="agreeTxt">약관에 동의합니다.</label></div>
+                        <div class="joinDivb pb-5"><input type="checkbox" id="agreeChk" class="mr-2 mb-1" readonly><label for="agreeChk" id="agreeTxt">약관에 동의합니다.</label></div>
                         <div class="joinDiv pt-2"><input type="button" class="btn btn-navy t-white w-100" id="loginBtn" value="가입"></div>
                         <div class="joinDiv pt-2">아이디가 존재합니까? <input type="button" class="btn t-navy" value="로그인" onclick="location.href='login.php'"></div>
                     </div>
@@ -206,6 +206,31 @@ $(function() {
             }
         });
     }
+
+    $(document).on("click","#agreeTxt, #agreeChk",function(){
+        $("#agreeChk").prop("checked",false);
+        $("#joinAgreeMdl").modal("show");
+    });
+    
+    $(document).on("click","#joinAgreeBtn1",function(){
+        $("#joinAgreeMdl").find(".show1").addClass("d-none");
+        $("#joinAgreeMdl").find(".show2").removeClass("d-none");
+    })
+
+    $(document).on("click","#joinAgreeBtn2",function(){
+        $("#joinAgreeMdl").modal("hide");
+        $("#agreeChk").prop("checked",true);
+        $("#joinAgreeMdl").find(".show1").removeClass("d-none");
+        $("#joinAgreeMdl").find(".show2").addClass("d-none");
+    })
+    $(document).on("click","#joinDisagreeBtn1,#joinDisagreeBtn2",function(){
+        $("#joinAgreeMdl").modal("hide");
+        $("#agreeChk").prop("checked",false);
+        $("#joinAgreeMdl").find(".show1").removeClass("d-none");
+        $("#joinAgreeMdl").find(".show2").addClass("d-none");
+    })
+    
+    
 
     function joinOk(){
         if($("#userName").val() == ""){
