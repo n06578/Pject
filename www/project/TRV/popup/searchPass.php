@@ -2,26 +2,26 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header_nologo.php";
 ?>
-<div class="loginBox h-90">
+<div class="passSearchBox h-90">
     
-    <table class="noBorder text-center w-40">
+    <table class="noBorder text-center w-100">
         <tr>
-            <td colspan=2 class="text-left tx-14 pb-2"><div class="row j-c w-100 my-1" id="trvLogoPopUp"></div></td>
+            <td class="text-left w-50 tx-14 pb-2"><div class="row j-c w-100 my-1" id="trvLogoPopUp"></div></td>
         </tr>
         <tr>
-            <td></td>
-            <td><input type="text" class="form-control tx-12" id="userName" name="userName" placeholder="성명"></td>
+            <td class="text-center"><input type="text" class="form-control d-in-block tx-12 w-40" id="userName" name="userName" placeholder="성명"></td>
         </tr>
         <tr>
-            <td></td>
-            <td><input type="text" class="form-control tx-12" id="userEmail" name="userEmail" placeholder="이메일"></td>
+            <td class="text-center"><input type="text" class="form-control d-in-block tx-12 w-40" id="userEmail" name="userEmail" placeholder="이메일"></td>
         </tr>
         <tr>
-            <td colspan=2>
-                <input type="button" class="btn btn-sm btn-navy w-100" id="passSearch" value="찾기">
+            <td class="text-center">
+                <input type="button" class="btn btn-sm btn-navy  w-40" id="passSearch" value="찾기">
             </td>
         </tr>
     </table>
+    <!-- <br>
+    <div class=" w-100h-30"></div> -->
 </div>
 
 <script>

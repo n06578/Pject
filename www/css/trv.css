@@ -539,6 +539,11 @@ body {
   align-items: center;
   justify-content: center !important;
 }
+.passSearchBox{
+  height: 100vh;
+  align-content: center;
+  justify-content: center !important;
+}
 
 .joinBox {
   padding-top: 100px !important;
@@ -774,6 +779,7 @@ body {
 .d-table-cell{display: table-cell !important;}
 .d-ruby{display: ruby !important;}
 .d-ruby-t{display: ruby-text !important;}
+.d-in-block{display: inline-block !important;}
 .btn:focus{box-shadow: none !important; border-color: #2e266d26;}
 .btn-xs{padding: .1rem .2rem; font-size: .59rem; line-height: 1.5; border-radius: .2rem;}
 .btn-white{background-color: #ffffff; border-color: #eeeeee;}
