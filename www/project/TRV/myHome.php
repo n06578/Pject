@@ -2,7 +2,7 @@
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 
 $thisPage = $_SESSION['homeType'] == "myPost" ?  $_SESSION['viewType']:"";
-$PageName = "";
+$cardChkShow = $PageName = "";
 switch(@$thisPage) {
     case "home": $PageName = "게시물"; break;
     case "recent": $PageName = "최근 본 게시물"; break;

@@ -11,6 +11,7 @@ $rootPath = "../";
 $rootPath =  str_repeat($rootPath,count($documentPath)-1);
 
 $cardItemCol = "col-xl-4";
+$cardChkShow = "d-none";
 ?>
 <!DOCTYPE html>
 <html lang="ko">

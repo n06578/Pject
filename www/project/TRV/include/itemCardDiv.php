@@ -5,7 +5,7 @@ header.php에서 col-xl-4로 설정되어있음
 -->
 <?$cardItemCol = @$cardItemCol =="" ? "col-xl-4":$cardItemCol;?>
 <div class="<?=$cardItemCol?> col-md-6 mb-4">
-    <div class="showChkBox text-right" title="<?=$mainSeq?>">
+    <div class="showChkBox text-right <?=$cardChkShow?>">
         <input type="checkbox" class="form-check-input" id="checkItem<?=$mainSeq?>" name="checkItem[]" value="<?=$mainSeq?>">
     </div>
     <div class="card h-500 py-2 c-pointer listItemCard">
