@@ -1,12 +1,6 @@
-<?php 
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-echo "in";
-?>
-    <script src="https://cdn.tiny.cloud/1/ajhw6o78srgkq6cu3900a48w0flx52dwsxc0el1qxxesa8vj/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-    <!-- <script src="https://cdn.tiny.cloud/1/ajhw6o78srgkq6cu3900a48w0flx52dwsxc0el1qxxesa8vj/tinymce/6/langs/ko.js" referrerpolicy="origin"></script> -->
+<script src="https://cdn.tiny.cloud/1/ajhw6o78srgkq6cu3900a48w0flx52dwsxc0el1qxxesa8vj/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<!-- <script src="https://cdn.tiny.cloud/1/ajhw6o78srgkq6cu3900a48w0flx52dwsxc0el1qxxesa8vj/tinymce/6/langs/ko.js" referrerpolicy="origin"></script> -->
 
 <!-- Custom fonts -->
 <link href="<?=$rootPath?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

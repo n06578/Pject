@@ -25,7 +25,7 @@ $cardChkShow = "d-none";
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="google" content="notranslate">
-    <?php include "linkScript.php"; // link, script 관련 경로 ?>
+    <? include "linkScript.php"; // link, script 관련 경로 ?>
     <title>PjectY</title>
 </head>
 
