@@ -2,11 +2,42 @@
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 $cardItemCol = "col-xl-3";
 $cardChkShow = "";
+$que = "select * from TcalanderTbl where seq = '".$_REQUEST['seq']."'";
+$res = mysql_query($que);
+$row = mysql_fetch_array($res);
 ?>
 <div class="main-box h-90 d-none">
     <div class="p-0 m-0 h-100">
         <div class="row h-100">
             <div class="contents-col col px-5 text-lg">
+                <div class="card tx-12 mt-2">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="text-center col-1"><b>일정명</b></div>
+                            <div class="col"><?=$row['title']?></div>
+                            <hr class ="hr-navy py-1 p-0 m-0">
+                        </div>
+                        <div class="row">
+                            <div class="text-center col-1"><b>일정소명</b></div>
+                            <div class="col"><?=$row['subTitle']?></div>
+                            <hr class ="hr-navy py-1 p-0 m-0">
+                        </div>
+                        <div class="row">
+                            <div class="text-center col-1"><b>일정시작일</b></div>
+                            <div class="col"><?=substr($row['startDateTime'],0,10)?></div>
+                            <hr class ="hr-navy py-1 p-0 m-0">
+                        </div>
+                        <div class="row">
+                            <div class="text-center col-1"><b>일정종료일</b></div>
+                            <div class="col"><?=substr($row['endDateTime'],0,10)?></div>
+                            <hr class ="hr-navy py-1 p-0 m-0">
+                        </div>
+                        <div class="row">
+                            <div class="text-center col-1"><b>일정메모</b></div>
+                            <div class="col"><?=$row['contents']?></div>
+                        </div>
+                    </div>
+                </div>
                 <hr class="hr-navy">
                 <div class="row mt-4">
                     <?
