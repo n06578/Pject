@@ -111,6 +111,8 @@ switch(@$thisPage) {
         $(document).on("click", ".proImgChg", function () {
             fileInput.trigger("click");
             thisBtn = $(this).parent();
+            croppers = [];  // croppers 배열 초기화
+
         });
 
         // 파일 선택 후 이미지 추가
@@ -137,7 +139,6 @@ switch(@$thisPage) {
                         croppers.forEach(({ cropper }) => {
                             cropper.destroy();
                         });
-                        croppers = [];  // croppers 배열 초기화
                     }
 
                     // Cropper 적용
