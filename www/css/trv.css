@@ -455,7 +455,19 @@ body {
   cursor: pointer;
   font-size :12px
 }
-
+#cardDelBtn{
+  z-index: 4;
+  position: fixed;
+  width: 100px;
+  bottom: 10px;
+  padding: 8px 0px;
+  border-radius: 50px;
+  background-color: #d80000b2;
+  color: #fff;
+  right: 120px;
+  cursor: pointer;
+  font-size :12px
+}
 #moneBtn{
   z-index: 4;
   position: fixed;

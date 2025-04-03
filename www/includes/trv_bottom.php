@@ -5,6 +5,7 @@
 <?if($baseName[0] == "login" || $baseName[0] == "join"){ // 로그인 회원가입 bottom?>
     <div class="text-center" id="homeBtn" onclick="location.href='trvmain2.php'"><i class="fas fa-home"></i> 홈으로</div>
 <?}else if($baseName[0] == "myHome"){ // 내 프로필 bottom?>
+    <div class="text-center <?=$cardChkShow?>" id="cardDelBtn"><i class="fas fa-trash-alt"></i> 삭제</div>
     <div class="text-center" id="writeBtn" onclick="location.href='write.php'"><i class="fas fa-pen"></i> 등록하기</div>
 <?}?>
 <?

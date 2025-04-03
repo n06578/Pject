@@ -4,7 +4,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 $thisPage = $_SESSION['homeType'] == "myPost" ?  $_SESSION['viewType']:"";
 $cardChkShow = $PageName = "";
 switch(@$thisPage) {
-    case "home": $PageName = "게시물"; break;
+    case "home": $PageName = "게시물"; $cardChkShow="d-none"; break;
     case "recent": $PageName = "최근 본 게시물"; break;
     case "cal": $PageName = "일정에 추가된 게시물"; break;
     case "heart": $PageName = "찜한 게시물"; break;
@@ -271,6 +271,69 @@ switch(@$thisPage) {
         "mouseout":function() {
             $(this).find(".listItemWrt").removeClass("d-flex").addClass("d-none");
             $(this).find(".showDetail").removeClass("d-flex").addClass("d-none");
+        }
+    });
+
+    $(document).on("click","#cardDelBtn",function(){
+        // 선택된 체크박스의 값을 가져옵니다.
+        var chkData = [];
+        var cnt = 0;
+        $(".itemChkBox:checked").each(function() {
+            console.log($(this).val());
+            chkData.push($(this).val());
+            cnt++;
+        });
+        if(cnt < 1){
+            pAlert("error","실패","삭제할 게시물을 선택해주세요.",true);
+            return false;
+        }else{
+            const notice = PNotify.info({
+                title: '삭제하시겠습니까?',
+                text: '해당 게시물 삭제하면 복구가 불가능합니다.',
+                icon: 'fa fa-exclamation-triangle',
+                hide: false, // 자동으로 닫히지 않도록 설정
+                closer: false, // 닫기 버튼 비활성화
+                sticker: false, // 스티커 버튼 비활성화
+                destroy: true, // 알림을 클릭으로 제거 가능하도록 설정
+                stack: new PNotify.Stack({
+                    dir1: 'down',
+                    modal: true,
+                    firstpos1: 25,
+                    overlayClose: false
+                }),
+                modules: new Map([
+                    ...PNotify.defaultModules,
+                    [PNotifyConfirm, {
+                        confirm: true,
+                        buttons: [
+                            {
+                                text: '확인',
+                                click: (notice) => {
+                                    notice.close();
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "ajax/cardItemDel.php", // 데이터를 가져올 서버 URL
+                                        data: {pageType:"<?=@$thisPage?>",chkData:chkData},
+                                        success: function(data) {
+                                            mobiscroll.toast({
+                                                message: "삭제되었습니다.",
+                                                display: "center",
+                                                color: "gray",
+                                                closeButton: false
+                                            });
+                                            location.reload();
+                                        }
+                                    });
+                                }
+                            },
+                            {
+                                text: '취소',
+                                click: notice => notice.close()
+                            }
+                        ]
+                    }]
+                ])
+            });
         }
     });
     
