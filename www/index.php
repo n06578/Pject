@@ -1,6 +1,9 @@
 <?php
+echo "1";
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
+echo "2";
 include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
+echo "3";
 ?>
 <div class="container-fluid">
     <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
