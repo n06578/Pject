@@ -1,4 +1,9 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+echo "in";
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 date_default_timezone_set('Asia/Seoul');
