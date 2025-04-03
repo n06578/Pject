@@ -1,4 +1,5 @@
 <?php
+phpinfo();
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
 ?>
