@@ -1,6 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 $cardItemCol = "col-xl-3";
+$cardChkShow = "";
 ?>
 <div class="main-box h-90 d-none">
     <div class="p-0 m-0 h-100">
@@ -36,6 +37,7 @@ $cardItemCol = "col-xl-3";
         </div>
     </div>
 </div>
+<div class="text-center <?=$cardChkShow?> position1" id="cardDelBtn"><i class="fas fa-trash-alt"></i> 삭제</div>
 <div class="text-center" id="listBtn" onclick="history.back();"><i class="fas fa-list"></i> 일정보기</div>
 
 <div class="modal " id="imgModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="false">
@@ -85,5 +87,66 @@ $cardItemCol = "col-xl-3";
             $(this).find(".showDetail").removeClass("d-flex").addClass("d-none");
         }
     });
-    
+    $(document).on("click","#cardDelBtn",function(){
+        // 선택된 체크박스의 값을 가져옵니다.
+        var chkData = [];
+        var cnt = 0;
+        $(".itemChkBox:checked").each(function() {
+            console.log($(this).val());
+            chkData.push($(this).val());
+            cnt++;
+        });
+        if(cnt < 1){
+            pAlert("error","실패","삭제할 게시물을 선택해주세요.",true);
+            return false;
+        }else{
+            const notice = PNotify.info({
+                title: '삭제하시겠습니까?',
+                text: '해당 게시물 삭제하면 복구가 불가능합니다.',
+                icon: 'fa fa-exclamation-triangle',
+                hide: false, // 자동으로 닫히지 않도록 설정
+                closer: false, // 닫기 버튼 비활성화
+                sticker: false, // 스티커 버튼 비활성화
+                destroy: true, // 알림을 클릭으로 제거 가능하도록 설정
+                stack: new PNotify.Stack({
+                    dir1: 'down',
+                    modal: true,
+                    firstpos1: 25,
+                    overlayClose: false
+                }),
+                modules: new Map([
+                    ...PNotify.defaultModules,
+                    [PNotifyConfirm, {
+                        confirm: true,
+                        buttons: [
+                            {
+                                text: '확인',
+                                click: (notice) => {
+                                    notice.close();
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "ajax/cardItemDel.php", // 데이터를 가져올 서버 URL
+                                        data: {pageType:"cal",chkData:chkData,calSeq : "<?=$_REQUEST['seq']?>"},
+                                        success: function(data) {
+                                            mobiscroll.toast({
+                                                message: "삭제되었습니다.",
+                                                display: "center",
+                                                color: "gray",
+                                                closeButton: false
+                                            });
+                                            location.reload();
+                                        }
+                                    });
+                                }
+                            },
+                            {
+                                text: '취소',
+                                click: notice => notice.close()
+                            }
+                        ]
+                    }]
+                ])
+            });
+        }
+    });
 </script>

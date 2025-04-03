@@ -442,6 +442,9 @@ body {
   position: relative;
 }
 
+.position1{right: 10px;}
+.position2{right: 120px;}
+
 #writeBtn{
   z-index: 4;
   position: fixed;
@@ -464,7 +467,6 @@ body {
   border-radius: 50px;
   background-color: #d80000b2;
   color: #fff;
-  right: 120px;
   cursor: pointer;
   font-size :12px
 }

@@ -143,7 +143,7 @@
                         <table class="table table-border table-hover tx-13">
                             <thead>
                                 <tr>
-                                    <td></td>
+                                    <td><input type="checkbox" id="calChkAll"></td>
                                     <td>일정명</td>
                                     <td>일정시작일</td>
                                     <td>일정종료일</td>
@@ -216,6 +216,13 @@
                     }
                 } 
             });
+        }
+    })
+    $(document).on("click","#calChkAll",function(){
+        if($(this).is(":checked")){
+            $(".calSeq").prop("checked",true);
+        }else{
+            $(".calSeq").prop("checked",false);
         }
     })
 </script>
