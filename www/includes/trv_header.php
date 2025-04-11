@@ -33,8 +33,9 @@ $cardChkShow = "d-none";
             PNotify.defaults.icons = 'brighttheme';
         });
     </script>
-    <?include $rootPath."lib/PNotify.php"; // PNotiry관련 함수 ?>
 </head>
+
+<?require_once $rootPath."lib/PNotify.php"; // PNotiry관련 함수 ?>
 
 <?
 //footer box 기본값 x
