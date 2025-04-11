@@ -111,7 +111,7 @@ if($_SESSION['loginNum'] != '-' && $_SESSION['loginYn'] == "Y"){?>
                     monePWInput: $("#monePWInput").val()
                 },
                 success: function(data){
-                    if(data > 0){location.href='moneView.php?seq='+$("#mSeq").val()}
+                    if(data > 0){location.href='monEView.php?seq='+$("#mSeq").val()}
                     else{
                         $("#monePWModal").modal("hide");
                         pAlert("error","실패","비밀번호가 틀렸습니다.",true);
@@ -130,7 +130,7 @@ if($_SESSION['loginNum'] != '-' && $_SESSION['loginYn'] == "Y"){?>
             if(writer != '<?=$_SESSION['loginNum']?>' && '<?=$_SESSION['loginNum']?>' != '0'){
                 pAlert("error","경고","작성자만 열람가능합니다.",true);
             }else{
-                location.href='moneView.php?seq='+seq;
+                location.href='monEView.php?seq='+seq;
             }
         }
     }
