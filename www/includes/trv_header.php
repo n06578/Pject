@@ -50,8 +50,8 @@ if(!isset($_SESSION['loginYn'])){
         $que_info = "select * from TjoinTbl where seq = '".$_SESSION['loginNum']."'";
         $res_info = mysql_query($que_info);
         $row_info = mysql_fetch_array($res_info);
+        $login="yes";
     }
-    $login="yes";
 }
 //seq 값이 없을때
 if(!isset($_REQUEST['seq'])){$_REQUEST['seq'] = "";}
