@@ -1,4 +1,3 @@
-<script>
     function loginChkLoca(){
         const notice = PNotify.info({
             title: '로그인 후 이용가능합니다.',
@@ -216,6 +215,3 @@ function joinLogin(){
             ])
         });
     }
-
-
-</script>

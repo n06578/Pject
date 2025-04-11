@@ -41,3 +41,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <script src="<?=$rootPath?>js/jquery.form.js"></script>
 <script src="<?=$rootPath?>vendor/chart.js/Chart.min.js"></script>
+<script src="<?=$rootPath?>lib/PNotify.js"></script>
