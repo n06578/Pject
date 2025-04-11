@@ -63,7 +63,7 @@ if($row_con['ansSeq'] !=0 ){
 
 <?if($row_con['ansSeq'] ==0 && $login == "yes" && $commu_writer=="yes"){?>
     <div class="text-center" id="writeBtn" onclick="location.href='monEWrite.php?seq=<?=$_REQUEST['seq']?>'"><i class="far fa-save"></i> 수정하기</div>
-<?}else if($row_con['ansSeq'] != 0 && $_SESSION['loginNum']!="0"){?>
+<?}else if($row_con['ansSeq'] != 0){?>
     <div class="text-center moneBtn" id="moneBtn" ><i class="far fa-save"></i> 답변보기</div>
 <?}else if($_SESSION['loginNum']=="0"){
     if($row_con['ansSeq'] ==0){$btnTxt = "답변등록";}
