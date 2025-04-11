@@ -6,23 +6,24 @@
                     <!-- <input type="search" name="SEARCH" placeholder="SEARCH">
                     <br> -->
                     <div class="topDiv">
-                            <a href="trvmain2.php" class="btn">
-                                <i class="fas fa-home"></i>
-                                <br>
-                                <span class="text">홈</span>
-                            </a>
-
-                            <a href="javascript:void(0)" class="btn" onclick="chkLogin('myCal.php')">
-                                <i class="far fa-calendar-alt"></i>
-                                <br>
-                                <span class="text">일정</span>
-                            </a>
+                        <a href="trvmain2.php" class="btn">
+                            <i class="fas fa-home"></i>
+                            <br>
+                            <span class="text">홈</span>
+                        </a>
+                        <?if($_SESSION['loginNum'] != 0){?>
+                        <a href="javascript:void(0)" class="btn" onclick="chkLogin('myCal.php')">
+                            <i class="far fa-calendar-alt"></i>
+                            <br>
+                            <span class="text">일정</span>
+                        </a>
                         <br>
                         <a href="javascript:void(0)" class="btn" onclick="chkLogin('myHomeChk.php?viewType=home')">
                             <i class="fas fa-plane"></i>
                             <br>
                             <span class="text">프로필</span>
                         </a>
+                    <?}?>
                     <? if($_SESSION['loginYn'] == "Y" ) {?>
                         <a href="logout.php" class="btn">
                             <i class="fas fa-sign-out-alt"></i>
