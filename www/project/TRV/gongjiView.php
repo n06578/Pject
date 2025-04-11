@@ -57,7 +57,7 @@ if($_SESSION['loginNum'] != "0"){
                     ?>
                     <label class="c-pointer mr-1 getCnt" id="ansLikeCnt" data-seq="<?=$row_ans['seq']?>" title="<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label>
                     <label class="c-pointer mr-1 getCnt" id="ansHateCnt" data-seq="<?=$row_ans['seq']?>" title="<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
-                <? if($row_ans['joinSeq'] == $_SESSION['loginNum']){ ?>
+                <? if($row_ans['joinSeq'] == $_SESSION['loginNum'] || $_SESSION['loginNum'] == '0'){ ?>
                     <label class="c-pointer deleteCnt"><i class="fas fa-trash-alt"></i></label>
                 <? }else{ ?>
                     <label class="c-pointer" id="ansDeclare" data-seq="<?=$row_ans['seq']?>"><i class="fas fa-exclamation-triangle"></i></label>
@@ -81,7 +81,7 @@ if($_SESSION['loginNum'] != "0"){
                     ?>
                     <label class="c-pointer mr-1 btn btn-white txt-8 getCnt" id="LikeCnt" data-seq="<?=$_REQUEST['seq']?>" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","like")?>"><i class="<?=$likeChk?> fa-thumbs-up" ></i> </label>
                     <label class="c-pointer mr-1 btn btn-white txt-8 getCnt" id="HateCnt" data-seq="<?=$_REQUEST['seq']?>" title="<?=getAnsCnt($_REQUEST['seq'],"postGongji","hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
-                    <?if($commu_writer == "yes"){?>
+                    <?if($commu_writer == "yes" || $_SESSION['loginNum'] == '0'){?>
                     <label class="c-pointer mr-1 btn btn-white txt-8 postDelete"><i class="fas fa-trash-alt"></i></label>
                     <?}else{?>
                         <label class="c-pointer mr-1 btn btn-white txt-8 " id="postDeclare" data-seq="<?=$_REQUEST['seq']?>"><i class="fas fa-exclamation-triangle"></i></label>

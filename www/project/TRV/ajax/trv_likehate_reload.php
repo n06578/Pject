@@ -14,6 +14,6 @@ if($cnt_lh>0){
 ?>
     <label class="c-pointer ansLikeCnt mr-1"><i class="<?=$likeChk?> fa-thumbs-up"></i> <?=getAnsCnt($_REQUEST['conSeq'],$_REQUEST['conType'],"like")?></label>
     <label class="c-pointer ansHateCnt mr-1"><i class="<?=$hateChk?> fa-thumbs-down"></i> <?=getAnsCnt($_REQUEST['conSeq'],$_REQUEST['conType'],"hate")?></label>
-<? if($_REQUEST['joinSeq'] == $_SESSION['loginNum']){ ?>
+<? if($_REQUEST['joinSeq'] == $_SESSION['loginNum'] || $_SESSION['loginNum'] == '0'){ ?>
     <label class="c-pointer deleteCnt"><i class="fas fa-trash-alt"></i></label>
 <? } ?>

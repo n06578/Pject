@@ -69,7 +69,7 @@ mysql_query($que_recent);
                     ?>
                     <label class="c-pointer mr-1 getCnt" id="ansLikeCnt" data-seq="<?=$row_ans['seq']?>" title="<?=getAnsCnt($row_ans['seq'],"itemAns","like")?>"><i class="<?=$likeChk?> fa-thumbs-up"></i> </label>
                     <label class="c-pointer mr-1 getCnt" id="ansHateCnt" data-seq="<?=$row_ans['seq']?>" title="<?=getAnsCnt($row_ans['seq'],"itemAns","hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
-                <? if($row_ans['joinSeq'] == $_SESSION['loginNum']){ ?>
+                <? if($row_ans['joinSeq'] == $_SESSION['loginNum'] || $_SESSION['loginNum'] == '0'){ ?>
                     <label class="c-pointer deleteCnt"><i class="fas fa-trash-alt"></i></label>
                 <? }else{ ?>
                     <label class="c-pointer" id="ansDeclare" data-seq="<?=$row_ans['seq']?>"><i class="fas fa-exclamation-triangle"></i></label>
@@ -107,7 +107,7 @@ mysql_query($que_recent);
                 <button type="button" class="btn btn-white txt-8" id="likeCnt"><i class="<?=$likeChk?> fa-thumbs-up" ></i></button>
                 <button type="button" class="btn btn-white txt-8" id="hateCnt"><i class="<?=$hateChk?> fa-thumbs-down" ></i></button>
                 
-                <? if($row_main['joinSeq'] == $_SESSION['loginNum']){ ?>
+                <? if($row_main['joinSeq'] == $_SESSION['loginNum'] || $_SESSION['loginNum'] == '0'){ ?>
                 <button type="button" class="btn btn-white txt-8" id="delBtn"><i class="fas fa-trash-alt"></i></label></button>
                 <? }else{   ?>
                     <button type="button" class="btn btn-white txt-8" data-seq="<?=$_REQUEST['seq']?>" id="postDeclare"><i class="fas fa-exclamation-triangle" ></i></button>
