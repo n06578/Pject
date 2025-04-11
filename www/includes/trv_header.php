@@ -36,7 +36,7 @@ $cardChkShow = "d-none";
     });
 </script>
 <?
-echo "in";
+echo $rootPath."lib/PNotify.php";
 include $rootPath."lib/PNotify.php"; // PNotiry관련 함수 
 
 //footer box 기본값 x
