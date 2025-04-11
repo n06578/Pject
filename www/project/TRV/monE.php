@@ -127,7 +127,7 @@ if($_SESSION['loginNum'] != '-' && $_SESSION['loginYn'] == "Y"){?>
             $("#monePWInput").val("");
             $("#monePWModal").modal("show");
         }else{
-            if(writer != '<?=$_SESSION['loginNum']?>' || '<?=$_SESSION['loginNum']?>' == '0'){
+            if(writer != '<?=$_SESSION['loginNum']?>' || '<?=$_SESSION['loginNum']?>' != '0'){
                 pAlert("error","경고","작성자만 열람가능합니다.",true);
             }else{
                 location.href='moneView.php?seq='+seq;
