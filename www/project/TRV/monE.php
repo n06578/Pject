@@ -122,17 +122,14 @@ if($_SESSION['loginNum'] != '-' && $_SESSION['loginYn'] == "Y"){?>
     });
 
     function loginChk(seq,writer){
-        console.log("<?=$login?>");
         if("<?=$login?>" == "no"){
             $("#mSeq").val(seq);
             $("#monePWInput").val("");
             $("#monePWModal").modal("show");
         }else{
-            if(writer != '<?=$_SESSION['loginNum']?>' || '<?=$_SESSION['loginNum']?>' != '0'){
-                console.log("1<?=$_SESSION['loginNum']?>");
+            if(writer != '<?=$_SESSION['loginNum']?>' && '<?=$_SESSION['loginNum']?>' != '0'){
                 pAlert("error","경고","작성자만 열람가능합니다.",true);
             }else{
-                console.log("2<?=$_SESSION['loginNum']?>");
                 location.href='moneView.php?seq='+seq;
             }
         }
