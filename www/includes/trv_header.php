@@ -27,18 +27,16 @@ $cardChkShow = "d-none";
     <meta name="google" content="notranslate">
     <? include "linkScript.php"; // link, script 관련 경로 ?>
     <title>PjectY</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            PNotify.defaults.styling = 'brighttheme';
+            PNotify.defaults.icons = 'brighttheme';
+        });
+    </script>
+    <?include $rootPath."lib/PNotify.php"; // PNotiry관련 함수 ?>
 </head>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        PNotify.defaults.styling = 'brighttheme';
-        PNotify.defaults.icons = 'brighttheme';
-    });
-</script>
 <?
-echo $rootPath."lib/PNotify.php";
-include $rootPath."lib/PNotify.php"; // PNotiry관련 함수 
-
 //footer box 기본값 x
 $showFooter = false;
 //로그인 여부 체크
