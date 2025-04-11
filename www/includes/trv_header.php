@@ -35,7 +35,7 @@ $cardChkShow = "d-none";
     </script>
 </head>
 
-<?require_once $rootPath."lib/PNotify.php"; // PNotiry관련 함수 ?>
+<?require_once $_SERVER['DOCUMENT_ROOT']."lib/PNotify.php"; // PNotiry관련 함수 ?>
 
 <?
 //footer box 기본값 x
