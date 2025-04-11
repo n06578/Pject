@@ -72,7 +72,7 @@ if($row_con['ansSeq'] !=0 ){
     ?>
         <div class="text-center moneBtn" id="manaMoneBtn" ><i class="far fa-save"></i> 답변보기</div>
     <?}?>
-        <div class="text-center" id="writeBtn" onclick="location.href='manageMonEWrite.php?seq=<?=$_REQUEST['seq']?>'"><i class="far fa-save"></i> <?=$btnTxt?></div>
+        <div class="text-center" id="writeBtn" onclick="location.href='manageMoneWrite.php?seq=<?=$_REQUEST['seq']?>'"><i class="far fa-save"></i> <?=$btnTxt?></div>
     <?}?>
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <!-- Place the first <script> tag in your HTML's <head> -->
