@@ -63,14 +63,16 @@ if($row_con['ansSeq'] !=0 ){
 
 <?if($row_con['ansSeq'] ==0 && $login == "yes" && $commu_writer=="yes"){?>
     <div class="text-center" id="writeBtn" onclick="location.href='monEWrite.php?seq=<?=$_REQUEST['seq']?>'"><i class="far fa-save"></i> 수정하기</div>
-<?}else if($row_con['ansSeq'] != 0){?>
+<?}else if($row_con['ansSeq'] != 0 && $_SESSION['loginNum']!="0"){?>
     <div class="text-center moneBtn" id="moneBtn" ><i class="far fa-save"></i> 답변보기</div>
 <?}else if($_SESSION['loginNum']=="0"){
     if($row_con['ansSeq'] ==0){$btnTxt = "답변등록";}
     else{$btnTxt = "답변수정";}
+    if($row_con['ansSeq'] != 0){
     ?>
-    <div class="text-center moneBtn" id="manaMoneBtn" ><i class="far fa-save"></i> 답변보기</div>
-    <div class="text-center" id="writeBtn" onclick="location.href='manageMonEWrite.php?seq=<?=$_REQUEST['seq']?>'"><i class="far fa-save"></i> <?=$btnTxt?></div>
+        <div class="text-center moneBtn" id="manaMoneBtn" ><i class="far fa-save"></i> 답변보기</div>
+    <?}?>
+        <div class="text-center" id="writeBtn" onclick="location.href='manageMonEWrite.php?seq=<?=$_REQUEST['seq']?>'"><i class="far fa-save"></i> <?=$btnTxt?></div>
     <?}?>
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <!-- Place the first <script> tag in your HTML's <head> -->
