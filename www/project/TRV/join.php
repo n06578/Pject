@@ -265,6 +265,11 @@ $(function() {
             $("#loginPW").focus();
             return false;
         }
+        if($("#agreeChk").is(":checked") == false){
+            pAlert("error","가입실패","약관에 동의해주세요.",true);
+            return false;
+        }
+        
         $("#joinFrm").ajaxSubmit({
             url: 'ajax/ajax_join.php',
             type: 'post',
