@@ -70,46 +70,54 @@ if($seq == ""){
     
     $que_item = "select * from TcalanItemTbl where  calanSeq='".$seq."' order by addDateTime desc";
     $res_item = mysql_query($que_item);
+    $cnt_item = mysql_num_rows($res_item);
     $row_item = mysql_fetch_array($res_item);
-    
-    $que_item = "select * from TuserItem where 1=1 and seq ='".$row_item['itemSeq']."'";
-    $res_item = mysql_query($que_item);
-    $row_item = mysql_fetch_array($res_item);
+    if($cnt_item > 0){
+        $que_item = "select * from TuserItem where 1=1 and seq ='".$row_item['itemSeq']."'";
+        $res_item = mysql_query($que_item);
+        $cnt_item = mysql_num_rows($res_item);
+        $row_item = mysql_fetch_array($res_item);
 
-    $que_sub = "select * from TuserItemList where itemSeq = '".$row_item['seq']."'";
-    $res_sub = mysql_query($que_sub);
-    $row_sub = mysql_fetch_array($res_sub);
+        $que_sub = "select * from TuserItemList where itemSeq = '".$row_item['seq']."'";
+        $res_sub = mysql_query($que_sub);
+        $row_sub = mysql_fetch_array($res_sub);
 
 
-    $que_file = "select * from TuserItemFile where itemSeq = '".$row_item['seq']."'";
-    $res_file = mysql_query($que_file);
-    $cnt_file = mysql_num_rows($res_file);
-    $row_file = mysql_fetch_array($res_file);
+        $que_file = "select * from TuserItemFile where itemSeq = '".$row_item['seq']."'";
+        $res_file = mysql_query($que_file);
+        $cnt_file = mysql_num_rows($res_file);
+        $row_file = mysql_fetch_array($res_file);
 
-    $contents =(@$row_sub['itemComment'] !="") ? nl2br($row_sub['itemComment']) : "";
+        $contents =(@$row_sub['itemComment'] !="") ? nl2br($row_sub['itemComment']) : "";
 
-    
-    $html = '<div class="card-body listItem p-2">';
-    $contentCss= "listItemMoreCon ";
-    if($cnt_file > 0){
-        $contentCss= "listItemCon ";
-        $html .=' 
-                <div class="listItemBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
-                    <img class="listItemImg" src="'.$row_file['filePath'].'">
-                    
-                    <div class="itemBigView text-right txt-7">
-                        크게보기
+        if($cnt_item >0){
+                
+            $html = '<div class="card-body listItem p-2">';
+            $contentCss= "listItemMoreCon ";
+        
+            if($cnt_file > 0){
+                $contentCss= "listItemCon ";
+                $html .=' 
+                        <div class="listItemBox modal-open" data-bs-toggle="modal" data-bs-target="#imgModal">
+                            <img class="listItemImg" src="'.$row_file['filePath'].'">
+                            
+                            <div class="itemBigView text-right txt-7">
+                                크게보기
+                            </div>
+                        </div>';
+            }
+            $html .= ' 
+                <div class="'.$contentCss.' pt-2" onclick="location.href=\'itemView.php?seq='.$row_item['seq'].'\'" title="'.$row_sub['itemComment'].'">
+                    '.$contents.'
+                    <div class="showDetail text-right txt-6">
+                        자세히보기
                     </div>
                 </div>';
+            $html .= '</div>';
+        }
+    }else{
+        $html = '<span class="text-center"> 추가된 게시물이 없습니다.</span>';
     }
-    $html .= ' 
-        <div class="'.$contentCss.' pt-2" onclick="location.href=\'itemView.php?seq='.$row_item['seq'].'\'" title="'.$row_sub['itemComment'].'">
-            '.$contents.'
-            <div class="showDetail text-right txt-6">
-                자세히보기
-            </div>
-        </div>';
-    $html .= '</div>';
     $data['card'] = $html;
 
 ?>

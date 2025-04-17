@@ -6,7 +6,7 @@ date_default_timezone_set('Asia/Seoul');
 $host='34.231.136.110';		   # 호스트명 또는 IP
 $user='n06578';			   # Mysql 유저이름
 $dbpass='Nyoun003310.';		   # DB 패스워드
-$dbname='PjectDev';		   # 데이타 베이스 이름
+$dbname='PjectDB';		   # 데이타 베이스 이름
 $conn = mysqli_connect($host, $user, $dbpass, $dbname);
 
 if (!$conn) {

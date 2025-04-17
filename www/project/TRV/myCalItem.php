@@ -62,6 +62,9 @@ $row = mysql_fetch_array($res);
 
                         include "include/itemCardDiv.php";
                     }
+                    if($num_item < 1){
+                        echo "<div class='text-center'>등록된 게시물이 없습니다.</div>";
+                    }
                     ?>
                 </div>
             </div> 
