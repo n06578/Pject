@@ -4,78 +4,81 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
 ?>
 <div class="container-fluid">
     <h1 class="h3 mb-4 text-gray-80">Month 메모</h1>
-    <div class="row">
+    <div class="row ">
         <div class="col-xl-12 col-md-12 mb-2">
-            <div class="card border-top-primary shadow h-100 py-">
-                <div class="card-body pb-0 m-3">
-                    <div id="demo-desktop-month-view" style="height:100%"></div>
+            <div class="row vh-70">
+                <div class="col-12 card border-top-primary shadow h-100 py- card-memo">
+                    <div class="card-body pb-0 m-3">
+                        <div id="demo-desktop-month-view" style="height:100%"></div>
+                    </div>
+                </div>
+                <div class="d-none card border-top-primary shadow h-100 py- card-info">
+                    <div class="card-body pb-0 m-3 clicktitle">
+                        <form id="infoData">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <input type="hidden" name="dataMode" value="updateData">
+                                    <input type="hidden" name="id" id="id">
+                                    <input type="hidden" name="allDay" id="allDay">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">title</div>
+                                    <input type="text" name="title" class="form-control" id="title">
+                                </div>
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2 my-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">startDate</div>
+                                    <div class="row no-gutters align-items-center">
+                                        <input type="date" name="startDay" class="form-control px-3 col mr-3" id="startDay">
+                                        <input type="time" name="startTime" class="form-control px-3 col" id="startTime">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2 my-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">endDate</div>
+                                    <div class="row no-gutters align-items-center">
+                                        <input type="date" name="endDay" class="form-control px-3 col mr-3" id="endDay">
+                                        <input type="time" name="endTime" class="form-control px-3 col" id="endTime">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2 my-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">color</div>
+                                    <input type="color" name="color" class="form-control" id="color">
+                                </div>
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2 my-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">memo</div>
+                                    <textarea type="text" name="memo" class="form-control" rows="10" id="memo"></textarea>
+                                </div>
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2 my-2 text-right">
+                                    <a href="#" class="btn btn-sm btn-danger btn-icon-split btn-del">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-trash"></i>
+                                        </span>
+                                        <span class="text">DELETE</span>
+                                    </a>
+                                    <a class="btn btn-sm btn-success btn-icon-split" id="btn-save">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span class="text">SAVE</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row info-card d-none">
         <div class="col-xl-12 col-md-12 mb-2">
-            <div class="card border-top-primary shadow h-100 py-">
-                <div class="card-body pb-0 m-3 clicktitle">
-					<form id="infoData">
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2">
-								<input type="hidden" name="dataMode" value="updateData">
-								<input type="hidden" name="id" id="id">
-								<input type="hidden" name="allDay" id="allDay">
-								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">title</div>
-								<input type="text" name="title" class="form-control" id="title">
-							</div>
-						</div>
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2 my-2">
-								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">startDate</div>
-                                <div class="row no-gutters align-items-center">
-                                    <input type="date" name="startDay" class="form-control px-3 col mr-3" id="startDay">
-                                    <input type="time" name="startTime" class="form-control px-3 col" id="startTime">
-                                </div>
-							</div>
-						</div>
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2 my-2">
-								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">endDate</div>
-                                <div class="row no-gutters align-items-center">
-                                    <input type="date" name="endDay" class="form-control px-3 col mr-3" id="endDay">
-                                    <input type="time" name="endTime" class="form-control px-3 col" id="endTime">
-                                </div>
-							</div>
-						</div>
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2 my-2">
-								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">color</div>
-								<input type="color" name="color" class="form-control" id="color">
-							</div>
-						</div>
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2 my-2">
-								<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">memo</div>
-								<textarea type="text" name="memo" class="form-control" id="memo"></textarea>
-							</div>
-						</div>
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2 my-2 text-right">
-								<a href="#" class="btn btn-sm btn-danger btn-icon-split btn-del">
-									<span class="icon text-white-50">
-										<i class="fas fa-trash"></i>
-									</span>
-									<span class="text">DELETE</span>
-								</a>
-								<a class="btn btn-sm btn-success btn-icon-split" id="btn-save">
-									<span class="icon text-white-50">
-										<i class="fas fa-check"></i>
-									</span>
-									<span class="text">SAVE</span>
-								</a>
-							</div>
-						</div>
-					</form>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -142,6 +145,8 @@ $(document).ready(function() {
 								dataType : "json",
                                 success: function (data) {
 									$(".info-card").removeClass("d-none")
+                                    $(".card-memo").addClass("col-8").removeClass("col-12");
+                                    $(".card-info").addClass("col-4").removeClass("d-none");
                                     $("#title").val(data['title']);
                                     var startDate = data['startDate'];
                                     startDay = startDate.split(" ");
