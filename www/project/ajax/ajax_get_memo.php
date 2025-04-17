@@ -9,6 +9,7 @@ while ($row = mysql_fetch_array($res)) {
     // 데이터를 가공하여 배열에 저장
     // $row['color'] = $row['color'] == "" ? "blue":$row['color'];
     $event = array(
+        'seq' => $row['seq'], // 예시: 1
         'start' => $row['startDate'],  // 예시: '2024-12-18 10:00:00'
         'end' => $row['endDate'],      // 예시: '2024-12-18 12:00:00'
         'title' => $row['title'],  // 예시: 'Conference'

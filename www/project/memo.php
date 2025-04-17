@@ -17,8 +17,9 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                         <form id="infoData">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <input type="hidden" name="dataMode" value="updateData">
+                                    <input type="hidden" name="dataMode" id="dataType" value="updateData">
                                     <input type="hidden" name="id" id="id">
+                                    <input type="hidden" name="seq" id="seq">
                                     <input type="hidden" name="allDay" id="allDay">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">title</div>
                                     <input type="text" name="title" class="form-control" id="title">
@@ -155,6 +156,7 @@ $(document).ready(function() {
 
                                     var endDate = data['endDate'];
                                     endDay = endDate.split(" ");
+                                    $("#seq").val(data['seq']);
                                     $("#endDay").val(endDay[0]);
                                     $("#endTime").val(endDay[1]);
 									$("#color").val(data['color']);
@@ -202,6 +204,23 @@ $(document).ready(function() {
 		});
 	})
 	
+    $(".btn-del").click(function(){
+        $("#dataType").val("deleteData");
+        $("#infoData").ajaxSubmit({
+			url: 'ajax/ajax_memo.php',
+			type: 'post',
+			success : function(val){
+				mobiscroll.toast({
+					message: "삭제되었습니다.",
+					display: "center",
+					color: "gray",
+					closeButton: false
+				});
+				location.reload();
+			}
+		});
+    });
+
 });
   
 </script>

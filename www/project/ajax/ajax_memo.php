@@ -45,6 +45,7 @@ if($dataMode == "insertChk"){
     $res = mysql_query($que) or die(mysql_error());
     $row = mysql_fetch_array($res);
 
+    $data['seq'] = $row['seq'];
     $data['allDay'] = $row['allDay'];
     $data['endDate'] = $row['endDate'];
     $data['startDate'] = $row['startDate'];
@@ -66,6 +67,9 @@ if($dataMode == "insertChk"){
                 memo = '".$_REQUEST['memo']."'
             where memoId='".$_REQUEST['id']."'
                 ";
+    mysql_query($que);
+}else if($dataMode == "deleteData"){
+    $que = "delete from MonthMemo where seq='".$_REQUEST['seq']."'";
     mysql_query($que);
 }
 
