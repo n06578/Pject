@@ -22,7 +22,6 @@ if($cnt > 0){
         joinDateTime = '".date("Y-m-d H:i:s")."'
         $appendQue
     ";
-    echo $que;
     mysql_query($que);
     $thisSeq = mysql_insert_id();
     mailSend("메일 인증",$_REQUEST['userName'],$_REQUEST['userName']."님 가입 활성화를 원하신다면<br> 버튼을 눌러 메일 인증을 완료해주세요",$_REQUEST['eMail'],"joinAgreeChk" ,"&seq=$thisSeq");
