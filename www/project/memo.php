@@ -51,7 +51,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2 my-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">memo</div>
-                                    <textarea type="text" name="memo" class="form-control" rows="10" id="memo"></textarea>
+                                    <textarea type="text" name="memo" class="form-control" rows="7" id="memo"></textarea>
                                 </div>
                             </div>
                             <div class="row no-gutters align-items-center">
