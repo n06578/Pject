@@ -43,13 +43,14 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                             </div>
                             <div class="col-9">
                                 <p class="txt-black lh-2 context1" >
-                                    안녕하십니까.
-                                    <br>저는 웹 개발자 <strong>나윤아</strong>입니다. <br>
-                                    저는 웹 개발자로서 다양한 프로젝트를 경험하며 다양한 기술을 습득하고 있습니다. <br>
-                                    <!-- 저는 끊임없이 배우고 성장하는 개발자가 되기 위해 노력하고 있습니다. <br> -->
-                                    배우는것에 대한 두려움이 없고, 새로운 기술을 배우는 것을 즐깁니다. <br>
-                                    아직 부족한 부분이 많지만, 끊임없이 노력하고 성장하는 개발자가 되겠습니다. <br>
-                                    감사합니다.
+                                현재 PHP 기반의 웹 풀스택 개발자로, 실무 경력은 2년 4개월입니다.<br>
+
+                                고등학교 시절부터 일상생활의 불편함을 앱 개발적 측면에서 바라보는 관점을 자주 가졌습니다.<br>
+                                이러한 경험이 쌓여 개발에 관심을 갖게되었습니다. <br>
+                                초기에 목표로 둔 앱 개발을 통하여 자연스럽게 웹 개발에도 관심을 가지게 되었으며 이후 웹이 가진 실시간성, 빠른 배포 환경에 매력을 느껴
+                                자연스럽게 웹 중심으로 커리어를 이어오게 되었습니다.<br><br>
+                                저는 여러 시스템을 접하며 불편함을 느껴봤었던 사용자로 개발을 맡아 임할 때 사소한부분까지 고려하며 프로젝트를 진행시켰습니다.<br>
+                                위 시각으로 단순히 주어진 기능만 구현하는 개발자가 아닌 끊임없이 아이디어를 고민하고 시스템을 발전시킬 수 있는 개발자로 성장하고 싶다는 목표를 갖게 되었습니다.
                                 </p>
                                 
                                 <p class="txt-black lh-2 context2 d-none" >
@@ -291,7 +292,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                         <div class="progress-bar bg-info" role="progressbar" style="width: 84%"
                             aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <h4 class="small font-weight-bold">CENTOS <span
+                    <h4 class="small font-weight-bold">UBUNTU <span
                             class="float-right">54%</span></h4>
                     <div class="progress">
                         <div class="progress-bar bg-danger" role="progressbar" style="width: 54%"
@@ -302,7 +303,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
         </div>
     </div>
 
-    <!-- 개인 성장 그래프 card 부분 -->
+    <!-- 개인 성장 그래프 card 부분 
     <div class="row">
         <div class="col-xl-12 col-lg-7">
             <div class="card shadow mb-4">
@@ -323,8 +324,8 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
                     </div>
-                </div>
-                <!-- 개인 성장 그래프 -->
+                </div>-->
+                <!-- 개인 성장 그래프 
                 <div class="card-body">
                     <div class="chart-area">
                         <canvas id="myAreaChart"></canvas>
@@ -332,7 +333,7 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/main_header.php";
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <div class="row">
         <div class="col-xl-3 col-lg-7">
