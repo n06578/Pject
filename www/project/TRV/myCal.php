@@ -95,7 +95,9 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
 									<span class="text">삭제</span>
 								</a>
 								<a class="btn btn-sm btn-success btn-icon-split" id="btn-save">
-										<i class="fas fa-check"></i>
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-check"></i>
+									</span>
 									<span class="text">저장</span>
 								</a>
 							</div>
