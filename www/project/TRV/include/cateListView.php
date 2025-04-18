@@ -17,7 +17,7 @@ while($row_sub = mysql_fetch_array($res_sub)) {
     $row_file = mysql_fetch_array($res_file);
     
     /* include에서 사용하는 변수 */
-    $srcItem = ($cnt_file > 0)? "../".$row_file['filePath']:"";
+    $srcItem = ($cnt_file > 0)? $row_file['filePath']:"";
     $contentsItem = (@$row_sub['itemComment'] !="") ? nl2br($row_sub['itemComment']) : "";
     $nameItem = getName($row_sub['joinSeq']);
     $mainSeq = $row_sub['itemSeq'];
