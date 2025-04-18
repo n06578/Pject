@@ -58,9 +58,8 @@ if($showFooter){
 <script src="<?=$rootPath?>vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="<?=$rootPath?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-<script src="<?=$rootPath?>lib/function.js"></script>
 
-<? include $rootPath."lib/function.php"; ?>
+<? include $_SERVER['DOCUMENT_ROOT']."/lib/function.php"; ?>
 </body>
 </html>
 <script>
