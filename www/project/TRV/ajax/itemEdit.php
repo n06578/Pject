@@ -24,6 +24,14 @@ else if($type == "itemDel"){
     mysql_query($que);
     $que = "delete from TuserItemFile where itemSeq = '".$_REQUEST['conSeq']."'";
     mysql_query($que);
+    $que = "delete from TanotherTbl where conSeq = '".$_REQUEST['conSeq']."'";
+    mysql_query($que);
+    $que = "delete from TcalanItemTbl where itemSeq = '".$_REQUEST['conSeq']."'";
+    mysql_query($que);
+    $que = "delete from TlikeHateTbl where itemSeq = '".$_REQUEST['conSeq']."' and conType = 'item'";
+    mysql_query($que);
+    $que = "delete from TdeclareTbl where conSeq = '".$_REQUEST['conSeq']."' and type = 'item' and conType='postDeclare'";
+    mysql_query($que);
 }
 else if($type == "likeHate"){
     

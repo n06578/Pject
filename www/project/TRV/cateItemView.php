@@ -108,9 +108,10 @@ mysql_query($que_recent);
                 
                 <button type="button" class="btn btn-white txt-8" id="likeCnt"><i class="<?=$likeChk?> fa-thumbs-up" ></i></button>
                 <button type="button" class="btn btn-white txt-8" id="hateCnt"><i class="<?=$hateChk?> fa-thumbs-down" ></i></button>
-                <button type="button" class="btn btn-white txt-8" data-seq="<?=$_REQUEST['seq']?>" id="postDeclare"><i class="fas fa-exclamation-triangle" ></i></button>
                 <? if($row_main['joinSeq'] == $_SESSION['loginNum'] || $_SESSION['loginNum'] == '0'){ ?>
-                <button type="button" class="btn btn-white txt-8" id="delBtn"><i class="fas fa-trash-alt"></i></label></button>
+                    <button type="button" class="btn btn-white txt-8" id="delBtn"><i class="fas fa-trash-alt"></i></label></button>
+                <? }else{?>
+                    <button type="button" class="btn btn-white txt-8" data-seq="<?=$_REQUEST['seq']?>" id="postDeclare"><i class="fas fa-exclamation-triangle" ></i></button>
                 <? } ?>
                 <button type="button" class="btn btn-white txt-8"  id="showAnsWrite" ><i class="fas fa-angle-up" ></i></button>
             </div>
