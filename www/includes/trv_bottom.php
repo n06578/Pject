@@ -1,6 +1,5 @@
 
 <?php
-echo $rootPath."project/TRV/modal.php";
 include $_SERVER['DOCUMENT_ROOT']."/project/TRV/modal.php";?>
 
 </div> <!-- End of Main Content -->

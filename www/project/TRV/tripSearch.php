@@ -62,7 +62,7 @@
 	});
 
 	function getCities(countryCode) {
-		fetch(`http://api.geonames.org/searchJSON?country=${countryCode}&featureClass=P&maxRows=100&lang=ko&username=n06578`)
+		fetch(`http://api.geonames.org/searchJSON?country=${countryCode}&featureClass=P&maxRows=0&lang=ko&username=n06578`)
 		.then(response => response.json())
 		.then(data => {
 			data.geonames.forEach(city => {
