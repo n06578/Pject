@@ -54,7 +54,7 @@ for ($i = 1; $i <= $itemList; $i++) {
                     $fileDestination = $uploadDir ."/" . $newFileName;
 
                     // 파일을 서버에 저장
-                    if (compressImageFast($fileTmpName, $fileDestination, $fileExt, 70)) {
+                    if (compressAndResizeImage($fileTmpName, $fileDestination, $fileExt, 1024, 70)) {
                         $que = "insert into TuserItemFile set
                             itemSeq = '".$mainSeq."',
                             itemListSeq = '".$subSeq."',
@@ -82,23 +82,50 @@ for ($i = 1; $i <= $itemList; $i++) {
 }
 
 echo "success|".$mainSeq;
-function compressImageFast($source, $destination, $ext, $quality = 70) {
+function compressAndResizeImage($source, $destination, $ext, $maxWidth = 1024, $quality = 70) {
+    list($width, $height) = getimagesize($source);
+    $scale = $maxWidth / $width;
+
+    // 원본보다 작으면 리사이징 생략
+    if ($scale >= 1) {
+        $newWidth = $width;
+        $newHeight = $height;
+    } else {
+        $newWidth = $maxWidth;
+        $newHeight = intval($height * $scale);
+    }
+
     switch ($ext) {
         case 'jpg':
         case 'jpeg':
             $image = imagecreatefromjpeg($source);
-            $result = imagejpeg($image, $destination, $quality);
             break;
         case 'png':
             $image = imagecreatefrompng($source);
-            imagealphablending($image, true);
-            imagesavealpha($image, true);
-            $result = imagepng($image, $destination, 6); // 압축 0~9 중간값
             break;
         default:
-            return false; // gif 등은 제외
+            return false;
     }
+
+    $newImage = imagecreatetruecolor($newWidth, $newHeight);
+
+    // PNG는 투명 처리 유지
+    if ($ext === 'png') {
+        imagealphablending($newImage, false);
+        imagesavealpha($newImage, true);
+    }
+
+    imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+    $result = false;
+    if ($ext === 'jpg' || $ext === 'jpeg') {
+        $result = imagejpeg($newImage, $destination, $quality);
+    } elseif ($ext === 'png') {
+        $result = imagepng($newImage, $destination, 6);
+    }
+
     imagedestroy($image);
+    imagedestroy($newImage);
     return $result;
 }
 ?>
