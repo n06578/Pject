@@ -60,7 +60,7 @@ if($_SESSION['loginNum'] != $row_con['joinSeq']){
                     ?>
                     <label class="c-pointer mr-1 getCnt" id="ansLikeCnt" data-seq="<?=$row_ans['seq']?>" title="<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"like")?>"><i class="<?=$likeChk?> fa-thumbs-up"></i></label>
                     <label class="c-pointer mr-1 getCnt" id="ansHateCnt" data-seq="<?=$row_ans['seq']?>" title="<?=getAnsCnt($row_ans['seq'],$row_ans['conType'],"hate")?>"><i class="<?=$hateChk?> fa-thumbs-down"></i></label>
-                <?if($commu_writer == "yes" || $_SESSION['loginNum'] == '0'){?>
+                <?if($row_ans['joinSeq'] == $_SESSION['loginNum'] || $_SESSION['loginNum'] == '0'){?>
                     <label class="c-pointer deleteCnt"><i class="fas fa-trash-alt"></i></label>
                 <? }else{ ?>
                     <label class="c-pointer" id="ansDeclare" data-seq="<?=$row_ans['seq']?>"><i class="fas fa-exclamation-triangle"></i></label>
