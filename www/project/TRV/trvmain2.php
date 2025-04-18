@@ -1,5 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
+$cardItemCol = "col-xl-4";
+$cardChkShow = "d-none";
 ?>
 
 <div class="main-box h-90 d-none">
