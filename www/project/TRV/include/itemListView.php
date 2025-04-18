@@ -15,7 +15,7 @@ if(@$_REQUEST['search'] == "clear") {
 }
 
 if(@$_SESSION['searchCountry'] != "") {
-    $where =" where  country = '".$_SESSION['searchCountry']."'";
+    $where =" where  country like '".$_SESSION['searchCountry']."%'";
 }
     $que_item = "select * from TuserItem $where order by writeDate desc";
     $res_item = mysql_query($que_item);
