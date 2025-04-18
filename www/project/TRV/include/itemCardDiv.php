@@ -3,6 +3,7 @@ header.php에서 col-xl-4로 설정되어있음
 기본 col-xl-4
 변경할 page : MyCal.php - col-xl-3
 -->
+
 <?$cardItemCol = @$cardItemCol =="" ? "col-xl-4":$cardItemCol;?>
 <div class="<?=$cardItemCol?> col-md-6 mb-4">
     <div class="showChkBox text-right <?=$cardChkShow?>">
