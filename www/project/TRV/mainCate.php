@@ -131,6 +131,9 @@ if($_SESSION['searchCountry'] == ""){
 
 <?
 function checkBoxChk($data){
+    if (!isset($_SESSION['cateViewList'])) {
+        $_SESSION['cateViewList'] = array();
+    }
     if (in_array("전체보기", $_SESSION['cateViewList'])) { return "checked";}
     if (in_array($data, $_SESSION['cateViewList'])) {return "checked";}
     return "";
