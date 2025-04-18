@@ -12,7 +12,7 @@ mysql_query($que);
 $mainSeq = mysql_insert_id();
 
 
-$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/project/TRV/itemImgFile/user_'.$_SESSION['loginNum'];  // 이 디렉토리가 존재하고 쓰기 권한이 있어야 합니다.
+$uploadDir = 'itemImgFile/user_'.$_SESSION['loginNum'];  // 이 디렉토리가 존재하고 쓰기 권한이 있어야 합니다.
 
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
