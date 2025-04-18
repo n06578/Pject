@@ -11,7 +11,4 @@ if (isset($_REQUEST['cate']) && is_array($_REQUEST['cate'])) {
 
     $_SESSION['cateViewList'] = array_values($filtered); // 인덱스 정렬
 }
-echo "<pre>";
-print_r($_SESSION['cateViewList']);
-echo "</pre>";
 ?>

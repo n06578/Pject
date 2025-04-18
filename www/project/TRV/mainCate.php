@@ -133,6 +133,7 @@ if($_SESSION['searchCountry'] == ""){
 function checkBoxChk($data){
     if (in_array("전체보기", $_SESSION['cateViewList'])) { return "checked";}
     if (in_array($data, $_SESSION['cateViewList'])) {return "checked";}
+    return "";
 }
 ?>
 <div class="text-center" id="writeBtn"><i class="fas fa-list"></i> 목록보기</div>
