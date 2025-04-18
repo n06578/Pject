@@ -8,7 +8,7 @@ if (!in_array('전체보기', $_REQUEST['cate'])) {
     $_SESSION['cateSearch'] = "'" . implode("', '", $_REQUEST['cate']) . "'";
 }
 $cardChkShow ="d-none";
-$que_sub = "select a.*, b.joinSeq from TuserItemList a left join TuserItem b on a.itemSeq = b.seq where b.country like '".$_SESSION['searchCountry']."#' $where group by b.seq order by b.writeDate desc";
+$que_sub = "select a.*, b.joinSeq from TuserItemList a left join TuserItem b on a.itemSeq = b.seq where b.country like '".$_SESSION['searchCountry']."%' $where group by b.seq order by b.writeDate desc";
 $res_sub = mysql_query($que_sub);
 $cnt_sub = mysql_num_rows($res_sub);
 while($row_sub = mysql_fetch_array($res_sub)) {
