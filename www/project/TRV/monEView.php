@@ -53,7 +53,7 @@ if($row_con['ansSeq'] !=0 ){
                         작성일자 : <?=$row_ans['answerDateTime']?>
                     </div>
                     <div class="card mx-5 h-80 p-5 text-left">
-                        <?=$row_ans['answerContents']?>
+                        <?=nl2br($row_ans['answerContents'])?>
                     </div>
                 </div>
             </div>

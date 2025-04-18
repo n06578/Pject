@@ -43,7 +43,7 @@ if($_SESSION['loginNum'] != "0"){
             <div class="ansCard px-2 py-1 txt-9">
                 <label class="txt-10"><?=getName($row_ans['joinSeq'])?></label>
                 <label class="f-right txt-8"><?=$row_ans['answerDateTime']?></label>
-                <div> <label><?=$row_ans['answerContents']?></label> </div>
+                <div> <label><?=nl2br($row_ans['answerContents'])?></label> </div>
                 <div class="likeHateDiv text-right" id="likeHate_<?=$row_ans['seq']?>">
                     <?
                     $que_lh = "select * from TlikeHateTbl where joinSeq ='".$_SESSION['loginNum']."' and conSeq = '".$row_ans['seq']."' and conType = 'gongji'";
