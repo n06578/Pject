@@ -174,7 +174,7 @@ if($_SESSION['searchCountry'] == ""){
         $.ajax({
             url: "include/itemListView.php",
             type: "POST",
-            data: "search=clear",
+            data: "search=clear&pageName=mainCate&",
             success: function (data) {
                 location.href="trvmain2.php";
             }
@@ -191,7 +191,7 @@ if($_SESSION['searchCountry'] == ""){
             $.ajax({
                 url: "include/itemListView.php",
                 type: "POST",
-                data: "search=ajax&searchCountry="+$(".searchInput").val(),
+                data: "search=ajax&pageName=mainCate&searchCountry="+$(".searchInput").val(),
                 success: function (data) {
                     $("#searchMap").removeClass("d-none")
                     $("#clear").removeClass("d-none");

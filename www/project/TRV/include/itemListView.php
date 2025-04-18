@@ -13,7 +13,7 @@ if(@$_REQUEST['search'] == "clear") {
     $_SESSION["lng"]= "";
     require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';   
 }
-if(@$_REQUEST['pageName'] == "trvmain2") {
+if(@$_REQUEST['pageName'] == "trvmain2" || @$_REQUEST['pageName'] == "mainCate") {
     $cardItemCol = "col-xl-4";
     $cardChkShow = "d-none";
 }
@@ -39,9 +39,6 @@ if(@$_SESSION['searchCountry'] != "") {
         /* include에서 사용하는 변수 */
         $pageName = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
         $filePath = $row_file['filePath'];
-        if($pageName == "mainCate"){
-            // $filePath = "../".$filePath;
-        }
         $srcItem = ($cnt_file > 0)? $filePath:"";
         $contentsItem = (@$row_sub['itemComment'] !="") ? nl2br($row_sub['itemComment']) : "";
         $nameItem = getName($row_item['joinSeq']);
