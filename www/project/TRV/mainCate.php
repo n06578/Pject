@@ -106,16 +106,16 @@ if($_SESSION['searchCountry'] == ""){
                         <div class="card">
                             <div class="card-body tx-12 text-center">
                                 <div class="row px-4">
-                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk1"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk1" value="전체보기">전체보기</label>
-                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk2"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk2" value="음식">음식</label>
-                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk3"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk3" value="관광">관광</label>
-                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk4"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk4" value="쇼핑">쇼핑</label>
-                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk5"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk5" value="패션">패션</label>
-                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk6"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk6" value="문화">문화</label>
-                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk7"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk7" value="휴양">휴양</label>
-                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk8"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk8" value="교통">교통</label>
-                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk9"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk9" value="숙소">숙소</label>
-                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk10"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk10" value="이색여행">이색여행</label>
+                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk1"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk1" value="전체보기" <?=checkBoxChk("전체보기")?>>전체보기</label>
+                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk2"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk2" value="음식" <?=checkBoxChk("음식")?>>음식</label>
+                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk3"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk3" value="관광" <?=checkBoxChk("관광")?>>관광</label>
+                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk4"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk4" value="쇼핑" <?=checkBoxChk("쇼핑")?>>쇼핑</label>
+                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk5"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk5" value="패션" <?=checkBoxChk("패션")?>>패션</label>
+                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk6"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk6" value="문화" <?=checkBoxChk("문화")?>>문화</label>
+                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk7"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk7" value="휴양" <?=checkBoxChk("휴양")?>>휴양</label>
+                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk8"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk8" value="교통" <?=checkBoxChk("교통")?>>교통</label>
+                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk9"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk9" value="숙소" <?=checkBoxChk("숙소")?>>숙소</label>
+                                    <label class="col p-0 d-flex lh-24 mb-0" for="cateChk10"><input type="checkbox" class="form-checkbox cateChk mr-2" id="cateChk10" value="이색여행" <?=checkBoxChk("숙소")?>>이색여행</label>
                                     <button type="button" class="col p-0 btn btn-sm btn-success" id="cateChgBtn">변경</button>
                                 </div>
                             </div>
@@ -129,15 +129,26 @@ if($_SESSION['searchCountry'] == ""){
     </div>
 </div>
 
+<?
+function checkBoxChk($data){
+    if (in_array("전체보기", $_SESSION['cateViewList'])) { return "checked";}
+    if (in_array($data, $_SESSION['cateViewList'])) {return "checked";}
+}
+?>
 <div class="text-center" id="writeBtn"><i class="fas fa-list"></i> 목록보기</div>
 <!-- <div class="text-center" id="writeBtn" onclick="location.href='trvmain2.php'"><i class="fas fa-list"></i> 목록보기</div> -->
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <script>
     
     $(document).ready(function() {
-        $(".listItemWrt").addClass("d-none");
-        $(".showDetail").addClass("d-none");
-        $(".itemBigView").addClass("d-none");
+        if("<?=@$_SESSION['cateView']?>" == "cateList"){
+            $("#cateChgBtn").click();
+            $(".container").addClass("d-none");
+        }else{
+            $(".listItemWrt").addClass("d-none");
+            $(".showDetail").addClass("d-none");
+            $(".itemBigView").addClass("d-none");
+        }
         
         // 버튼 클릭 시 맨 위로 이동
         $("#cateBtn").on("click", function() {
@@ -238,26 +249,46 @@ if($_SESSION['searchCountry'] == ""){
 
     // getCateList 함수에서 AJAX 호출
     function getCateList() {
+        formData.set('cateView', "cateList");
         $.ajax({
-            url: "include/cateListView.php",
+            url: "include/cateSession.php",
             type: "POST",
             data: formData,  // FormData 객체를 그대로 전달
             processData: false,  // FormData 사용 시 기본적으로 false로 설정
             contentType: false,  // contentType도 false로 설정
             success: function(data) {
-                $(".itemListView").html(data);
-                $(".container").addClass("d-none");
-                $(".listView").removeClass("d-none");
-                formData = new FormData();  // 새 FormData 객체로 초기화
+                $.ajax({
+                    url: "include/cateListView.php",
+                    type: "POST",
+                    data: formData,  // FormData 객체를 그대로 전달
+                    processData: false,  // FormData 사용 시 기본적으로 false로 설정
+                    contentType: false,  // contentType도 false로 설정
+                    success: function(data) {
+                        $(".itemListView").html(data);
+                        $(".container").addClass("d-none");
+                        $(".listView").removeClass("d-none");
+                        formData = new FormData();  // 새 FormData 객체로 초기화
 
+                    }
+                });
             }
         });
     }
 
 
     $(document).on("click","#writeBtn",function(){
-        $(".listView").addClass("d-none")
-        $(".container").removeClass("d-none")
+        formData.set('cateView', "cateMain");
+        $.ajax({
+            url: "include/cateSession.php",
+            type: "POST",
+            data: formData,  // FormData 객체를 그대로 전달
+            processData: false,  // FormData 사용 시 기본적으로 false로 설정
+            contentType: false,  // contentType도 false로 설정
+            success: function(data) {
+                $(".listView").addClass("d-none")
+                $(".container").removeClass("d-none")
+            }
+        })
     })
 
 </script>

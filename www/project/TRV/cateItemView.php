@@ -133,7 +133,7 @@ mysql_query($que_recent);
         </div>
     </div>
 </div>
-<div class="text-center" id="listBtn" onclick="history.back();"><i class="fas fa-list"></i> 목록</div>
+<div class="text-center" id="listBtn" onclick="location.href='mainCate.php'"><i class="fas fa-list"></i> 목록</div>
 <!-- /.container-fluid -->
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <script>
