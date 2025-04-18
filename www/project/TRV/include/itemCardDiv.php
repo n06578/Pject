@@ -4,7 +4,9 @@ header.php에서 col-xl-4로 설정되어있음
 변경할 page : MyCal.php - col-xl-3
 -->
 
-<?$cardItemCol = @$cardItemCol =="" ? "col-xl-4":$cardItemCol;?>
+<?$cardItemCol = @$cardItemCol =="" ? "col-xl-4":$cardItemCol;
+
+?>
 <div class="<?=$cardItemCol?> col-md-6 mb-4">
     <div class="showChkBox text-right <?=$cardChkShow?>">
         <input type="checkbox" class="form-check-input itemChkBox" id="checkItem<?=$mainSeq?>" name="checkItem[]" value="<?=$mainSeq?>">

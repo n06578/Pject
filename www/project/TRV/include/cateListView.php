@@ -7,6 +7,7 @@ if (!in_array('전체보기', $_REQUEST['cate'])) {
     $where = " AND a.itemType IN ('" . implode("', '", $_REQUEST['cate']) . "')";
     $_SESSION['cateSearch'] = "'" . implode("', '", $_REQUEST['cate']) . "'";
 }
+$cardChkShow ="d-none";
 $que_sub = "select a.*, b.joinSeq from TuserItemList a left join TuserItem b on a.itemSeq = b.seq where b.country = '".$_SESSION['searchCountry']."' $where group by b.seq order by b.writeDate desc";
 $res_sub = mysql_query($que_sub);
 $cnt_sub = mysql_num_rows($res_sub);
@@ -26,3 +27,31 @@ while($row_sub = mysql_fetch_array($res_sub)) {
     <div class="col-12 text-center tx-16 mt-1 mb-5">등록된 게시물이 없습니다.</div>
     <hr>
 <?} ?>
+<script>
+    $(document).ready(function() {
+        $(".listItemWrt").addClass("d-none");
+        $(".showDetail").addClass("d-none");
+        $(".itemBigView").addClass("d-none");
+        
+    });
+    $(".listItemBox").on({
+        "mouseover":function() {
+            $(this).find(".itemBigView").removeClass("d-none").addClass("d-flex");
+        },
+        "mouseout":function() {
+            $(this).find(".itemBigView").removeClass("d-flex").addClass("d-none");
+        }
+    });
+
+    $(".listItem").on({
+        "mouseover":function() {
+            $(this).find(".listItemWrt").removeClass("d-none").addClass("d-flex");
+            $(this).find(".showDetail").removeClass("d-none").addClass("d-flex");
+            
+        },
+        "mouseout":function() {
+            $(this).find(".listItemWrt").removeClass("d-flex").addClass("d-none");
+            $(this).find(".showDetail").removeClass("d-flex").addClass("d-none");
+        }
+    });
+</script>
