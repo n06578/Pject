@@ -82,7 +82,7 @@ for ($i = 1; $i <= $itemList; $i++) {
 }
 
 echo "success|".$mainSeq;
-function compressAndResizeImage($source, $destination, $ext, $maxWidth = 1024, $quality = 70) {
+function compressAndResizeImage($source, $destination, $ext, $maxWidth = 800, $quality = 70) {
     list($width, $height) = getimagesize($source);
     $scale = $maxWidth / $width;
 
