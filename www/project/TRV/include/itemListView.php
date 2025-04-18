@@ -40,7 +40,7 @@ if(@$_SESSION['searchCountry'] != "") {
         $pageName = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
         $filePath = $row_file['filePath'];
         if($pageName == "mainCate"){
-            $filePath = "../".$filePath;
+            // $filePath = "../".$filePath;
         }
         $srcItem = ($cnt_file > 0)? $filePath:"";
         $contentsItem = (@$row_sub['itemComment'] !="") ? nl2br($row_sub['itemComment']) : "";
