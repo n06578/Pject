@@ -32,8 +32,6 @@ session_start();
         <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
       </div>
     </div>
-    <?=$_SESSION["lat"]?>,<?=$_SESSION["lng"]?>
-<BR>
     <gmp-map center="<?=$_SESSION["lat"]?>,<?=$_SESSION["lng"]?>" zoom="4" map-id="DEMO_MAP_ID">
       <gmp-advanced-marker position="<?=$_SESSION["lat"]?>,<?=$_SESSION["lng"]?>" title="My location"></gmp-advanced-marker>
     </gmp-map>
