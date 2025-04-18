@@ -48,4 +48,35 @@ if($num_item < 1) {?>
 <?}
 if(@$_SESSION['searchCountry'] != "") {?>
     <div class="text-center" id="cateBtn"><i class="fas fa-arrow-up"></i> 카테고리로 보기</div>
-<?}?>
+<?}
+
+?>
+
+<script>
+    $(document).ready(function() {
+        $(".listItemWrt").addClass("d-none");
+        $(".showDetail").addClass("d-none");
+        $(".itemBigView").addClass("d-none");
+        
+    });
+    $(".listItemBox").on({
+        "mouseover":function() {
+            $(this).find(".itemBigView").removeClass("d-none").addClass("d-flex");
+        },
+        "mouseout":function() {
+            $(this).find(".itemBigView").removeClass("d-flex").addClass("d-none");
+        }
+    });
+
+    $(".listItem").on({
+        "mouseover":function() {
+            $(this).find(".listItemWrt").removeClass("d-none").addClass("d-flex");
+            $(this).find(".showDetail").removeClass("d-none").addClass("d-flex");
+            
+        },
+        "mouseout":function() {
+            $(this).find(".listItemWrt").removeClass("d-flex").addClass("d-none");
+            $(this).find(".showDetail").removeClass("d-flex").addClass("d-none");
+        }
+    });
+</script>
