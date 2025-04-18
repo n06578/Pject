@@ -11,9 +11,9 @@ include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
             <table class="table noTable">
                 <tr>
                     <td class="w-10 text-blg text-right t-navy tx-18" id="tripArea">여행지</td>
-                    <td class="w-75"><input type="text" class="form-control noBorder searchInput mr-4" name="country"></td>
-                    <td class="w-15"><input type="button" class="btn btn-white mr-4 w-100 text-blg t-navy" id="searchMap" value="지도에서 찾기"></td>
-                    <td class="w-10"><input type="button" class="btn btn-navy w-100 mr-4 text-blg t-white" id="search" value="조회"></td>
+                    <td class="w-80"><input type="text" class="form-control noBorder searchInput mr-4" name="country"></td>
+                    <!-- <td class="w-15"><input type="button" class="btn btn-white mr-4 w-100 text-blg t-navy" id="searchMap" value="지도에서 찾기"></td> -->
+                    <!-- <td class="w-10"><input type="button" class="btn btn-navy w-100 mr-4 text-blg t-white" id="search" value="조회"></td> -->
                 </tr>
             </table>
             <hr class="hr-navy">

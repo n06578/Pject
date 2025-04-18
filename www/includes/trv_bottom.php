@@ -1,5 +1,7 @@
 
-<? include $rootPath."project/TRV/modal.php"; ?>
+<?php
+echo $rootPath."project/TRV/modal.php";
+ include $rootPath."project/TRV/modal.php"; ?>
 
 </div> <!-- End of Main Content -->
 <?if($baseName[0] == "login" || $baseName[0] == "join"){ // 로그인 회원가입 bottom?>
