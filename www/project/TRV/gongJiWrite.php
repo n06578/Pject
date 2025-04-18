@@ -31,7 +31,7 @@ if($_REQUEST['seq'] !=""){
             </table>
             <hr class="hr-navy">
             <div class="card mx-5 h-80">
-                <input type="text" name='managerPw'>
+                <input type="hidden" name='managerPw'>
                 <textarea id="editor" class="w-100 h-90" name="gongjiContents">
                     <?=$editor?>
                 </textarea>
