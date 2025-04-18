@@ -13,6 +13,10 @@ if(@$_REQUEST['search'] == "clear") {
     $_SESSION["lng"]= "";
     require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';   
 }
+if(@$_REQUEST['pageName'] == "trvmain2") {
+    $cardItemCol = "col-xl-4";
+    $cardChkShow = "d-none";
+}
 
 if(@$_SESSION['searchCountry'] != "") {
     $where =" where  country like '".$_SESSION['searchCountry']."%'";

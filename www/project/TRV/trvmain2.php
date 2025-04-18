@@ -1,7 +1,5 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/includes/trv_header.php";
-$cardItemCol = "col-xl-4";
-$cardChkShow = "d-none";
 ?>
 
 <div class="main-box h-90 d-none">
@@ -53,7 +51,7 @@ $cardChkShow = "d-none";
         $.ajax({
             url: "include/itemListView.php",
             type: "POST",
-            data: "search=clear",
+            data: "search=clear&pageName=trvmain2",
             success: function (data) {
                 $(".searchInput").val("");
                 $("#searchMap").addClass("d-none");
@@ -72,7 +70,7 @@ $cardChkShow = "d-none";
             $.ajax({
                 url: "include/itemListView.php",
                 type: "POST",
-                data: "search=ajax&searchCountry="+$(".searchInput").val(),
+                data: "search=ajax&pageName=trvmain2&searchCountry="+$(".searchInput").val(),
                 success: function (data) {
                     $("#searchMap").removeClass("d-none")
                     $("#clear").removeClass("d-none");
