@@ -2,7 +2,6 @@
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 
-// 메인 아이템 등록
 $que = "insert into TuserItem set
     joinSeq = '".$_SESSION['loginNum']."',
     country = '".$_REQUEST['country']."',
@@ -11,7 +10,6 @@ $que = "insert into TuserItem set
 mysql_query($que);
 $mainSeq = mysql_insert_id();
 
-// 저장 폴더 준비
 $uploadDir = 'itemImgFile/user_'.$_SESSION['loginNum'];
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
@@ -22,7 +20,6 @@ for ($i = 1; $i <= $itemList; $i++) {
     $subNumFiles = (!isset($_FILES['croppedImages']['name'][$i])) ? 0 : count($_FILES['croppedImages']['name'][$i]);
     if ($subNumFiles == 0 && str_replace(" ", "", $_REQUEST['textarea'][$i]) == "") continue;
 
-    // 서브 아이템 등록
     $que = "insert into TuserItemList set
         itemSeq = '".$mainSeq."',
         itemType = '".$_REQUEST['select'][$i]."',
@@ -31,7 +28,6 @@ for ($i = 1; $i <= $itemList; $i++) {
     mysql_query($que);
     $subSeq = mysql_insert_id();
 
-    // 이미지 파일 처리
     for ($j = 0; $j < $subNumFiles; $j++) {
         $fileName = $_FILES['croppedImages']['name'][$i][$j];
         $fileTmpName = $_FILES['croppedImages']['tmp_name'][$i][$j];
@@ -45,8 +41,7 @@ for ($i = 1; $i <= $itemList; $i++) {
             $newFileName = uniqid('', true) . '.' . $fileExt;
             $fileDestination = $uploadDir . "/" . $newFileName;
 
-            // 이미지 압축 및 저장
-            if (compressImage($fileTmpName, $fileDestination, $fileExt, 1024, 70)) {
+            if (compressImageFast($fileTmpName, $fileDestination, $fileExt, 70)) {
                 $que = "insert into TuserItemFile set
                     itemSeq = '".$mainSeq."',
                     itemListSeq = '".$subSeq."',
@@ -65,60 +60,29 @@ for ($i = 1; $i <= $itemList; $i++) {
 
 echo "success|".$mainSeq;
 
-
-// 이미지 압축 함수
-function compressImage($source, $destination, $ext, $maxWidth = 1024, $quality = 70) {
-    list($width, $height) = getimagesize($source);
-    $scale = $maxWidth / $width;
-
-    if ($scale >= 1) {
-        $newWidth = $width;
-        $newHeight = $height;
-    } else {
-        $newWidth = $maxWidth;
-        $newHeight = $height * $scale;
-    }
-
+// 단순 압축 함수 (크기 유지)
+function compressImageFast($source, $destination, $ext, $quality = 70) {
     switch ($ext) {
         case 'jpg':
         case 'jpeg':
             $image = imagecreatefromjpeg($source);
+            $result = imagejpeg($image, $destination, $quality);
             break;
         case 'png':
             $image = imagecreatefrompng($source);
+            imagealphablending($image, true);
+            imagesavealpha($image, true);
+            $result = imagepng($image, $destination, 6); // 압축 레벨: 0~9 (6이 보통)
             break;
         case 'gif':
             $image = imagecreatefromgif($source);
+            $result = imagegif($image, $destination);
             break;
         default:
             return false;
     }
 
-    $newImage = imagecreatetruecolor($newWidth, $newHeight);
-
-    if ($ext == 'png') {
-        imagealphablending($newImage, false);
-        imagesavealpha($newImage, true);
-    }
-
-    imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-    $result = false;
-    switch ($ext) {
-        case 'jpg':
-        case 'jpeg':
-            $result = imagejpeg($newImage, $destination, $quality);
-            break;
-        case 'png':
-            $result = imagepng($newImage, $destination, 6); // 0~9 압축 정도
-            break;
-        case 'gif':
-            $result = imagegif($newImage, $destination);
-            break;
-    }
-
     imagedestroy($image);
-    imagedestroy($newImage);
     return $result;
 }
 ?>
