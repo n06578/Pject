@@ -136,7 +136,7 @@ $(document).ready(function () {
                     autoCropArea: 1,
                     movable: true,
                     zoomable: true,
-                    rotatable: false,
+                    rotatable: true,
                     scalable: true,
                     cropBoxMovable: true,
                     cropBoxResizable: true,

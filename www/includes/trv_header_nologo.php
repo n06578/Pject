@@ -32,7 +32,7 @@ if(@$_SESSION['loginNum'] != 0 && $_SESSION['loginYn'] == "Y"){
     <title>PjectY</title>
 
 </head>
-<?include $rootPath."lib/PNotify.php"; // PNotiry관련 함수 ?>
+<?//include $rootPath."lib/PNotify.php"; // PNotiry관련 함수 ?>
 <body id="page-top">
     <div id="wrapper">
         <div id="content-wrapper" class="d-flex flex-column">
