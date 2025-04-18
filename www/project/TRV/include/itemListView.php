@@ -37,7 +37,12 @@ if(@$_SESSION['searchCountry'] != "") {
         $row_file = mysql_fetch_array($res_file);
         
         /* include에서 사용하는 변수 */
-        $srcItem = ($cnt_file > 0)? $row_file['filePath']:"";
+        $pageName = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
+        $filePath = $row_file['filePath'];
+        if($pageName == "mainCate"){
+            $filePath = "../".$filePath;
+        }
+        $srcItem = ($cnt_file > 0)? $filePath:"";
         $contentsItem = (@$row_sub['itemComment'] !="") ? nl2br($row_sub['itemComment']) : "";
         $nameItem = getName($row_item['joinSeq']);
 
