@@ -12,9 +12,6 @@ $rootPath =  str_repeat($rootPath,count($documentPath)-1);
 if($_SERVER['HTTP_HOST'] != "localhost:8080"){
     $rootPath = "http://34.231.136.110/";
 }
-
-$cardItemCol = "col-xl-4";
-$cardChkShow = "d-none";
 ?>
 <!DOCTYPE html>
 <html lang="ko">
