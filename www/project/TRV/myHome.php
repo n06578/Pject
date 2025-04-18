@@ -111,8 +111,6 @@ switch(@$thisPage) {
         $(document).on("click", ".proImgChg", function () {
             fileInput.trigger("click");
             thisBtn = $(this).parent();
-            croppers = [];  // croppers 배열 초기화
-
         });
 
         // 파일 선택 후 이미지 추가
@@ -149,7 +147,7 @@ switch(@$thisPage) {
                         autoCropArea: 1,
                         movable: true,
                         zoomable: true,
-                        rotatable: false,
+                        rotatable: true,
                         scalable: true,
                         cropBoxMovable: true,
                         cropBoxResizable: true,
@@ -173,6 +171,7 @@ switch(@$thisPage) {
 
         // 개별 이미지 삭제
         $(document).on("click", ".btn-remove-img", function () {
+            fileInput.val(null); // ← 이게 핵심! fileInput의 값을 초기화
             $(".profileBox").removeClass("d-none");
             const parent = $(this).closest(".profileCropper");
             croppers = croppers.filter(c => c.container[0] !== parent[0]);

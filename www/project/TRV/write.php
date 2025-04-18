@@ -103,6 +103,7 @@ $(document).ready(function () {
 
     // 이미지 추가 버튼 클릭 시 파일 선택 창 열기
     $(document).on("click", ".addImgPart", function () {
+        fileInput.val(null); // ← 이게 핵심! fileInput의 값을 초기화
         fileInput.trigger("click");
         thisBtn = $(this).parent();
     });
