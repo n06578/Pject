@@ -136,7 +136,12 @@ mysql_query($que_recent);
 <!-- /.container-fluid -->
 <? include $_SERVER['DOCUMENT_ROOT']."/includes/trv_bottom.php"?>
 <script>
-
+    const imgs = document.querySelectorAll("img");
+    imgs.forEach(img => {
+    img.onerror = () => {
+        img.src = "no-image.jpg"; // 기본 이미지
+    };
+    });
     $(".listItemBox").on({
         "mouseover":function() {
             $(this).find(".itemBigView").removeClass("d-none").addClass("d-flex");
