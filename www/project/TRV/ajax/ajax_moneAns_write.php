@@ -2,7 +2,7 @@
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'].'/lib/configure.php';
 $ip = '수정필요';
-$que = "select * from TjoinTbl where moneSeq = '".$_REQUEST['seq']."'";
+$que = "select * from TmoneAnswerTbl where moneSeq = '".$_REQUEST['seq']."'";
 $res = mysql_query($que);
 $cnt = mysql_num_rows($res);
 if($cnt == 0){
