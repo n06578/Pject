@@ -35,13 +35,13 @@ for ($i = 1; $i <= $itemList; $i++) {
         $fileError = $_FILES['croppedImages']['error'][$i][$j];
 
         $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-        $allowedExts = ['jpg', 'jpeg', 'png', 'gif'];
+        $allowedExts = ['jpg', 'jpeg', 'png'];
 
         if (in_array($fileExt, $allowedExts) && $fileError === 0 && $fileSize <= 5 * 1024 * 1024) {
             $newFileName = uniqid('', true) . '.' . $fileExt;
             $fileDestination = $uploadDir . "/" . $newFileName;
 
-            if (compressImageFast($fileTmpName, $fileDestination, $fileExt, 70)) {
+            if (compressImageToTarget($fileTmpName, $fileDestination, $fileExt, 100 * 1024)) {
                 $que = "insert into TuserItemFile set
                     itemSeq = '".$mainSeq."',
                     itemListSeq = '".$subSeq."',
@@ -60,29 +60,34 @@ for ($i = 1; $i <= $itemList; $i++) {
 
 echo "success|".$mainSeq;
 
-// 단순 압축 함수 (크기 유지)
-function compressImageFast($source, $destination, $ext, $quality = 70) {
-    switch ($ext) {
-        case 'jpg':
-        case 'jpeg':
-            $image = imagecreatefromjpeg($source);
-            $result = imagejpeg($image, $destination, $quality);
-            break;
-        case 'png':
-            $image = imagecreatefrompng($source);
-            imagealphablending($image, true);
-            imagesavealpha($image, true);
-            $result = imagepng($image, $destination, 6); // 압축 레벨: 0~9 (6이 보통)
-            break;
-        case 'gif':
-            $image = imagecreatefromgif($source);
-            $result = imagegif($image, $destination);
-            break;
-        default:
-            return false;
+// ✅ 이미지 100KB 이하로 저장하는 함수
+function compressImageToTarget($source, $destination, $ext, $targetSize = 100 * 1024) {
+    if ($ext == 'jpg' || $ext == 'jpeg') {
+        $image = imagecreatefromjpeg($source);
+    } else if ($ext == 'png') {
+        $image = imagecreatefrompng($source);
+    } else {
+        return false;
     }
 
+    $quality = 90;
+    $step = 5;
+
+    do {
+        ob_start();
+        if ($ext == 'jpg' || $ext == 'jpeg') {
+            imagejpeg($image, null, $quality);
+        } else if ($ext == 'png') {
+            imagepng($image, null, round($quality / 10)); // PNG 압축 0~9
+        }
+        $data = ob_get_clean();
+        $size = strlen($data);
+        $quality -= $step;
+    } while ($size > $targetSize && $quality > 10);
+
+    file_put_contents($destination, $data);
     imagedestroy($image);
-    return $result;
+
+    return $size <= $targetSize;
 }
 ?>
