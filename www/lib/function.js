@@ -1,4 +1,3 @@
-<script>
     function Format_comma(val1){
         if(val1 == 0){
             return val1
@@ -65,4 +64,3 @@
         if("<?=$login?>" =="yes") {return true;}
         else{return false;}
     }
-</script>
