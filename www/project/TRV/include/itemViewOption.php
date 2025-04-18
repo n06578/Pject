@@ -35,11 +35,13 @@ switch($type){
             <text><?=nl2br($itemComment)?></text>
             <?
         break;
-    case "4":
+    case "4":?>
+        <div class="x-scroll my-2"> <?
         while($row_file = mysql_fetch_array($res_file)){?>
             <img class="dItemImg c-pointer ml-1 modal-open" data-bs-toggle="modal" data-bs-target="#imgModal"  src="<?=$row_file['filePath']?>">
-        <? } 
-        break;
+        <? } ?>
+        </div>
+        <? break;
 }
 ?>
 
