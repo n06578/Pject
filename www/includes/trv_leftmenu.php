@@ -7,7 +7,7 @@
                     <br> -->
                     <div class="topDiv">
                         <?if($_SESSION['loginNum'] != 0){
-                            if($_SESSION['login`Yn'] == "Y" ) {?>
+                            if($_SESSION['loginYn'] == "Y" ) {?>
                                 <a href="write.php" class="btn">
                                     <i class="fas fa-pen"></i>
                                     <br>
