@@ -6,12 +6,20 @@
                     <!-- <input type="search" name="SEARCH" placeholder="SEARCH">
                     <br> -->
                     <div class="topDiv">
-                        <a href="trvmain2.php" class="btn">
-                            <i class="fas fa-home"></i>
-                            <br>
-                            <span class="text">홈</span>
-                        </a>
-                        <?if($_SESSION['loginNum'] != 0){?>
+                        <?if($_SESSION['loginNum'] != 0){
+                            if($_SESSION['login`Yn'] == "Y" ) {?>
+                                <a href="write.php" class="btn">
+                                    <i class="fas fa-pen"></i>
+                                    <br>
+                                    <span class="text">글작성</span>
+                                </a>
+                            <?}else{?>
+                                <a href="trvmain2.php" class="btn">
+                                    <i class="fas fa-home"></i>
+                                    <br>
+                                    <span class="text">홈</span>
+                                </a>
+                            <?}?>
                         <a href="javascript:void(0)" class="btn" onclick="chkLogin('myCal.php')">
                             <i class="far fa-calendar-alt"></i>
                             <br>
@@ -22,6 +30,12 @@
                             <i class="fas fa-plane"></i>
                             <br>
                             <span class="text">프로필</span>
+                        </a>
+                    <?}else{?>
+                        <a href="trvmain2.php" class="btn">
+                            <i class="fas fa-home"></i>
+                            <br>
+                            <span class="text">홈</span>
                         </a>
                     <?}?>
                     <? if($_SESSION['loginYn'] == "Y" ) {?>
