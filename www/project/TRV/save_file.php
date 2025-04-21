@@ -54,7 +54,7 @@ for ($i = 1; $i <= $itemList; $i++) {
                     $fileDestination = $uploadDir ."/" . $newFileName;
 
                     // 파일을 서버에 저장
-                    if (compressAndResizeImage($fileTmpName, $fileDestination, $fileExt, 1024, 70)) {
+                    if (compressAndResizeImage($fileTmpName, $fileDestination, $fileExt, 1024, 40)) {
                         $que = "insert into TuserItemFile set
                             itemSeq = '".$mainSeq."',
                             itemListSeq = '".$subSeq."',
