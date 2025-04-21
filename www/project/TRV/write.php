@@ -168,20 +168,20 @@ $(document).ready(function () {
 
     // 저장 버튼 클릭 시 크롭한 이미지 업로드
     $("#saveBtn").click(async function (event) {
-        if($(".searchInput ").val() == ""){
-            pAlert("error","등록실패","여행지를 선택해주세요.",true);
-            return false;
-        }
-        var textarea = 0;
-        $(".textarea:visible").each(function(){
-            if($(this).val() != ""){
-                textarea++;
-            }
-        });
-        if(textarea == 0 && $(".cropped-img").length == 0){
-            pAlert("error","등록실패","내용 입력 또는 사진을 등록해주세요.",true);
-            return false;
-        }
+        // if($(".searchInput ").val() == ""){
+        //     pAlert("error","등록실패","여행지를 선택해주세요.",true);
+        //     return false;
+        // }
+        // var textarea = 0;
+        // $(".textarea:visible").each(function(){
+        //     if($(this).val() != ""){
+        //         textarea++;
+        //     }
+        // });
+        // if(textarea == 0 && $(".cropped-img").length == 0){
+        //     pAlert("error","등록실패","내용 입력 또는 사진을 등록해주세요.",true);
+        //     return false;
+        // }
         event.preventDefault();
         // numberChk를 기준으로 각각의 select와 textarea의 name을 변경
         $(".filebox").each(function () {
@@ -209,8 +209,13 @@ $(document).ready(function () {
             message: "게시물 업로드 중...",
             display: "center",
             color: "gray",
-            closeButton: false
+            closeButton: false,
+            duration: false,
+            cssClass: "my-gray-toast"
         });
+        $("#saveBtn").attr("disabled", true);
+        $("#saveBtn").css("pointer-events", "none");
+        $("#saveBtn").css("opacity", "0.5");
 
         $.ajax({
             url: "save_file.php",
@@ -225,10 +230,16 @@ $(document).ready(function () {
                         message: "업로드 완료",
                         display: "center",
                         color: "gray",
-                        closeButton: false
+                        closeButton: false,
+                        duration: false,
+                        cssClass: "my-gray-toast"
+
                     });
                     location.href = "itemView.php?seq="+response[1];
                 }else{
+                    $("#saveBtn").attr("disabled", false);
+                    $("#saveBtn").css("pointer-events", "");
+                    $("#saveBtn").css("opacity", ""); 
                     mobiscroll.toast({
                         message: "업로드 실패",
                         display: "center",
