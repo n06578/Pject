@@ -11,7 +11,7 @@
                                 <a href="write.php" class="btn">
                                     <i class="fas fa-pen"></i>
                                     <br>
-                                    <span class="text">글작성</span>
+                                    <span class="text">작성</span>
                                 </a>
                             <?}else{?>
                                 <a href="trvmain2.php" class="btn">
